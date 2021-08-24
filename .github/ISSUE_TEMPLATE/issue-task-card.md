@@ -18,7 +18,7 @@ assignees: ''
 3. [ ] Job3
 
 **Estimated time**
-Pick one
+> Pick one
 
 ```0.5h```
 ```1h```
