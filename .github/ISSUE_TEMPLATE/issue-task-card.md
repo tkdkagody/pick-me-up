@@ -7,17 +7,17 @@ assignees: ''
 
 ---
 
-###ISSUE
+**ISSUE**
 - Group: ```client```, ```server```, ```sr```
 - Type: ```bug```, ```feature```, ```delete```
 - Detail: fix actions from client redux
 
-###TODO
+**TODO**
 1. [ ] Job1
 2. [ ] Job2
 3. [ ] Job3
 
-###Estimated time
+**Estimated time**
 Pick one
 
 ```0.5h```
@@ -27,7 +27,7 @@ Pick one
 ```2.5h```
 ```3h```
 
-###Labels
+**Labels**
 - Estimated time: ```E: 1h```
 - Group : ```client```,``` server```
 - Sprint: ```Sprint__NUMBER__```
