@@ -1,24 +1,36 @@
-import logo from './logo.svg';
 import './App.css';
+import React from 'react';
+import Navbar from './pages/navbar/Navbar';
+import {BrowserRouter as Router, Switch, Route, Link} from "react-router-dom";
+import Footer from './pages/footer/Footer';
+import MainFeeds from './pages/mainFeeds/MainFeeds';
+import Mypage from './pages/mypage/Mypage';
+
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Router>
+        <Navbar></Navbar>
+        <div id="page">
+          <Switch>
+            <Route exact={true} path="/">
+              <MainFeeds></MainFeeds>  
+            </Route>
+            <Route path="/mypage">
+              <Mypage></Mypage>
+            </Route>
+          </Switch>
+        </div>
+        <Footer></Footer>
+      </Router>
+      {/* Navbar */}
+      
+      {/* 4개의 메인 컴포넌트 상태에 따라서 랜더링 */}
+      {/* Footer */}
+      
+    </>
   );
 }
 
