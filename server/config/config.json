@@ -4,6 +4,7 @@
     "password": "root1234",
     "database": "pick_me_up",
     "host": "my-database-practice.ctobugrb9z8w.ap-northeast-2.rds.amazonaws.com",
+    "port":"13306",
     "dialect": "mysql"
   },
   "test": {
