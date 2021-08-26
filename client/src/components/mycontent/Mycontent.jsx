@@ -1,11 +1,17 @@
-import styles from './Mycontent.module.css';
-
-
+import styles from './Mycontent.module.css'
 import React from 'react';
+import FeedContent from '../feedContent/FeedContent';
+
+
 
 const Mycontent = (props) => {
     return(
-        <h1>mycontent</h1>
+    <>
+        <ul className={styles.feedList}>
+            <FeedContent/>  
+            <FeedContent/> 
+        </ul>
+    </>
     );
 }
 

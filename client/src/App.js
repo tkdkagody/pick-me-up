@@ -5,6 +5,7 @@ import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
 import Footer from './pages/footer/Footer';
 import MainFeeds from './pages/mainFeeds/MainFeeds';
 import Mypage from './pages/mypage/Mypage';
+import Writing from './pages/writing/Writing';
 
 
 
@@ -24,6 +25,9 @@ function App() {
             </Route>
             <Route path="/mypage">
               <Mypage/>
+            </Route>
+            <Route path="/writing">
+              <Writing />
             </Route>
           </Switch>
         </div>
