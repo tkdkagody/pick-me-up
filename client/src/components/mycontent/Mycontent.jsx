@@ -5,8 +5,13 @@ import React from 'react';
 
 const Mycontent = (props) => {
     return(
-        <h1>mycontent</h1>
+        <div className={styles.container}>
+            mycontent
+        </div>
     );
 }
 
 export default Mycontent;
+
+
+//새로고침 했을때 myinfo로 자동이동하는부분 막기 

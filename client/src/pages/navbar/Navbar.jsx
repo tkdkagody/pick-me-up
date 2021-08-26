@@ -1,20 +1,26 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import styles from './Navbar.module.css';
 
 
-const Navbar = (props) => {
+const Navbar = () => {
   //props로 isSignIn받고 true일경우 login/ false일경우 logout버튼
+
+  
+
   return (
       <header className={styles.header}>
-        <Link to="/">
+<div className={styles.contentbox}>
+        {/* <Link to="/">
           <span className={styles.homebtn}>
             <img src="../../../images/home.svg" className={styles.homeimg}></img>
           </span>
+        </Link> */}
+        <Link to="/">
+          <div className={styles.title}>PickMeUp</div>
         </Link>
-        <h1 className={styles.title}>PickMeUp</h1>
         <div className={styles.btns}>
-          <button className={styles.signin} >
+          <button className={styles.signin}>
             Sign in
           </button>
         <Link to="/mypage">
@@ -23,6 +29,9 @@ const Navbar = (props) => {
           </button>
         </Link>
         </div>
+</div>
+
+
 
     </header>
   );

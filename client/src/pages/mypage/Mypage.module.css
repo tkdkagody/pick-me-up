@@ -1,6 +1,7 @@
 .container{
     /*최상위 바디 컨테이너*/
-    width: 100%;
+    width: 500px;
+    margin:0 auto;
 }
 .category{
     border-bottom: 1px solid #b8b6b3;
@@ -33,12 +34,6 @@
 /*
 카테고리 클릭되면, myinfo/mycontent 검정밑줄
 */
-
-
-/* .body{
-    border-top: 1px solid rgb(243, 242, 232);
-    border-bottom: 1px solid rgb(243, 242, 232);
-} */
 
 
 
