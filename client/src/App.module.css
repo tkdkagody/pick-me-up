@@ -11,8 +11,9 @@ app을 한번 감싸서
 } */
 
 * {
-    box-sizing: border-box;
     
+    box-sizing: border-box;
+
 }
 
 .body{
