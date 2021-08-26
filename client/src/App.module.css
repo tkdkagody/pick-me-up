@@ -15,8 +15,9 @@ app을 한번 감싸서
 }
 
 .body{
-    width: 50%;
+    width: 100%;
     margin: 0 auto;
+    padding: 0.2rem;
 }
 
 
