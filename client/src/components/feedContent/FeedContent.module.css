@@ -1,0 +1,43 @@
+.container {
+  margin-bottom: 3rem;
+}
+
+.img {
+  cursor: pointer;
+  display: flex;
+  margin-bottom: 1rem;
+  width: 500px;
+  height: 350px;
+  overflow: hidden;
+}
+.image {
+  width: 50%;
+  height: 100%;
+  object-fit: cover;
+}
+.title {
+  cursor: pointer;
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+  margin-left: 0.3rem;
+  font-weight: bold;
+}
+
+.categories {
+  margin-bottom: 0.3rem;
+}
+.hashtag {
+  display: inline-block;
+  margin-left: 0.3rem;
+  margin-right: 0.2rem;
+  background-color: rgb(240, 199, 35);
+  color: white;
+  padding: 0.3rem;
+  border-radius: 5px;
+  font-size: 0.8rem;
+}
+
+.voteText {
+  font-size: 0.68rem;
+  margin-left: 0.5rem;
+}
