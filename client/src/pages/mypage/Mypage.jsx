@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import Mycontent from '../../components/mycontent/Mycontent';
 import Myinfo from '../../components/myinfo/Myinfo';
@@ -35,4 +36,5 @@ const Mypage = () => {
 };
 
 export default Mypage;
+
 

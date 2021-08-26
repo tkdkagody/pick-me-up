@@ -10,17 +10,20 @@ import Mypage from './pages/mypage/Mypage';
 
 
 function App() {
+
+  
+  
   return (
     <div className={styles.body}>
       <Router>
-        <Navbar></Navbar>
+        <Navbar/>
         <div id="page">
           <Switch>
             <Route exact={true} path="/">
-              <MainFeeds></MainFeeds>  
+              <MainFeeds/>  
             </Route>
             <Route path="/mypage">
-              <Mypage></Mypage>
+              <Mypage/>
             </Route>
           </Switch>
         </div>
