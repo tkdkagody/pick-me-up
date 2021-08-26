@@ -1,0 +1,37 @@
+.categories {
+  height: 4rem;
+  display: flex;
+  align-items: center;
+}
+
+.hashtag {
+  cursor: pointer;
+  border: 1px solid rgb(210, 210, 210);
+  border-radius: 20px;
+  padding: 0.5rem 0.8rem;
+  font-size: 0.8rem;
+  margin-right: 0.3rem;
+}
+
+.hashtag:hover {
+  border: none;
+  color: white;
+  background-color: black;
+}
+
+.writingBtn {
+  text-align: right;
+  margin-bottom: 1rem;
+}
+
+.button {
+  cursor: pointer;
+  border: none;
+  padding: 0.4rem 1rem;
+  border-radius: 5px;
+  background-color: rgb(250, 206, 27);
+  transition: 0.3s;
+  font-size: 0.65rem;
+  font-weight: bold;
+  color: white;
+}

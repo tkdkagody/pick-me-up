@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Feed = (props) => {
-    return <h1></h1>
+  return 
 };
 
 export default Feed;

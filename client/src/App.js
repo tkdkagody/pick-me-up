@@ -1,7 +1,7 @@
 import './App.css';
 import React from 'react';
 import Navbar from './pages/navbar/Navbar';
-import {BrowserRouter as Router, Switch, Route, Link} from "react-router-dom";
+import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
 import Footer from './pages/footer/Footer';
 import MainFeeds from './pages/mainFeeds/MainFeeds';
 import Mypage from './pages/mypage/Mypage';
@@ -9,17 +9,20 @@ import Mypage from './pages/mypage/Mypage';
 
 
 function App() {
+
+  
+  
   return (
     <>
       <Router>
-        <Navbar></Navbar>
+        <Navbar/>
         <div id="page">
           <Switch>
             <Route exact={true} path="/">
-              <MainFeeds></MainFeeds>  
+              <MainFeeds/>  
             </Route>
             <Route path="/mypage">
-              <Mypage></Mypage>
+              <Mypage/>
             </Route>
           </Switch>
         </div>
