@@ -11,15 +11,14 @@ app을 한번 감싸서
 } */
 
 * {
-    
     box-sizing: border-box;
-
 }
 
 .body{
     width: 50%;
     margin: 0 auto;
 }
+
 
 @media screen and (max-width: 62rem) {
     .body{
