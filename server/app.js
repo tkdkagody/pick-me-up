@@ -1,6 +1,6 @@
 const express = require("express");
 const logger = require("morgan");
-
+const cors = require("cors");
 class App {
   constructor() {
     this.app = express();
@@ -23,6 +23,7 @@ class App {
     this.app.use(logger("dev"));
     this.app.use(express.json());
     this.app.use(express.urlencoded({ extended: false }));
+    this.app.use(cors());
   }
 
   getRouting() {
