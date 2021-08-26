@@ -1,12 +1,6 @@
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('vote', {
-    id: {
-      autoIncrement: true,
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      primaryKey: true
-    },
+  return sequelize.define('post_tags', {
     post_id: {
       type: DataTypes.INTEGER,
       allowNull: true,
@@ -15,32 +9,31 @@ module.exports = function(sequelize, DataTypes) {
         key: 'id'
       }
     },
-    agreement: {
+    tag_id: {
       type: DataTypes.INTEGER,
-      allowNull: true
-    },
-    oppostion: {
-      type: DataTypes.INTEGER,
-      allowNull: true
+      allowNull: true,
+      references: {
+        model: 'tags',
+        key: 'id'
+      }
     }
   }, {
     sequelize,
-    tableName: 'vote',
-    timestamps: false,
+    tableName: 'post_tags',
+    timestamps: true,
     indexes: [
-      {
-        name: "PRIMARY",
-        unique: true,
-        using: "BTREE",
-        fields: [
-          { name: "id" },
-        ]
-      },
       {
         name: "post_id",
         using: "BTREE",
         fields: [
           { name: "post_id" },
+        ]
+      },
+      {
+        name: "tag_id",
+        using: "BTREE",
+        fields: [
+          { name: "tag_id" },
         ]
       },
     ]

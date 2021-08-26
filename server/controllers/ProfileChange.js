@@ -5,7 +5,8 @@ const users = require('../Model/users');
 
 module.exports = {
     // [PATCH] /user/profile/:id
-    // 토큰 인증 넣어서 async awit으로 리팩토링
+    // modified
+    // 토큰 인증 넣어서 async awit으로 리팩토링 
     changeProfile: (req, res) => {
         const { userName, mobile } = req.body;
         users.update({

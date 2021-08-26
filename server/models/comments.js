@@ -1,34 +1,30 @@
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('users', {
+  return sequelize.define('comments', {
     id: {
       autoIncrement: true,
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true
     },
+    post_id: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      references: {
+        model: 'post',
+        key: 'id'
+      }
+    },
     user_id: {
       type: DataTypes.INTEGER,
-      allowNull: true
+      allowNull: true,
+      references: {
+        model: 'users',
+        key: 'id'
+      }
     },
-    password: {
+    text_content: {
       type: DataTypes.STRING(255),
-      allowNull: true
-    },
-    nickname: {
-      type: DataTypes.STRING(255),
-      allowNull: true
-    },
-    sign_up_type: {
-      type: DataTypes.STRING(255),
-      allowNull: true
-    },
-    phone_number: {
-      type: DataTypes.STRING(255),
-      allowNull: true
-    },
-    account_type: {
-      type: DataTypes.INTEGER,
       allowNull: true
     },
     created_at: {
@@ -41,8 +37,8 @@ module.exports = function(sequelize, DataTypes) {
     }
   }, {
     sequelize,
-    tableName: 'users',
-    timestamps: false,
+    tableName: 'comments',
+    timestamps: true,
     indexes: [
       {
         name: "PRIMARY",
@@ -50,6 +46,20 @@ module.exports = function(sequelize, DataTypes) {
         using: "BTREE",
         fields: [
           { name: "id" },
+        ]
+      },
+      {
+        name: "feedId",
+        using: "BTREE",
+        fields: [
+          { name: "post_id" },
+        ]
+      },
+      {
+        name: "userId",
+        using: "BTREE",
+        fields: [
+          { name: "user_id" },
         ]
       },
     ]

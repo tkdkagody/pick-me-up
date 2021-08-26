@@ -14,7 +14,7 @@ module.exports = function(sequelize, DataTypes) {
   }, {
     sequelize,
     tableName: 'tags',
-    timestamps: false,
+    timestamps: true,
     indexes: [
       {
         name: "PRIMARY",

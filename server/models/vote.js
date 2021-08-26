@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('comments', {
+  return sequelize.define('vote', {
     id: {
       autoIncrement: true,
       type: DataTypes.INTEGER,
@@ -15,30 +15,18 @@ module.exports = function(sequelize, DataTypes) {
         key: 'id'
       }
     },
-    user_id: {
+    agreement: {
       type: DataTypes.INTEGER,
-      allowNull: true,
-      references: {
-        model: 'users',
-        key: 'id'
-      }
-    },
-    text_content: {
-      type: DataTypes.STRING(255),
       allowNull: true
     },
-    created_at: {
-      type: DataTypes.DATE,
-      allowNull: true
-    },
-    updated_at: {
-      type: DataTypes.DATE,
+    oppostion: {
+      type: DataTypes.INTEGER,
       allowNull: true
     }
   }, {
     sequelize,
-    tableName: 'comments',
-    timestamps: false,
+    tableName: 'vote',
+    timestamps: true,
     indexes: [
       {
         name: "PRIMARY",
@@ -49,17 +37,10 @@ module.exports = function(sequelize, DataTypes) {
         ]
       },
       {
-        name: "feedId",
+        name: "post_id",
         using: "BTREE",
         fields: [
           { name: "post_id" },
-        ]
-      },
-      {
-        name: "userId",
-        using: "BTREE",
-        fields: [
-          { name: "user_id" },
         ]
       },
     ]
