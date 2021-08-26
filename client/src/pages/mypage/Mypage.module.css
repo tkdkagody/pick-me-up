@@ -1,34 +1,37 @@
+
+
 .container{
     /*최상위 바디 컨테이너*/
     width: 500px;
     margin:0 auto;
 }
-.category{
-    border-bottom: 1px solid #b8b6b3;
-    height: 3rem;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-    align-items: flex-end;
+.category {
+  margin-bottom: 3rem;
+  border-bottom: 1px solid #b8b6b3;
+  height: 3rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: flex-end;
 }
-.myinfo{
-    flex-basis: 19%;
+.myinfo {
+  flex-basis: 19%;
 }
-.mycontent{
-    flex-basis: 30%;
+.mycontent {
+  flex-basis: 30%;
 }
 .myinfo,
-.mycontent{
-    justify-content: center;
-    align-items: center;
-    height: 1.5rem;
-    text-align: center;
-    font-size: 1rem;
-    cursor: pointer;
+.mycontent {
+  justify-content: center;
+  align-items: center;
+  height: 1.5rem;
+  text-align: center;
+  font-size: 1rem;
+  cursor: pointer;
 }
 .myinfo:hover,
-.mycontent:hover{
-    color: grey;
+.mycontent:hover {
+  color: grey;
 }
 
 /*
@@ -36,17 +39,22 @@
 */
 
 
+/* .body{
+    border-top: 1px solid rgb(243, 242, 232);
+    border-bottom: 1px solid rgb(243, 242, 232);
+} */
+
 
 /*반응형*/
 @media screen and (max-width: 62rem) {
-    .myinfo{
-        flex-basis: 16%;
-    }
-    .mycontent{
-        flex-basis: 22%;
-    }
-    .myinfo,
-    .mycontent{
+  .myinfo {
+    flex-basis: 16%;
+  }
+  .mycontent {
+    flex-basis: 22%;
+  }
+  .myinfo,
+  .mycontent {
     font-size: 0.9rem;
-    }
+  }
 }
