@@ -19,10 +19,12 @@ const Mypage = () => {
 
   return (
     <section className={styles.container}>
+
         <nav className={styles.category}>
             <div className={styles.myinfo} onClick={handleClickMyinfo}>MY INFO</div>
             <div className={styles.mycontent} onClick={handleClickMycontnent}>MY CONTENT</div>
         </nav>
+        
         <div className={styles.body}>
           {infoClicked=== true ?
             <Myinfo />

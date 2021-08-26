@@ -47,8 +47,8 @@ const Myinfo = (props) => {
             <div className={styles.btns}>
             <button className={styles.btn}>회원탈퇴(optional)</button>
             <button className={styles.btn} onClick={handleClickModify} 
-            isModifyClicked={isModifyClicked}
-            setIsModifyClicked={setIsModifyClicked}
+                isModifyClicked={isModifyClicked}
+                setIsModifyClicked={setIsModifyClicked}
             >수정하기</button>
             </div>
         </>
