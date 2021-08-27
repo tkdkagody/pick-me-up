@@ -18,8 +18,8 @@ a {
   position: relative;
 }
 
-.underline{
-    text-decoration: none;
+.underline {
+  text-decoration: none;
 }
 
 .title {
@@ -44,85 +44,80 @@ a {
   color: gray;
 }
 
-  .homebtn {
-    width: 3rem;
-    position: absolute;
-    left: 0.5em;
-    top: 1.8em;
-    cursor: pointer;
-    box-sizing: border-box;
-  }
-  .btns {
-    height: 3rem;
-    position: absolute;
-    right: 0.5em;
-    /* top: 1.85em; */
-  }
-  .signin {
-    font-size: 0.8rem;
-    font-weight: bold;
-    height: 100%;
-    border: 0;
-    background-color: white;
-    cursor: pointer;
-    outline: none;
-  }
-  .mypage {
-    width: 10.5rem;
-    height: 3rem;
-    margin: 0.8em;
-    padding: 0.2rem 0.8rem;
-    color: black; 
-    font-size: 2rem;
-    position: absolute;
-    left: 8rem;
-    top:1rem;
-    text-align: center;
+.homebtn {
+  width: 3rem;
+  position: absolute;
+  left: 0.5em;
+  top: 1.8em;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+.btns {
+  height: 3rem;
+  position: absolute;
+  right: 0.5em;
+  /* top: 1.85em; */
+}
+.signin {
+  font-size: 0.8rem;
+  font-weight: bold;
+  height: 100%;
+  border: 0;
+  background-color: white;
+  cursor: pointer;
+  outline: none;
+}
+.mypage {
+  width: 10.5rem;
+  height: 3rem;
+  margin: 0.8em;
+  padding: 0.2rem 0.8rem;
+  color: black;
+  font-size: 2rem;
+  position: absolute;
+  left: 8rem;
+  top: 1rem;
+  text-align: center;
 }
 
-.btns{
-    height: 1.5rem;
-    position: absolute;
-    right: 1em;
-    top: 3.4em;
-
+.btns {
+  height: 1.5rem;
+  position: absolute;
+  right: 1em;
+  top: 3.4em;
 }
 .signin,
-.mypage{
-    font-size: 0.8rem;
-    font-weight: bold;
-    height: 70%;
-    border: 0; 
-    background-color: rgb(247, 240, 229);
-    cursor: pointer;
-    outline: none;
-  }
+.mypage {
+  font-size: 0.8rem;
+  font-weight: bold;
+  height: 70%;
+  border: 0;
+  background-color: rgb(247, 240, 229);
+  cursor: pointer;
+  outline: none;
 }
 
 .signin:hover,
-.mypage:hover{
-    color:gray;
+.mypage:hover {
+  color: gray;
 }
 
-.mypage{
-    margin-left: 0.5rem;
+.mypage {
+  margin-left: 0.5rem;
 }
-
 
 /*반응형*/
 @media screen and (max-width: 33rem) {
-    .contentbox{
-        width: 28rem;
-    }
- 
-    .btns{
-        height: 5rem;
-        position: absolute;
-        right: 1em;
-        top: 1em;
-        display: flex;
-        flex-direction: column;
-    
-    }
-}
+  .contentbox {
+    width: 28rem;
+  }
 
+  .btns {
+    height: 5rem;
+    position: absolute;
+    right: 1em;
+    top: 1em;
+    display: flex;
+    flex-direction: column;
+  }
+}
