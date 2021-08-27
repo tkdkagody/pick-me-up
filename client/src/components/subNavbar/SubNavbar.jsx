@@ -2,22 +2,20 @@ import React from 'react';
 import styles from './SubNavbar.module.css'
 import { Link } from 'react-router-dom';
 
-const SubNavbar = (props) => {
+const SubNavbar = ({filterHandle}) => {
+
+  const tags=['전체', '#의류', '#리빙', '#뷰티', '#식품', '#잡화', '#디지털']
   return (
     <>
       <div className={styles.categories}>
-        <span className={styles.hashtag}>전체</span>
-        <span className={styles.hashtag}>#의류</span>
-        <span className={styles.hashtag}>#리빙</span>
-        <span className={styles.hashtag}>#디지털</span>
-        <span className={styles.hashtag}>#식품</span>
-        <span className={styles.hashtag}>#잡화</span>
+        {tags.map(el => <span className={styles.hashtag} onClick={()=>filterHandle(el)}>{el}</span>)}
       </div>
-      <Link to="/writing">
-        <div className={styles.writingBtn}>
+      <div className={styles.writingBtn}>
+        <Link to="/writing">
           <button className={styles.button}>글쓰기</button>
-        </div>
-      </Link>
+        </Link>
+      </div>
+    
     
     </>
   )
