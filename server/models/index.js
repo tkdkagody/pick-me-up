@@ -9,35 +9,19 @@ const config = require(__dirname + "/../config/config.json")[env];
 const db = {};
 
 let sequelize;
-if (config.use_env_variable) {
-  console.log("haha");
-  sequelize = new Sequelize(config.database, config.username, config.password, {
-    host: config.host,
-    port: config.port,
-    logging: console.log,
-    maxConcurrentQueries: 100,
-    dialect: "mysql",
-    dialectOptions: {
-      ssl: "Amazon RDS",
-    },
-    pool: { maxConnections: 5, maxIdleTime: 30 },
-    language: "en",
-  });
-} else {
-  console.log("haha1");
-  sequelize = new Sequelize(config.database, config.username, config.password, {
-    host: config.host,
-    port: config.port,
-    logging: console.log,
-    maxConcurrentQueries: 100,
-    dialect: "mysql",
-    dialectOptions: {
-      ssl: "Amazon RDS",
-    },
-    pool: { maxConnections: 5, maxIdleTime: 30 },
-    language: "en",
-  });
-}
+console.log("haha");
+sequelize = new Sequelize(config.database, config.username, config.password, {
+host: config.host,
+port: config.port,
+logging: console.log,
+maxConcurrentQueries: 100,
+dialect: "mysql",
+dialectOptions: {
+ssl: "Amazon RDS",
+},
+pool: { maxConnections: 5, maxIdleTime: 30 },
+language: "en",
+});
 
 fs.readdirSync(__dirname)
   .filter((file) => {
