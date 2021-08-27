@@ -40,7 +40,6 @@ router.post("/sign-up", (req, res) => {
     });
 });
 
-
 router.get("/", (req, res) => {
   res.send("hello world!");
 });
