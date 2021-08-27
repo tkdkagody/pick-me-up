@@ -4,6 +4,8 @@ import styles from './Vote.module.css';
 
 
 const Vote = ({feed, handleVote}) => {
+
+  
   return(
   <section className={styles.container}>
  

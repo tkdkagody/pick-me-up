@@ -1,12 +1,19 @@
 import styles from './RealVote.module.css';
-
 import React from 'react';
+import { useHistory } from 'react-router';
 
-const RealVote = ({feed, handleVote, clickYes}) => {
+const RealVote = ({feed, handleVote}) => {
 
-    // const clickYesOrNo = () => {
-    //     handleVote(true)
-    // }
+   
+   const history = useHistory();
+   
+    const clickYes = ()=> {
+        history.push('/result');
+
+        handleVote(false)
+    }
+
+    
 
     return(
 <section className={styles.backdrop}>
