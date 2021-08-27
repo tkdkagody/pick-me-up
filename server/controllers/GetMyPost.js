@@ -1,10 +1,9 @@
-const { post } = require("../Model/post");
+const { post } = require("../models");
 const jwt = require('jsonwebtoken');
 require("dotenv").config();
 const e = require('express');
 
 module.exports = {
-    // modified
     getMyPost: async (req, res) => {
         const Authentication = await req.headers.Authentication;
         
