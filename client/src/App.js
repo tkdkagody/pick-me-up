@@ -86,7 +86,9 @@ function App() {
             <Route path="/feed">
               <Feed feed={selectedFeed}/>
             </Route>
-            : null}
+            : null} 
+             
+            {/* 이부분 투표창에서 새로고침시 페이지 사라지는거 막아야함 */}
 
           </Switch>
         </div>

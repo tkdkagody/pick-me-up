@@ -1,19 +1,47 @@
 import React, { useState } from 'react';
-import Navbar from '../../pages/navbar/Navbar';
 import Signup from '../signup/Signup';
 import styles from './Signin.module.css';
+import axios from 'axios';
+
+
+axios.defaults.withCredentials = true;
 
 const Signin = ({clickCloseSignIn}) => {
 
-  const [isSignUpClicked, setIsSignUpClicked] = useState(false);
+//로그인정보 상태
+  const [loginInfo, setLoginInfo] = useState({
+    userId: '',
+    password: ''
+  });
 
+//에러메세지 상태
+  const [errorMessage, setErrorMessage] = useState('');
+
+//로그인창에 있는 가입창 누름여부 상태 
+  const [isSignUpClicked, setIsSignUpClicked] = useState(false);
   const clickSignUpBtn = () => {
     setIsSignUpClicked(!isSignUpClicked); 
   };
+//input창이랑 연결 메소드
+  const handleInputValue =(key) =>  (e) => {
+    setLoginInfo({...loginInfo, [key]: e.target.value});
+  }
+
+  const { userId, password } = loginInfo;
+//로그인버튼 클릭시 호출 메소드 
+  const handleLogin = ()=> {
+    if(!userId || !password){
+      setErrorMessage('아이디와 비밀번호를 모두 입력해주세요');
+    }else{
+      setErrorMessage('');
+      //여기서 post요청
+      // clickCloseSignIn()  ::제대로 받아왔을경우 사인인창 없애기 
+    }
+  }
+
 
     return(
-
-<section className={styles.backdrop}>
+    <section className={styles.backdrop}>
       {isSignUpClicked ?
         <Signup isSignUpClicked={isSignUpClicked} 
           setIsSignUpClicked={setIsSignUpClicked}
@@ -27,16 +55,24 @@ const Signin = ({clickCloseSignIn}) => {
             <img src="../../../images/close.svg" className={styles.img}></img>
           </span>
         </div>
- {/* <form className={styles.form}> */}   
+
+  <form className={styles.form} onSubmit={(e) => e.preventDefault()}> 
         <ul className={styles.list}>
            <li className={styles.item}>
-                <input type="text" className={styles.text} placeholder="아이디를 입력하세요"/>
+                <input type="text" className={styles.text} onChange={handleInputValue('userId')} placeholder="아이디를 입력하세요"/>
           </li>
           <li className={styles.item}>
-                <input type="text" className={styles.text} placeholder="비밀번호를 입력하세요"/>
+                <input type="text" className={styles.text} onChange={handleInputValue('password')} placeholder="비밀번호를 입력하세요"/>
           </li>
+         
+          {
+          errorMessage ? 
+          (<li className={styles.alert}>{errorMessage}</li>) 
+          : null
+          }
+
           <li className={styles.item}>
-            <button className={styles.button} >
+            <button className={styles.button} onClick={handleLogin}>
               Sign in 
             </button>
           </li>
@@ -51,9 +87,12 @@ const Signin = ({clickCloseSignIn}) => {
             </button>
           </li>
         </ul>
- {/* </form> */}     
+        
+ </form>   
+ 
+  
       </div>
-</section>
+    </section>
 
 
 

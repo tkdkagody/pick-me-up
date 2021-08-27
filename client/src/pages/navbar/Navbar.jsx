@@ -30,12 +30,12 @@ const Navbar = (props) => {
           <div className={styles.title} >Pick me up</div>
         </Link>
         <div className={styles.btns}>
-          <button className={styles.signin} onClick={clickSigninBtn}>
+        <button className={styles.signbtn} onClick={clickSigninBtn}>
             Sign in
           </button>
         <Link to="/mypage">
-          <button className={styles.mypage} >
-            마이페이지
+        <button className={styles.mypagebtn} >
+            My page
           </button>
         </Link>
         </div>
@@ -48,6 +48,3 @@ const Navbar = (props) => {
 };
 
 export default Navbar;
-
-
-
