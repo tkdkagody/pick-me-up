@@ -4,7 +4,7 @@ import FeedContent from '../feedContent/FeedContent';
 
 
 
-const Mycontent = (props) => {
+const Mycontent = () => {
     return(
     <>
         <ul className={styles.feedList}>

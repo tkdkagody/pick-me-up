@@ -69,13 +69,22 @@ function App() {
             <Route path="/writing">
               <Writing />
             </Route>
-            <Route path="/result">
+            {/* <Route path="/result" >
               <VoteResult />
-            </Route>
+            </Route> */}
           </Switch>
         </div>
         <Footer></Footer>
       </Router>
+
+
+
+
+
+
+
+
+      
       {/* Navbar */}
       {/* 4개의 메인 컴포넌트 상태에 따라서 랜더링 */}
       {/* Footer */}
@@ -85,3 +94,4 @@ function App() {
 }
 
 export default App;
+
