@@ -10,6 +10,7 @@ import Login from './components/signin/Signin';
 import Signup from './components/signup/Signup';
 import Feed from './pages/feed/Feed';
 import Signin from './components/signin/Signin';
+import VoteResult from './components/voteResult/VoteResult';
 
 
 
@@ -63,10 +64,13 @@ function App() {
               <MainFeeds feeds={feeds} handleClick={select}/>
             </Route>}
             <Route path="/mypage">
-              <Mypage/>
+              <Mypage />
             </Route>
             <Route path="/writing">
               <Writing />
+            </Route>
+            <Route path="/result">
+              <VoteResult />
             </Route>
           </Switch>
         </div>
