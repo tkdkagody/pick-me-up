@@ -42,6 +42,7 @@ router.post("/sign-up", (req, res) => {
 });
 
 router.patch("/user/profile/:id", changeProfile);
+router.get('/user/posting-list/:id', getMyPost);
 
 router.get("/", (req, res) => {
   res.send("hello world!");
