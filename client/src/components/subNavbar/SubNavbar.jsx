@@ -10,11 +10,12 @@ const SubNavbar = ({filterHandle}) => {
       <div className={styles.categories}>
         {tags.map(el => <span className={styles.hashtag} onClick={()=>filterHandle(el)}>{el}</span>)}
       </div>
-      <Link to="/writing">
-        <div className={styles.writingBtn}>
+      <div className={styles.writingBtn}>
+        <Link to="/writing">
           <button className={styles.button}>글쓰기</button>
-        </div>
-      </Link>
+        </Link>
+      </div>
+    
     
     </>
   )
