@@ -44,7 +44,7 @@ router.post("/sign-up", (req, res) => {
     });
 });
 
-router.post("sign-in", (req, res) => {
+router.post("sign-in", async (req, res) => {
   const { userId, password } = req.body;
 
   passwordToken = jwt.sign(password, process.env.ACCESS_SECRET);
