@@ -44,8 +44,30 @@ router.post("/sign-up", (req, res) => {
     });
 });
 
-router.post("sign-in", (req, res) => {
+router.post("/sign-in", async (req, res) => {
   const { userId, password } = req.body;
+
+  passwordToken = jwt.sign(password, process.env.ACCESS_SECRET);
+
+  const userInfo = await users.findOne({
+    where: {
+      user_id: userId,
+      password: passwordToken,
+    },
+  });
+
+  if (!userInfo) {
+    return res.status(404).send("invalid user");
+  }
+
+  return res.status(200).json({
+    data: {},
+    message: "ok",
+  });
+});
+
+router.post("/sign-out", (req, res) => {
+  res.status(205).json({ message: "successfully signed out!" });
 });
 
 router.get("/", (req, res) => {
