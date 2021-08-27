@@ -19,9 +19,12 @@ a {
   top: 20px;
 }
 
+
+
 /* .underline{
     text-decoration: none;
 } */
+
 
 .title {
   position: absolute;
@@ -34,8 +37,6 @@ a {
   font-size: 1.8rem;
   cursor: pointer;
 }
-
-
 
 .btns{
     width: 115px;
@@ -58,17 +59,18 @@ a {
 
 
 .signin:hover,
-.mypage:hover{
-    color:gray;
+.mypage:hover {
+  color: gray;
 }
+
 
 .mypage{
     margin-left: 10px;
 }
 
-
 /*반응형*/
 @media screen and (max-width: 33rem) {
+
     .contentbox{
         width: 28rem;
     }
@@ -84,3 +86,13 @@ a {
     }
 }
 
+
+  .btns {
+    height: 5rem;
+    position: absolute;
+    right: 1em;
+    top: 1em;
+    display: flex;
+    flex-direction: column;
+  }
+}
