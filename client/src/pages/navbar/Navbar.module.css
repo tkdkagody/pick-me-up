@@ -6,103 +6,71 @@
 }
 .contentbox{
     width: 500px;
-    text-align: center;
+    height: 9rem;
     margin: 0 auto;
     position: relative;
+    top: 1rem;
 }
 
-/* .homebtn{
-    width: 3rem;
-    position: absolute;
-    left: 3em;
-    top: 1.8em;
-    cursor: pointer;
-    box-sizing: border-box;
+.underline{
+    text-decoration: none;
 }
-
-.homeimg{
-    width: 100%;
-    height: 100%;
-    padding: 0;
-    border: 1px solid black;
-    display: inline-block;
-    vertical-align: middle;
-} */
 
 .title {
+    width: 10.5rem;
+    height: 3rem;
     margin: 0.8em;
-    padding: 1.5rem 0.8rem;
+    padding: 0.2rem 0.8rem;
     color: black; 
-    text-decoration-line: none;
     font-size: 2rem;
-  }
+    position: absolute;
+    left: 8rem;
+    top:1rem;
+    text-align: center;
+}
+
 
 .btns{
-    height: 3rem;
+    height: 1.5rem;
     position: absolute;
     right: 1em;
-    top: 1em;
+    top: 3.4em;
+
 }
-.signin{
-    font-size: 0.8rem;
-    font-weight: bold;
-    height: 100%;
-    border: 0;
-    background-color: rgb(247, 240, 229);
-    cursor: pointer;
-    outline: none;
-}
-.signin:hover{
-    color:gray;
-}
+.signin,
 .mypage{
     font-size: 0.8rem;
     font-weight: bold;
-    height: 100%;
-    border: 0;
+    height: 70%;
+    border: 0; 
     background-color: rgb(247, 240, 229);
-    margin-left: 0.5rem;
     cursor: pointer;
     outline: none;
 }
+
+.signin:hover,
 .mypage:hover{
     color:gray;
 }
 
+.mypage{
+    margin-left: 0.5rem;
+}
 
 
-@media screen and (max-width: 62rem) {
-    .homebtn{
-        width: 3rem;
-        position: absolute;
-        left: 0.5em;
-        top: 1.8em;
-        cursor: pointer;
-        box-sizing: border-box;
+/*반응형*/
+@media screen and (max-width: 33rem) {
+    .contentbox{
+        width: 28rem;
     }
+ 
     .btns{
-        height: 3rem;
+        height: 5rem;
         position: absolute;
-        right: 0.5em;
-        top: 1.85em;
+        right: 1em;
+        top: 1em;
+        display: flex;
+        flex-direction: column;
+    
     }
-    .signin{
-        font-size: 0.8rem;
-        font-weight: bold;
-        height: 100%;
-        border: 0;
-        background-color: rgb(247, 240, 229);
-        cursor: pointer;
-        outline: none;
-    }
-    .mypage{
-        font-size: 0.8rem;
-        font-weight: bold;
-        height: 100%;
-        border: 0;
-        background-color: rgb(247, 240, 229);
-        margin-left: 0.5rem;
-        cursor: pointer;
-        outline: none;
-    }
-  }
+}

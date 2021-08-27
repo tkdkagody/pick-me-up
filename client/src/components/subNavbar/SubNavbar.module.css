@@ -35,3 +35,19 @@
   font-weight: bold;
   color: white;
 }
+.feedList{
+  border: 1px solid red; 
+}
+
+
+
+@media screen and (max-width: 33rem) {
+  .categories {
+    width : 100%;
+  }
+  /*li 태그 확인 */
+  .feedList{
+    border: 1px solid red; 
+    width: 100%;
+  }
+}

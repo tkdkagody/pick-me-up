@@ -8,6 +8,7 @@ import Mypage from './pages/mypage/Mypage';
 import Writing from './pages/writing/Writing';
 import Login from './components/signin/Signin';
 import Signup from './components/signup/Signup';
+import Signin from './components/signin/Signin';
 
 
 
@@ -34,13 +35,7 @@ function App() {
             </Route>
           </Switch>
         </div>
-      {/* 
-        <Login /> */}
-
-        <Signup />
         <Footer></Footer>
-
-
       </Router>
       {/* Navbar */}
       {/* 4개의 메인 컴포넌트 상태에 따라서 랜더링 */}
