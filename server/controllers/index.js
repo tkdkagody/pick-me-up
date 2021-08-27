@@ -60,8 +60,11 @@ router.post("/sign-in", async (req, res) => {
     return res.status(404).send("invalid user");
   }
 
+  delete userInfo.password;
+
+  const accessToken = jwt.sign(userInfo, process.env.ACCESS_SECRET);
+  res.cookie("jwt", accessToken);
   return res.status(200).json({
-    data: {},
     message: "ok",
   });
 });

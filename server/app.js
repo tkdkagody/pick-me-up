@@ -1,6 +1,7 @@
 const express = require("express");
 const logger = require("morgan");
 const cors = require("cors");
+const cookieParser = require("cookie-parser");
 class App {
   constructor() {
     this.app = express();
@@ -24,6 +25,7 @@ class App {
     this.app.use(express.json());
     this.app.use(express.urlencoded({ extended: false }));
     this.app.use(cors());
+    this.app.use(cookieParser());
   }
 
   getRouting() {
