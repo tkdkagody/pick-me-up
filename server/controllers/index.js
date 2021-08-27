@@ -45,7 +45,7 @@ router.post("/sign-up", (req, res) => {
 });
 
 router.post("sign-in", (req, res) => {
-  const { id, password } = req.body;
+  const { userId, password } = req.body;
 });
 
 router.get("/", (req, res) => {
