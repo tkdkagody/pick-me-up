@@ -71,6 +71,17 @@ function App() {
             <Route path="/writing">
               <Writing />
             </Route>
+
+
+
+
+
+      
+      {/* Navbar */}
+      {/* 4개의 메인 컴포넌트 상태에 따라서 랜더링 */}
+      {/* Footer */}
+      
+
             {selectedFeed ? 
             <Route path="/feed">
               <Feed feed={selectedFeed}/>
@@ -81,8 +92,10 @@ function App() {
         </div>
         <Footer></Footer>
       </Router> 
+
     </div>
   );
 }
 
 export default App;
+

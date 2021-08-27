@@ -4,6 +4,7 @@ import FeedContent from '../feedContent/FeedContent';
 
 
 
+
 const Mycontent = (props) => {
     const dummyData = [
         {userName: "구름이",
@@ -33,6 +34,7 @@ const Mycontent = (props) => {
     const handleOptions = () =>{  
         setMoreOptions(!moreOptions);
     }
+
 
     return(
     <ul className={styles.feedList}>
