@@ -4,5 +4,5 @@ require("dotenv").config();
 const { Router } = require("express");
 const router = Router();
 
-router.patch("/user/profile/:id", changeProfile);
+router.post("/user/profile/:id", changeProfile);
 router.get("/user/posting-list/:id", getMyPost);
