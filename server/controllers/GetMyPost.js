@@ -1,4 +1,4 @@
-const { post } = require("../models");
+const { post } = require('../models');
 const jwt = require('jsonwebtoken');
 require("dotenv").config();
 const e = require('express');
@@ -12,7 +12,7 @@ module.exports = {
         }
         else {
             const token = Authentication.split(' ')[1];
-            const data = jwt.verify(token, /* process.env.ACCESS_SECRET*/);
+            const data = jwt.verify(token, process.env.ACCESS_SECRET);
             if(!data) {
                 res.status(401).send({ "data": null, "message": "invalid access token" })
             }

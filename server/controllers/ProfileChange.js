@@ -1,14 +1,14 @@
 const e = require('express');
+const { users } = require('../models');
 const jwt = require('jsonwebtoken');
 require("dotenv").config();
-const { users } = require('../models');
 
 module.exports = {
     // [PATCH] /user/profile/:id
-    changeProfile: (req, res) => {
+    changeProfile: async (req, res) => {
         const { userName, mobile } = req.body;
         const Authentication = req.headers.Authentication;
-
+        
         if(!Authentication) {
             res.status(401).send({ "data": null, "message": "invalid access token" });
         }
@@ -35,5 +35,24 @@ module.exports = {
                 }
             }
         }
+        // users.update({
+        //     nickname: userName,
+        //     phone_number: mobile
+        // },
+        // {
+        //     where: { id: req.params.id }
+        // })
+        // .then(result => {
+        //     if(!result) {
+        //         return res.status(404).send({ "data": null, "message": "user not exists" });
+        //     } else {
+        //         const data = result.dataValues;
+        //         return res.status(200).send({ "data": data, "message": "profile changed" });
+        //     }
+        // })
+        // .catch(err => {
+        //     console.log(err);
+        // })
     }
 }
+

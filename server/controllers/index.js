@@ -18,12 +18,14 @@ router.post("/sign-up", (req, res) => {
       where: {
         user_id: id,
       },
-      default: {
-        password,
+      defaults: {
+        password: passwordToken,
         nickname: userName,
         phone_number: mobile,
         sign_up_type: signUpType,
         account_type: "client",
+        created_at: new Date(),
+        updated_at: new Date(),
       },
     })
     .then(([result, created]) => {
@@ -38,7 +40,7 @@ router.post("/sign-up", (req, res) => {
     });
 });
 
-router.get("/", (res, req) => {
+router.get("/", (req, res) => {
   res.send("hello world!");
 });
 
