@@ -5,7 +5,7 @@ import Signup from '../../components/signup/Signup';
 import styles from './Navbar.module.css';
 
 
-const Navbar = ({feed, handleClick}) => {
+const Navbar = (props) => {
   //props로 isSignIn받고 true일경우 login/ false일경우 logout버튼
 
 
@@ -20,24 +20,21 @@ const Navbar = ({feed, handleClick}) => {
     setIsSigninClicked(!isSigninClicked); 
   }
 
-
-  
-
   return (
       <header className={styles.header}>
         {/* 가입하기 모달창 */}
         {isSigninClicked  ?<Signin clickCloseSignIn={clickCloseSignIn} /> : null}
 
-<div className={styles.contentbox}>
+        <div className={styles.contentbox}>
         <Link to="/" className={styles.underline} >
-          <div className={styles.title}>PickMeUp</div>
+          <div className={styles.title} >Pick me up</div>
         </Link>
         <div className={styles.btns}>
           <button className={styles.signin} onClick={clickSigninBtn}>
             Sign in
           </button>
         <Link to="/mypage">
-          <button className={styles.mypage} onClick={handleClick}>
+          <button className={styles.mypage} >
             마이페이지
           </button>
         </Link>
