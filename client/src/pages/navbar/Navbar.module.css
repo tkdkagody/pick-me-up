@@ -1,15 +1,21 @@
-.header {
-    width:100%;
-    height: 200px;
-    padding: 0.5em;
-    background-color:rgb(247, 240, 229);
+@import url("https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap");
+
+a {
+  text-decoration: none;
 }
-.contentbox{
-    width: 500px;
-    height: 9rem;
-    margin: 0 auto;
-    position: relative;
-    top: 1rem;
+.header {
+  width: 100%;
+  height: 50px;
+  margin-top: 1rem;
+
+  /* background-color: #fbc000;*/
+}
+
+.contentbox {
+  width: 500px;
+  text-align: center;
+  margin: 0 auto;
+  position: relative;
 }
 
 .underline{
@@ -17,6 +23,51 @@
 }
 
 .title {
+  font-family: "Fredoka One", cursive;
+  color: black;
+  text-decoration-line: none;
+  font-size: 1.6rem;
+}
+
+.btns {
+  height: 3rem;
+  position: absolute;
+  right: 1em;
+  top: 1em;
+}
+
+.signin:hover {
+  color: gray;
+}
+
+.mypage:hover {
+  color: gray;
+}
+
+  .homebtn {
+    width: 3rem;
+    position: absolute;
+    left: 0.5em;
+    top: 1.8em;
+    cursor: pointer;
+    box-sizing: border-box;
+  }
+  .btns {
+    height: 3rem;
+    position: absolute;
+    right: 0.5em;
+    /* top: 1.85em; */
+  }
+  .signin {
+    font-size: 0.8rem;
+    font-weight: bold;
+    height: 100%;
+    border: 0;
+    background-color: white;
+    cursor: pointer;
+    outline: none;
+  }
+  .mypage {
     width: 10.5rem;
     height: 3rem;
     margin: 0.8em;
@@ -28,7 +79,6 @@
     top:1rem;
     text-align: center;
 }
-
 
 .btns{
     height: 1.5rem;
@@ -46,6 +96,7 @@
     background-color: rgb(247, 240, 229);
     cursor: pointer;
     outline: none;
+  }
 }
 
 .signin:hover,
@@ -74,3 +125,4 @@
     
     }
 }
+

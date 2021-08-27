@@ -5,7 +5,7 @@ import Signup from '../../components/signup/Signup';
 import styles from './Navbar.module.css';
 
 
-const Navbar = () => {
+const Navbar = ({feed, handleClick}) => {
   //props로 isSignIn받고 true일경우 login/ false일경우 logout버튼
 
 
@@ -37,12 +37,12 @@ const Navbar = () => {
             Sign in
           </button>
         <Link to="/mypage">
-          <button className={styles.mypage} >
-            My page
+          <button className={styles.mypage} onClick={handleClick}>
+            마이페이지
           </button>
         </Link>
         </div>
-</div>
+      </div>
 
 
 
