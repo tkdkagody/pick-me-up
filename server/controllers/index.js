@@ -1,4 +1,3 @@
-const { changeProfile } = require('../controllers/ProfileChange');
 require("dotenv").config();
 const { Router } = require("express");
 const router = Router();
@@ -19,12 +18,14 @@ router.post("/sign-up", (req, res) => {
       where: {
         user_id: id,
       },
-      default: {
-        password,
+      defaults: {
+        password: passwordToken,
         nickname: userName,
         phone_number: mobile,
         sign_up_type: signUpType,
         account_type: "client",
+        created_at: new Date(),
+        updated_at: new Date(),
       },
     })
     .then(([result, created]) => {
@@ -39,10 +40,7 @@ router.post("/sign-up", (req, res) => {
     });
 });
 
-router.patch("/user/profile/:id", changeProfile);
-router.get('/user/posting-list/:id', getMyPost);
-
-router.get("/", (res, req) => {
+router.get("/", (req, res) => {
   res.send("hello world!");
 });
 

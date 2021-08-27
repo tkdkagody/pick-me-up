@@ -9,7 +9,9 @@ import Writing from './pages/writing/Writing';
 import Login from './components/signin/Signin';
 import Signup from './components/signup/Signup';
 import Feed from './pages/feed/Feed';
-import Signin from './components/signin/Signin'
+import Signin from './components/signin/Signin';
+import VoteResult from './components/voteResult/VoteResult';
+
 
 
 
@@ -64,7 +66,7 @@ function App() {
               <MainFeeds feeds={feeds} filterHandle={listFilter} handleClick={select}/>
             </Route>
             <Route path="/mypage">
-              <Mypage/>
+              <Mypage />
             </Route>
             <Route path="/writing">
               <Writing />
@@ -74,6 +76,7 @@ function App() {
               <Feed feed={selectedFeed}/>
             </Route>
             : null}
+
           </Switch>
         </div>
         <Footer></Footer>
