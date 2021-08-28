@@ -24,7 +24,12 @@ class App {
     this.app.use(logger("dev"));
     this.app.use(express.json());
     this.app.use(express.urlencoded({ extended: false }));
-    this.app.use(cors()); // 응답 상태 200으로 설정}));
+    this.app.use(
+      cors({
+        credentials: true,
+        methods: ["GET", "POST", "OPTIONS"],
+      })
+    ); // 응답 상태 200으로 설정}));
     this.app.use(cookieParser());
   }
 

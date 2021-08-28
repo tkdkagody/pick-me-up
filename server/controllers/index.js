@@ -26,7 +26,7 @@ router.post("/sign-up", (req, res) => {
         password: passwordToken,
         nickname: userName,
         phone_number: mobile,
-        sign_up_type: signUpType,
+        sign_up_type: 2,
         account_type: "client",
         created_at: new Date(),
         updated_at: new Date(),
@@ -46,28 +46,29 @@ router.post("/sign-up", (req, res) => {
 });
 
 router.post("sign-in", async (req, res) => {
-  const { userId, password } = req.body;
+  res.send("hello world!");
+  // const { userId, password } = req.body;
 
-  passwordToken = jwt.sign(password, process.env.ACCESS_SECRET);
+  // passwordToken = jwt.sign(password, process.env.ACCESS_SECRET);
 
-  const userInfo = await users.findOne({
-    where: {
-      user_id: userId,
-      password: passwordToken,
-    },
-  });
+  // const userInfo = await users.findOne({
+  //   where: {
+  //     user_id: userId,
+  //     password: passwordToken,
+  //   },
+  // });
 
-  if (!userInfo) {
-    return res.status(404).send("invalid user");
-  }
+  // if (!userInfo) {
+  //   return res.status(404).send("invalid user");
+  // }
 
-  delete userInfo.password;
+  // delete userInfo.password;
 
-  const accessToken = jwt.sign(userInfo, process.env.ACCESS_SECRET);
-  res.cookie("jwt", accessToken);
-  return res.status(200).json({
-    message: "ok",
-  });
+  // const accessToken = jwt.sign(userInfo, process.env.ACCESS_SECRET);
+  // res.cookie("jwt", accessToken);
+  // return res.status(200).json({
+  //   message: "ok",
+  // });
 });
 
 router.post("/sign-out", (req, res) => {
