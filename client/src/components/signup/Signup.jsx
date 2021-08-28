@@ -25,13 +25,29 @@ const Signup = ({ setIsSignUpClicked, clickCloseBtn }) => {
       setErrorMessage("");
 
       const userData = {
-        id: userId,
+        userId,
         password: password,
         userName: userName,
         mobile: mobile,
         signUpType: signUpType,
       };
       // http://ec2-3-34-191-91.ap-northeast-2.compute.amazonaws.com/
+      // axios
+      //   .post(
+      //     "http://ec2-3-34-191-91.ap-northeast-2.compute.amazonaws.com/sign-up",
+      //     userData,
+      //     {
+      //       "Content-Type": "application/json",
+      //       withCredentials: true,
+      //     }
+      //   )
+      //   .then((result) => {
+      //     console.log(result);
+      //     // if(result.data.message === "successfully created"){
+      //     //       clickCloseAll();
+      //     //       //회원가입완료 모달 띄우면 좋을것 같음
+      //     // }
+      //   });
       axios
         .post(
           "http://ec2-3-34-191-91.ap-northeast-2.compute.amazonaws.com/sign-up",
@@ -41,12 +57,8 @@ const Signup = ({ setIsSignUpClicked, clickCloseBtn }) => {
             withCredentials: true,
           }
         )
-        .then((result) => {
-          console.log(result);
-          // if(result.data.message === "successfully created"){
-          //       clickCloseAll();
-          //       //회원가입완료 모달 띄우면 좋을것 같음
-          // }
+        .then((res) => {
+          console.log(res);
         });
     }
   };
