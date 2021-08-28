@@ -21,9 +21,9 @@ a {
 
 .title {
   position: absolute;
-  top:50px;
-  left : 180px;
-  width: 150px; 
+  top: 30px;
+  left: 180px;
+  width: 150px;
   font-family: "Fredoka One", cursive;
   color: black;
   text-decoration-line: none;
@@ -91,5 +91,4 @@ a {
   }
   
 }
-
 
