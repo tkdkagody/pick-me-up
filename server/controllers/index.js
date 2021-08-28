@@ -14,14 +14,11 @@ router.post("/sign-up", (req, res) => {
   const { userId, password, userName, mobile, signUpType } = req.body;
   console.log(userId, password, userName, mobile, signUpType);
 
-  if (!process.env.ACCESS_SECRET) {
-    return res.status(423).send("good");
-  }
   if (!userId || !password || !userName || !mobile) {
     return res.status(422).send("insufficient parameters supplied");
   }
   const passwordToken = jwt.sign(password, process.env.ACCESS_SECRET);
-  return res.send(passwordToken);
+
   users
     .findOrCreate({
       where: {
