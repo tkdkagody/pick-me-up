@@ -38,7 +38,7 @@ const Feed = ({feed}) => {
     {
       isVoteReal
       ? 
-       <VoteResult />
+       <VoteResult feed={feed} isVoted={isVoted} setIsVoted={setIsVoted}/>
       :
       (<section className={styles.container}>
         <div className={styles.feed}>
@@ -55,7 +55,7 @@ const Feed = ({feed}) => {
           {
             isVoted ?
             (<>
-            <RealVote feed={feed} handleVote={goResult}  setIsVoteReal={setIsVoteReal}/>
+            <RealVote  handleVote={goResult}  setIsVoteReal={setIsVoteReal}/>
             <Vote feed={feed} handleVote={vote} isVoted={isVoted}/>
             </>)
             :

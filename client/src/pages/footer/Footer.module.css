@@ -1,9 +1,15 @@
+@import url("https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap");
+
+span{
+  display: block;
+}
 .container {
   width: 100%;
   height: 250px;
   padding: 0.5em;
   /* background-color: #fad16a; */
   background-color: whitesmoke;
+
   display: flex;
   justify-content: center;
   align-items: center;
@@ -24,11 +30,12 @@
   margin-bottom: 2rem;
   font-size: 2rem;
   font-weight: bold;
+  font-family: "Fredoka One", cursive;
+  font-weight: bold;
 }
 
 .name {
-  /*li부분 > span*/
-  display: block;
+  font-family: "Fredoka One", cursive;
   font-weight: bold;
   display: flex;
   flex-direction: column;

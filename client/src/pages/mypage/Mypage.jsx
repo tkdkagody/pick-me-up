@@ -4,7 +4,8 @@ import Mycontent from '../../components/mycontent/Mycontent';
 import Myinfo from '../../components/myinfo/Myinfo';
 import styles from './Mypage.module.css';
 
-const Mypage = ({handleContent}) => {
+const Mypage = ({info, setInfo, handleContent}) => {
+// console.log(info)
 
 
   /* 카테고리이동 핸들러*/
@@ -29,8 +30,8 @@ const Mypage = ({handleContent}) => {
         
         <div className={styles.body}>
           {infoClicked=== true ?
-            <Myinfo />
-            : <Mycontent handleContent={handleContent}/>
+            <Myinfo info={info} setInfo={setInfo} handleContent={handleContent}/>
+            : <Mycontent />
           }
         </div>
         
