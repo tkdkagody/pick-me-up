@@ -19,18 +19,15 @@ a {
   top: 20px;
 }
 
-
-
 /* .underline{
     text-decoration: none;
 } */
 
-
 .title {
   position: absolute;
-  top:30px;
-  left : 180px;
-  width: 140px; 
+  top: 30px;
+  left: 180px;
+  width: 140px;
   font-family: "Fredoka One", cursive;
   color: black;
   text-decoration-line: none;
@@ -38,61 +35,54 @@ a {
   cursor: pointer;
 }
 
-.btns{
-    width: 115px;
-    height: 1.5rem;
-    position: absolute;
-    right: 1em;
-    top: 3.4em;
-
+.btns {
+  width: 115px;
+  height: 1.5rem;
+  position: absolute;
+  right: 1em;
+  top: 3.4em;
 }
 .signin,
-.mypage{
-    font-size: 0.8rem;
-    font-weight: bold;
-    height: 70%;
-    border: 0; 
-    background-color: #fbc000;
-    cursor: pointer;
-    outline: none;
-  }
-
+.mypage {
+  font-size: 0.8rem;
+  font-weight: bold;
+  height: 70%;
+  border: 0;
+  background-color: #fbc000;
+  cursor: pointer;
+  outline: none;
+}
 
 .signin:hover,
 .mypage:hover {
   color: gray;
 }
 
-
-.mypage{
-    margin-left: 10px;
+.mypage {
+  margin-left: 10px;
 }
 
 /*반응형*/
 @media screen and (max-width: 33rem) {
-
-    .contentbox{
-        width: 28rem;
-    }
- 
-    .btns{
-        height: 5rem;
-        position: absolute;
-        right: 0.3em;
-        top: 0.1em;
-        display: flex;
-        flex-direction: column;
-    
-    }
-}
-
+  .contentbox {
+    width: 28rem;
+  }
 
   .btns {
     height: 5rem;
     position: absolute;
-    right: 1em;
-    top: 1em;
+    right: 0.3em;
+    top: 0.1em;
     display: flex;
     flex-direction: column;
   }
+}
+
+.btns {
+  height: 5rem;
+  position: absolute;
+  right: 1em;
+  top: 1em;
+  display: flex;
+  flex-direction: column;
 }
