@@ -30,8 +30,8 @@ const Mypage = ({info, setInfo, handleContent}) => {
         
         <div className={styles.body}>
           {infoClicked=== true ?
-            <Myinfo info={info} setInfo={setInfo} handleContent={handleContent}/>
-            : <Mycontent />
+            <Myinfo info={info} setInfo={setInfo}/>
+            : <Mycontent handleContent={handleContent}/>
           }
         </div>
         
