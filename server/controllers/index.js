@@ -16,7 +16,7 @@ router.post("/sign-up", (req, res) => {
   if (!userId || !password || !userName || !mobile) {
     return res.status(422).send("insufficient parameters supplied");
   }
-  passwordToken = jwt.sign(password, process.env.ACCESS_SECRET);
+  const passwordToken = jwt.sign(password, process.env.ACCESS_SECRET);
   return res.send(passwordToken);
   users
     .findOrCreate({
