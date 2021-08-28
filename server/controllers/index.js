@@ -45,7 +45,7 @@ router.post("/sign-up", (req, res) => {
     });
 });
 
-router.post("sign-in", async (req, res) => {
+router.post("/sign-in", async (req, res) => {
   res.send("hello world!");
   // const { userId, password } = req.body;
 
