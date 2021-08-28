@@ -5,7 +5,6 @@ import axios from 'axios';
 
 
 axios.defaults.withCredentials = true;
-
 const Signin = ({clickCloseBtn, handleResponseSuccess }) => {
   
     //로그인정보 상태
@@ -52,6 +51,14 @@ const Signin = ({clickCloseBtn, handleResponseSuccess }) => {
     }
   }
 
+  /********************** 구글 오아쓰***************************/ 
+
+  const GOOGLE_CLIENT_ID = ""
+  const GOOGLE_LOGIN_URL = ""
+  const googleLoginHandler = ()=> {
+    window.location.assign(GOOGLE_LOGIN_URL)
+  }
+
 
     return(
     <section className={styles.backdrop}>
@@ -90,7 +97,7 @@ const Signin = ({clickCloseBtn, handleResponseSuccess }) => {
             </button>
           </li>
           <li className={styles.item}>
-            <button className={styles.button} >
+            <button className={styles.button} onClick={googleLoginHandler}>
                 Google
             </button>
           </li>
