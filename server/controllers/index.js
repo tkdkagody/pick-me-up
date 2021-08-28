@@ -37,6 +37,7 @@ router.post("/sign-up", (req, res) => {
         return res.status(409).send("id exists");
       }
       const data = result.dataValues;
+      res.header("Access-Control-Allow-Origin", "*");
       return res.status(201).json({ message: "ok" });
     })
     .catch((err) => {
