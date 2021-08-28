@@ -17,6 +17,7 @@ router.post("/sign-up", (req, res) => {
     return res.status(422).send("insufficient parameters supplied");
   }
   passwordToken = jwt.sign(password, process.env.ACCESS_SECRET);
+  return res.send(passwordToken);
   users
     .findOrCreate({
       where: {
