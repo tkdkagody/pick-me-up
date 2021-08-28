@@ -11,6 +11,7 @@ import Signup from './components/signup/Signup';
 import Feed from './pages/feed/Feed';
 import Signin from './components/signin/Signin';
 import VoteResult from './components/voteResult/VoteResult';
+import axios from 'axios';
 
 
 
@@ -39,14 +40,39 @@ function App() {
     votes: "N",
     createdAt: "2021-08-27"}
   ]
+    //로그인상태
+    const [isLogin, setIsLogin] = useState(false);
+    const [info, setInfo] = useState(null);
+
+
+  //유저데이터를 여기서 불러온다 ! //로그인 인증여기서!! 
+  const isAuthenticated = () => {    
+    // axios.get("http://ec2-3-34-191-91.ap-northeast-2.compute.amazonaws.com/userdata")
+    //성공할 경우 (토큰은 쿠키에 있음)
+    // .then(result => {}
+    setIsLogin(true);   //로그인상태  => 아마 로그인 창 닫힐듯! 
+    setInfo({   //인포상태 변화 //받아온 데이터로 넣어주기
+      userid:"abc1234",
+      nickname:"춘식",
+      mobile:"010-0000-0000"
+    });
+     loginHandler()
+    // //로그인창 닫기 
+  };
+  //로그인 정상적으로 완료하면 핸들리스폰스 호출 (signin 페이지)
+  const handleResponseSuccess = (msg) => {  //result.data.message="ok"!!
+    if(msg.message==="ok"){
+      isAuthenticated();
+    }
+  };
+
+ /**********************페이지 컨트롤 부분***************************/ 
 
   const [feeds, setFeeds] = useState(dummyData);
   const [selectedFeed, setSelectedFeed] = useState(null);
-
   const select = (el) => {
     setSelectedFeed(el);
   }
-
   const listFilter =(tag) =>{
     if(tag === '전체'){
       setFeeds(dummyData);
@@ -55,28 +81,42 @@ function App() {
     }
   } 
 
+ /**********************sign in 컨트롤 부분***************************/ 
+ 
+
+ //로그인상태 변경 메소드
+  const loginHandler=()=> {
+    setIsLogin(true);
+  }
+  //사인아웃클릭시 
+  const onSignout = ()=> {
+    axios.post('http://ec2-3-34-191-91.ap-northeast-2.compute.amazonaws.com/sign-out')
+    .then(result => {
+      setIsLogin(false);
+     //메인만 나오면 되서 아무것도 안해도 될거 같음 ! 
+    });
+  }
+
+
+
   return (
     
     <div className={styles.body}>
       <Router>
-         <Navbar/>
+         <Navbar handleResponseSuccess={handleResponseSuccess} onSignout={onSignout} isLogin={isLogin} info={info}/>
         <div id="page">
           <Switch>
             <Route exact={true} path="/">
               <MainFeeds feeds={feeds} filterHandle={listFilter} handleClick={select}/>
             </Route>
             <Route path="/mypage">
-              <Mypage />
+              <Mypage info={info} setInfo={setInfo}/>
             </Route>
             <Route path="/writing">
               <Writing />
             </Route>
 
 
-
-
-
-      
       {/* Navbar */}
       {/* 4개의 메인 컴포넌트 상태에 따라서 랜더링 */}
       {/* Footer */}
@@ -86,7 +126,9 @@ function App() {
             <Route path="/feed">
               <Feed feed={selectedFeed}/>
             </Route>
-            : null}
+            : null} 
+             
+            {/* 이부분 투표창에서 새로고침시 페이지 사라지는거 막아야함 */}
 
           </Switch>
         </div>

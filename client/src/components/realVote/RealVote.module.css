@@ -1,6 +1,6 @@
 /* 상위 컴포넌트에서 flex걸어서 로그인창 가운데정렬하기  */
 
-
+@import url("https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap");
 span{
     display: block;
   }
@@ -12,7 +12,7 @@ span{
       left: 0; 
       right: 0; 
       bottom:0;
-      background-color: rgba(0,0,0,0.1);
+      background-color: rgba(0,0,0,0.2);
       display: grid;
       place-items: center;
   }
@@ -23,16 +23,19 @@ span{
     display: flex;
     flex-direction: column;
     justify-content: center;
-    background-color: rgb(240, 199, 35);
+    background-color: #fbc000;
+    border-radius: 10px;
     border:1px solid grey;
     height: 140px;
+    font-weight: bold;
   }
 
   .title{
     height: 50px; 
     font-size: 25px;
     font-weight: bold;
-    color: white;
+    color: black;
+    font-family: "Fredoka One", cursive;
 
   }
 
@@ -41,6 +44,7 @@ span{
    display: flex;
    flex-direction: row;
    justify-content: space-evenly;
+  
   }
   .btn{
       outline: none;
@@ -51,6 +55,7 @@ span{
       font-family: "Fredoka One", cursive;
       font-weight: bold;
       cursor: pointer;
+      border-radius: 5px;
   }
   .btn:hover{
       background-color: black;
