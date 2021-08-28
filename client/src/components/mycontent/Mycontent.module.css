@@ -11,9 +11,6 @@
   margin-bottom: 3rem;
   overflow: hidden;
 }
-.feed {
-  position: relative;
-}
 
 .img {
   display: flex;
@@ -30,7 +27,6 @@
 .titleAndBtn {
   display: flex;
   justify-content: space-between;
-  align-items: center;
 }
 .title {
   display: inline-block;
@@ -42,13 +38,15 @@
 .titleAndBtn i {
   cursor: pointer;
   font-size: 0.8rem;
+  margin-top: 0.3rem;
   margin-right: 0.3rem;
+  position: relative;
 }
 
 .more {
   position: absolute;
-  bottom: 0rem;
-  right: 0.6rem;
+  top: 1rem;
+  right: 0;
   width: 4rem;
   text-align: center;
   list-style: none;
@@ -56,8 +54,13 @@
   border-radius: 2px;
   padding: 0.2rem 0;
   color: grey;
+  background-color: white;
   font-size: 0.7rem;
   box-shadow: -1px 0 4px rgba(14, 55, 63, 0.15);
+  font-weight: normal;
+}
+.more a {
+  color: grey;
 }
 .moreOpt {
   padding: 0.4rem 0;

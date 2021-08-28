@@ -1,5 +1,5 @@
 import styles from './App.module.css';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Navbar from './pages/navbar/Navbar';
 import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
 import Footer from './pages/footer/Footer';
@@ -11,7 +11,9 @@ import Signup from './components/signup/Signup';
 import Feed from './pages/feed/Feed';
 import Signin from './components/signin/Signin';
 import VoteResult from './components/voteResult/VoteResult';
+import ScrollButton from './components/scrollButton/ScrollButton';
 import axios from 'axios';
+
 
 
 
@@ -68,8 +70,9 @@ function App() {
 
  /**********************페이지 컨트롤 부분***************************/ 
 
-  const [feeds, setFeeds] = useState(dummyData);
-  const [selectedFeed, setSelectedFeed] = useState(null);
+  const [feeds, setFeeds] = useState(dummyData); //전체 피드리스트
+  const [selectedFeed, setSelectedFeed] = useState(null); //선택된 피드
+  const [revised, setRevised] = useState(null); //writing 할 피드
   const select = (el) => {
     setSelectedFeed(el);
   }
@@ -77,13 +80,24 @@ function App() {
     if(tag === '전체'){
       setFeeds(dummyData);
     }else{
-    setFeeds(dummyData.filter(el => el.tags.includes(tag)));
+      setFeeds(dummyData.filter(el => el.tags.includes(tag)));
     }
   } 
 
+  const revise = (el) => {
+    setRevised(el);
+  }
+
+  const resetWriting = () => {
+    setRevised(null);
+  }
+
+  useEffect(() => {
+    //feeds 불러오기 axios GET 요청(지영)
+  }, [])
+
  /**********************sign in 컨트롤 부분***************************/ 
  
-
  //로그인상태 변경 메소드
   const loginHandler=()=> {
     setIsLogin(true);
@@ -97,31 +111,32 @@ function App() {
     });
   }
 
-
-
   return (
     
     <div className={styles.body}>
       <Router>
-         <Navbar handleResponseSuccess={handleResponseSuccess} onSignout={onSignout} isLogin={isLogin} info={info}/>
+         <Navbar 
+          resetRevised={resetWriting} 
+          filterHandle={listFilter} 
+          handleResponseSuccess={handleResponseSuccess} 
+          onSignout={onSignout} 
+          isLogin={isLogin} 
+          info={info}/>
+
         <div id="page">
           <Switch>
             <Route exact={true} path="/">
               <MainFeeds feeds={feeds} filterHandle={listFilter} handleClick={select}/>
             </Route>
             <Route path="/mypage">
-              <Mypage info={info} setInfo={setInfo}/>
+              <Mypage 
+                handleContent={revise}
+                info={info} 
+                setInfo={setInfo}/>
             </Route>
             <Route path="/writing">
-              <Writing />
+              <Writing feed={revised} resetRevised={resetWriting}/>
             </Route>
-
-
-      {/* Navbar */}
-      {/* 4개의 메인 컴포넌트 상태에 따라서 랜더링 */}
-      {/* Footer */}
-      
-
             {selectedFeed ? 
             <Route path="/feed">
               <Feed feed={selectedFeed}/>
@@ -133,6 +148,7 @@ function App() {
           </Switch>
         </div>
         <Footer></Footer>
+        <ScrollButton/>
       </Router> 
 
     </div>
