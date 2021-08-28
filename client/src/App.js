@@ -65,6 +65,10 @@ function App() {
     setRevised(null);
   }
 
+  useEffect(() => {
+    //feeds 불러오기 axios GET 요청(지영)
+  }, [])
+
   return (
     
     <div className={styles.body}>

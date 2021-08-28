@@ -2,7 +2,6 @@ import React, {useState} from 'react';
 import Vote from '../../components/vote/Vote';
 import VoteResult from '../../components/voteResult/VoteResult';
 import styles from './Feed.module.css';
-import LoadingIndecator from '../../components/LoadingIndicator';
 import RealVote from '../../components/realVote/RealVote';
 
 

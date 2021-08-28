@@ -1,5 +1,5 @@
 import styles from './Mycontent.module.css'
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 
@@ -39,11 +39,20 @@ const Mycontent = ({handleContent}) => {
       isMoreOpt(!moreOpt);
     }
 
+    const deleteHandle = () => {
+      // 피드테이블에서 레코드 삭제하는 axios DELETE 요청(지영)
+      // 삭제 후 feeds 상태가 자동으로 변화되어 myfeeds 상태값도 바로 변화되는지 확인해봐야 함.
+      // 삭제 후 myContent 컴포넌트로 redirect 필요.
+    }
+
+    useEffect(() => {
+      //myFeeds 불러오기 axios GET 요청(지영)
+    }, []) // 빈배열을 빼고 myFeeds 상태값을 넣어야 할 수도 있음.
 
     return(
     <ul className={styles.feedList}>
       {myFeeds.map(el => {
-        if(JSON.stringify(el) === JSON.stringify(isPicked) && moreOpt){
+        if(JSON.stringify(el) === JSON.stringify(isPicked) && moreOpt){ //상태 두 개로 관리 안 해도 될 것 같음. 피드 id로 찾아내면 됌. 추후 디벨롭 예정(지영)
           return <li className={styles.container}>
                   <div className={styles.feed}>
                     <div className={styles.img}>
@@ -57,18 +66,10 @@ const Mycontent = ({handleContent}) => {
                           <Link to="/writing">
                             <li className={styles.moreOpt} onClick={()=>handleContent(el)}>수정</li>
                           </Link>
-                            <li className={styles.moreOpt}>삭제</li>
+                            <li className={styles.moreOpt} onClick={deleteHandle}>삭제</li>
                         </ul>
                       </i>
                     </div>
-
-                    {/* <ul className={styles.more}>
-                      <Link to="/writing">
-                        <li className={styles.moreOpt} onClick={()=>handleContent(el)}>수정</li>
-                      </Link>
-                        <li className={styles.moreOpt}>삭제</li>
-                    </ul> */}
-
                     <div className={styles.categories}>
                       {el.tags.map(el => <span className={styles.hashtag}>{el}</span>)}
                     </div>
