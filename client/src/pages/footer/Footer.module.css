@@ -8,7 +8,8 @@ span{
   height: 250px;
   padding: 0.5em;
   /* background-color: #fad16a; */
-  background-color: #fbc000;
+  background-color: whitesmoke;
+
   display: flex;
   justify-content: center;
   align-items: center;
