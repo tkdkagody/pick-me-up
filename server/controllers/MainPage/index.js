@@ -6,6 +6,6 @@ module.exports = {
     const data = result.map((obj) => {
       return obj.dataValues;
     });
-    console.log(data);
+    res.status(200).send(data);
   },
 };

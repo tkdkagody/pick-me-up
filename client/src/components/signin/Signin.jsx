@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
-import Signup from '../signup/Signup';
-import styles from './Signin.module.css';
-import axios from 'axios';
-
+import React, { useState } from "react";
+import Signup from "../signup/Signup";
+import styles from "./Signin.module.css";
+import axios from "axios";
 
 axios.defaults.withCredentials = true;
+
 const Signin = ({clickCloseBtn, handleResponseSuccess }) => {
   
     const [loginInfo, setLoginInfo] = useState({
@@ -16,14 +16,19 @@ const Signin = ({clickCloseBtn, handleResponseSuccess }) => {
   const [errorMessage, setErrorMessage] = useState('');
   const [isSignUpClicked, setIsSignUpClicked] = useState(false);
   const clickSignUpBtn = () => {
-    setIsSignUpClicked(!isSignUpClicked); 
+    setIsSignUpClicked(!isSignUpClicked);
   };
+  //input창이랑 연결 메소드
+  const handleInputValue = (key) => (e) => {
+    setLoginInfo({ ...loginInfo, [key]: e.target.value });
+  };
+
   const handleInputValue =(key) =>  (e) => {
     setLoginInfo({...loginInfo, [key]: e.target.value});
   }
 
+  /**********************sign in 컨트롤 부분***************************/
 
- /**********************sign in 컨트롤 부분***************************/ 
 
 //로그인버튼 클릭시 호출 메소드 
   const handleLogin = ()=> {
@@ -42,10 +47,13 @@ const Signin = ({clickCloseBtn, handleResponseSuccess }) => {
   }
 
     return(
+
     <section className={styles.backdrop}>
-      {isSignUpClicked ?
-        <Signup isSignUpClicked={isSignUpClicked} 
+      {isSignUpClicked ? (
+        <Signup
+          isSignUpClicked={isSignUpClicked}
           setIsSignUpClicked={setIsSignUpClicked}
+
           clickCloseBtn={clickCloseBtn}/> : null
       }
       <div className={styles.signin}>
@@ -55,6 +63,7 @@ const Signin = ({clickCloseBtn, handleResponseSuccess }) => {
             <img src="../../../images/close.svg" className={styles.img}></img>
           </span>
         </div>
+
 
       <form className={styles.form} onSubmit={(e) => e.preventDefault()}> 
         <ul className={styles.list}>
@@ -74,12 +83,13 @@ const Signin = ({clickCloseBtn, handleResponseSuccess }) => {
           </li>
           <li className={styles.item}>
             <button className={styles.button} >
+
                 Google
-            </button>
-          </li>
-          <li className={styles.item}>
-            <button className={styles.signup}  onClick={clickSignUpBtn} >
-                Sign up
+              </button>
+            </li>
+            <li className={styles.item}>
+              <button className={styles.signup} onClick={clickSignUpBtn}>
+
             </button>
           </li>
         </ul>
