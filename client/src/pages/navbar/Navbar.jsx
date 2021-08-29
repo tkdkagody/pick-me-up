@@ -5,7 +5,7 @@ import styles from './Navbar.module.css';
 
 
 
-const Navbar = ({handleResponseSuccess, onSignout, isLogin , info, resetRevised, filterHandle}) => {
+const Navbar = ({handleResponseSuccess, onSignout, isLogin , info, filterHandle}) => {
 
   //props로 isSignIn받고 true일경우 login/ false일경우 logout버튼
 
@@ -20,7 +20,6 @@ const Navbar = ({handleResponseSuccess, onSignout, isLogin , info, resetRevised,
   }
 
   const reset = () =>{
-    resetRevised();
     filterHandle();
   }
 

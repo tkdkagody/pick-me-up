@@ -13,6 +13,7 @@ import Signin from './components/signin/Signin';
 import VoteResult from './components/voteResult/VoteResult';
 import ScrollButton from './components/scrollButton/ScrollButton';
 import axios from 'axios';
+import Update from './pages/update/Update';
 
 
 
@@ -88,8 +89,8 @@ function App() {
     setRevised(el);
   }
 
-  const resetWriting = () => {
-    setRevised(null);
+  const createFeeds = (el) => {
+    setFeeds(feeds.concat(el))
   }
 
   useEffect(() => {
@@ -116,7 +117,6 @@ function App() {
     <div className={styles.body}>
       <Router>
          <Navbar 
-          resetRevised={resetWriting} 
           filterHandle={listFilter} 
           handleResponseSuccess={handleResponseSuccess} 
           onSignout={onSignout} 
@@ -135,7 +135,10 @@ function App() {
                 setInfo={setInfo}/>
             </Route>
             <Route path="/writing">
-              <Writing feed={revised} resetRevised={resetWriting}/>
+              <Writing isLogin={isLogin} feedList={feeds} feedsHandle={createFeeds}/>
+            </Route>
+            <Route path="/update">
+              <Update feed={revised}/>
             </Route>
             {selectedFeed ? 
             <Route path="/feed">
