@@ -7,11 +7,23 @@ module.exports = {
   },
   sendAccessToken: (res, accessToken) => {
     res
-      .cooke("jwt", accessToken, {
+      .cookie("jwt", accessToken, {
         httpOnly: true,
       })
       .status(200)
       .json({ message: "ok" });
   },
-  isAuthorized: (req) => {},
+  isAuthorized: (req) => {
+    const authorization = req.headers["cookie"];
+    if (!authorization) {
+      return null;
+    }
+    const token = authorization.split(); //토큰 들어오는 것 보고 수정
+
+    try {
+      return verify(token, process.env.ACCESS_SECRET);
+    } catch (err) {
+      return null;
+    }
+  },
 };
