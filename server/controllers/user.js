@@ -1,5 +1,5 @@
-const { changeProfile } = require('../controllers/ProfileChange');
-const { getMyPost } = require('../controllers/GetMyPost');
+const { changeProfile } = require("../controllers/ProfileChange");
+const { getMyPost } = require("../controllers/GetMyPost");
 require("dotenv").config();
 const { Router } = require("express");
 const router = Router();

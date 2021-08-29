@@ -1,55 +1,55 @@
-const e = require('express');
-const { users } = require('../models');
-const jwt = require('jsonwebtoken');
+const express = require("express");
+const { users } = require("../models");
+const jwt = require("jsonwebtoken");
 require("dotenv").config();
 
 module.exports = {
-    // [POST] /user/profile/:id
-    changeProfile: (req, res) => {
-        res.send("response");
-        // console.log(req)
-        // const { userName, mobile } = req.body;
-        // if(!userName && !mobile) {
-        //     return res.status(404).send("bad request");
-        // }
-        // const data = users.update({
-        //     nickname: userName,
-        //     phone_number: mobile
-        // },
-        // {
-        //     where: { id: req.params.id }
-        // });
+  // [POST] /user/profile/:id
+  changeProfile: (req, res) => {
+    res.status(404).send("bad request");
+    // console.log(req)
+    // const { userName, mobile } = req.body;
+    // if(!userName && !mobile) {
+    //     return res.status(404).send("bad request");
+    // }
+    // const data = users.update({
+    //     nickname: userName,
+    //     phone_number: mobile
+    // },
+    // {
+    //     where: { id: req.params.id }
+    // });
 
-        // if(!data) {
-        //     return res.status(404).send({ "data": null, "message": "user not exists" });
-        // }
-        // else {
-        //     const dataValues = data.dataValues;
-        //     return res.status(200).send({ "data": dataValues, "message": "profile changed" });
-        }
-        // users.update({
-        //     nickname: userName,
-        //     phone_number: mobile
-        // },
-        // {
-        //     where: { id: req.params.id }
-        // })
-        // .then(result => {
-        //     if(!result) {
-        //         return res.status(404).send({ "data": null, "message": "user not exists" });
-        //     } else {
-        //         const data = result.dataValues;
-        //         return res.status(200).send({ "data": data, "message": "profile changed" });
-        //     }
-        // })
-        // .catch(err => {
-        //     console.log(err);
-        // })
-    //}
-}
+    // if(!data) {
+    //     return res.status(404).send({ "data": null, "message": "user not exists" });
+    // }
+    // else {
+    //     const dataValues = data.dataValues;
+    //     return res.status(200).send({ "data": dataValues, "message": "profile changed" });
+    // }
+    // users.update({
+    //     nickname: userName,
+    //     phone_number: mobile
+    // },
+    // {
+    //     where: { id: req.params.id }
+    // })
+    // .then(result => {
+    //     if(!result) {
+    //         return res.status(404).send({ "data": null, "message": "user not exists" });
+    //     } else {
+    //         const data = result.dataValues;
+    //         return res.status(200).send({ "data": data, "message": "profile changed" });
+    //     }
+    // })
+    // .catch(err => {
+    //     console.log(err);
+    // })
+  },
+};
 
 // const Authentication = req.headers.Authentication;
-        
+
 //         if(!Authentication) {
 //             res.status(401).send({ "data": null, "message": "invalid access token" });
 //         }
@@ -76,7 +76,6 @@ module.exports = {
 //                 }
 //             }
 //         }
-
-router.get("/user", (req, res) => {
-    res.send("response");
-    })
+router.get("/user/profile", (req, res) => {
+  res.send("response res");
+});
