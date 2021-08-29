@@ -2,6 +2,7 @@ const express = require("express");
 const logger = require("morgan");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
+
 class App {
   constructor() {
     this.app = express();
@@ -26,6 +27,7 @@ class App {
     this.app.use(express.urlencoded({ extended: false }));
     this.app.use(
       cors({
+        origin: ["https://localhost:3000"],
         credentials: true,
         methods: ["GET", "POST", "OPTIONS"],
       })
@@ -50,4 +52,4 @@ class App {
   }
 }
 
-module.exports = new App().app;
+module.exports = new App().app ;
