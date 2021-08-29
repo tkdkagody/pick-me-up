@@ -6,7 +6,43 @@ require("dotenv").config();
 module.exports = {
   // [POST] /user/profile/:id
   changeProfile: (req, res) => {
-    res.status(404).send("bad request");
+    const user_id = req.params.id;
+    const { userName, mobile } = req.body;
+    // const result = await users.findAll();
+    // res.status(200).json({ data: result, message: "ok" });
+    console.log("user_id", user_id);
+    // const userInfo = await
+    const accessToken = req.cookie.jwt;
+    users
+      .update(
+        {
+          nickname: userName,
+          phone_number: mobile,
+        },
+        {
+          where: {
+            id: user_id,
+          },
+        }
+      )
+      .then((userInfo) => {
+        console.log("userInfo:", userInfo);
+        if (!userInfo) {
+          res.status(404).json({ message: "user not exists" });
+        } else {
+          // console.log("userInfo:", userInfo);
+          res.status(200).json({ message: "profile changed" });
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+    // if (!userInfo) {
+    //   res.status(404).send("bad request");
+    // } else {
+    //   res.status(200).send({ data: userInfo, message: "ok" });
+    // }
     // console.log(req)
     // const { userName, mobile } = req.body;
     // if(!userName && !mobile) {
@@ -76,6 +112,6 @@ module.exports = {
 //                 }
 //             }
 //         }
-router.get("/user/profile", (req, res) => {
-  res.send("response res");
-});
+// router.get("/user/profile", (req, res) => {
+//   res.send("response res");
+// });

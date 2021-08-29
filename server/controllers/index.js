@@ -38,7 +38,11 @@ router.post("/sign-up", (req, res) => {
     });
 });
 
-// router.post("/user/profile", changeProfile);
+router.post("/user/profile/:id", changeProfile);
+
+// router.get("/user/profile", (req, res) => {
+//   res.status(200).send("response ok");
+// });
 
 router.get("/", (req, res) => {
   res.send("hello world");
