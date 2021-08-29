@@ -14,10 +14,15 @@
   margin-right: 0.3rem;
 }
 
-.hashtag:hover {
-  border: none;
+.hashtagClicked {
+  cursor: pointer;
+  padding: 0.4rem 0.7rem;
+  font-size: 0.7rem;
+  margin-right: 0.3rem;
   color: white;
-  background-color: black;
+  border: 1px solid rgb(48, 48, 48);
+  background-color: rgb(48, 48, 48);
+  border-radius: 20px;
 }
 
 .writingBtn {

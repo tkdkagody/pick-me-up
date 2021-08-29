@@ -4,7 +4,9 @@ import Signin from '../../components/signin/Signin';
 import styles from './Navbar.module.css';
 
 
-const Navbar = ({handleResponseSuccess, onSignout, isLogin , info}) => {
+
+const Navbar = ({handleResponseSuccess, onSignout, isLogin , info, resetRevised, filterHandle}) => {
+
   //props로 isSignIn받고 true일경우 login/ false일경우 logout버튼
 
 
@@ -17,7 +19,11 @@ const Navbar = ({handleResponseSuccess, onSignout, isLogin , info}) => {
     setIsSigninClicked(false); 
   }
 
-  
+  const reset = () =>{
+    resetRevised();
+    filterHandle();
+  }
+
 
   return (
       <header className={styles.header}>
@@ -26,7 +32,7 @@ const Navbar = ({handleResponseSuccess, onSignout, isLogin , info}) => {
 
         <div className={styles.contentbox}>
         <Link to="/" className={styles.underline} >
-          <div className={styles.title} >Pick me up</div>
+          <div className={styles.title} onClick={reset}>Pick me up</div>
         </Link>
         <div className={styles.btns}>
        
