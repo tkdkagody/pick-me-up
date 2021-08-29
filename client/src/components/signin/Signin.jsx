@@ -7,25 +7,21 @@ import axios from 'axios';
 axios.defaults.withCredentials = true;
 const Signin = ({clickCloseBtn, handleResponseSuccess }) => {
   
-    //로그인정보 상태
     const [loginInfo, setLoginInfo] = useState({
       userId: '',
       password: ''
     });
-  
+    const { userId, password } = loginInfo;
  /**********************페이지 컨트롤 부분***************************/ 
-//에러메세지 상태
   const [errorMessage, setErrorMessage] = useState('');
-//로그인창에 있는 가입창 누름여부 상태 
   const [isSignUpClicked, setIsSignUpClicked] = useState(false);
   const clickSignUpBtn = () => {
     setIsSignUpClicked(!isSignUpClicked); 
   };
-//input창이랑 연결 메소드
   const handleInputValue =(key) =>  (e) => {
     setLoginInfo({...loginInfo, [key]: e.target.value});
   }
-  const { userId, password } = loginInfo;
+
 
  /**********************sign in 컨트롤 부분***************************/ 
 
@@ -35,38 +31,22 @@ const Signin = ({clickCloseBtn, handleResponseSuccess }) => {
       setErrorMessage('아이디와 비밀번호를 모두 입력해주세요');
     }else{
       setErrorMessage('');
-      // axios.post("http://ec2-3-34-191-91.ap-northeast-2.compute.amazonaws.com/sign-in",loginInfo,{
-      //   'Content-Type': 'application/json'
-      // })
-      // .then(result => {//result.data.data.accessToken
-      //   handleResponseSuccess(result)  //result.data.message="ok"!!
-      //   // clickCloseBtn()  ::제대로 받아왔을경우 사인인창 없애기 
-      // })
-      // .catch(err=> {
-      //   throw err
-      // });
-      //잘 로그인이 된경우 => 쿠키에 토큰이 들어가고 messaage로 ok를 받음 
-      handleResponseSuccess({message:"ok"});
-      clickCloseBtn();
+      axios.post("http://ec2-3-34-191-91.ap-northeast-2.compute.amazonaws.com/sign-in",loginInfo,{
+      })
+      .then(result => {
+        console.log(result.data.message);
+         handleResponseSuccess(result)  //result.data.message="ok"!!
+         clickCloseBtn()  //::제대로 받아왔을경우 사인인창 없애기 
+      })
     }
   }
-
-  /********************** 구글 오아쓰***************************/ 
-
-  const GOOGLE_CLIENT_ID = ""
-  const GOOGLE_LOGIN_URL = ""
-  const googleLoginHandler = ()=> {
-    window.location.assign(GOOGLE_LOGIN_URL)
-  }
-
 
     return(
     <section className={styles.backdrop}>
       {isSignUpClicked ?
         <Signup isSignUpClicked={isSignUpClicked} 
           setIsSignUpClicked={setIsSignUpClicked}
-          clickCloseBtn={clickCloseBtn}/>
-      : null
+          clickCloseBtn={clickCloseBtn}/> : null
       }
       <div className={styles.signin}>
         <div className={styles.titlebox}>
@@ -76,7 +56,7 @@ const Signin = ({clickCloseBtn, handleResponseSuccess }) => {
           </span>
         </div>
 
-  <form className={styles.form} onSubmit={(e) => e.preventDefault()}> 
+      <form className={styles.form} onSubmit={(e) => e.preventDefault()}> 
         <ul className={styles.list}>
            <li className={styles.item}>
                 <input type="text" className={styles.text} onChange={handleInputValue('userId')} placeholder="아이디를 입력하세요"/>
@@ -84,12 +64,8 @@ const Signin = ({clickCloseBtn, handleResponseSuccess }) => {
           <li className={styles.item}>
                 <input type="text" className={styles.text} onChange={handleInputValue('password')} placeholder="비밀번호를 입력하세요"/>
           </li>
-         
-          {
-          errorMessage ? 
-          (<li className={styles.alert}>{errorMessage}</li>) 
-          : null
-          }
+
+          {errorMessage ? (<li className={styles.alert}>{errorMessage}</li>) : null}
 
           <li className={styles.item}>
             <button className={styles.button} onClick={handleLogin}>
@@ -97,7 +73,7 @@ const Signin = ({clickCloseBtn, handleResponseSuccess }) => {
             </button>
           </li>
           <li className={styles.item}>
-            <button className={styles.button} onClick={googleLoginHandler}>
+            <button className={styles.button} >
                 Google
             </button>
           </li>
@@ -107,17 +83,9 @@ const Signin = ({clickCloseBtn, handleResponseSuccess }) => {
             </button>
           </li>
         </ul>
-        
- </form>   
- 
-  
+    </form>   
       </div>
     </section>
-
-
-
-
-  
     );
 }
 

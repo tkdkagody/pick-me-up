@@ -1,8 +1,10 @@
 import styles from './Myinfo.module.css';
-
 import React, { useState } from 'react';
 import MyinfoModify from '../myinfoModify/MyinfoModify';
-import MypageModifyNull from '../MypageModifyNull';
+import NullPage from '../NullPage/Nullpage';
+
+
+
 
 const Myinfo = ({info,setInfo}) => {
     if(info){  
@@ -17,6 +19,9 @@ const Myinfo = ({info,setInfo}) => {
     }
 
     return(
+        <>
+        {info ?
+        //
         <>
          {isModifyClicked=== false ?
 
@@ -74,7 +79,7 @@ const Myinfo = ({info,setInfo}) => {
             setIsModifyClicked={setIsModifyClicked}
             info={info} 
             setInfo={setInfo}/>
-        : <MypageModifyNull />   
+        : <NullPage />
         
         }
         </>
@@ -82,7 +87,14 @@ const Myinfo = ({info,setInfo}) => {
         }
 
        </>
-       
+        //
+        :
+        <NullPage />
+        }
+
+
+        
+    </>
     );
 }
 
