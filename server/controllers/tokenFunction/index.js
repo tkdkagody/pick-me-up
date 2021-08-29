@@ -8,7 +8,9 @@ module.exports = {
   sendAccessToken: (res, accessToken) => {
     res
       .cookie("jwt", accessToken, {
+        domain: "localhost:8080",
         httpOnly: true,
+        sameSite: "lax",
       })
       .status(200)
       .json({ message: "ok" });
@@ -18,7 +20,7 @@ module.exports = {
     if (!authorization) {
       return null;
     }
-    const token = authorization.split(); //토큰 들어오는 것 보고 수정
+    const token = authorization.split(";")[0].split("=")[1]; //토큰 들어오는 것 보고 수정
 
     try {
       return verify(token, process.env.ACCESS_SECRET);
