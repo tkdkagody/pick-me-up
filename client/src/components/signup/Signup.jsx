@@ -12,7 +12,7 @@ const Signup = ({setIsSignUpClicked, clickCloseBtn}) => {
       mobile :'', 
       password:'',
       password2 : '',
-      signUpType:false  //admin?
+      // signUpType:""  //admin?
   })
 
 //에러메세지 상태 
@@ -23,13 +23,12 @@ const handleSignup = ()=> {
             setErrorMessage('모든 항목을 입력해주세요')
       }else{
             setErrorMessage('')
-
             const userData = {
-                  id:userId,
+                  userId:userId,
                   password:password,
                   userName:userName,
                   mobile:mobile,
-                  signUpType:signUpType,
+                  // signUpType:signUpType,
             };
             // http://ec2-3-34-191-91.ap-northeast-2.compute.amazonaws.com/
             axios.post("http://ec2-3-34-191-91.ap-northeast-2.compute.amazonaws.com/sign-up",userData,{
@@ -37,10 +36,10 @@ const handleSignup = ()=> {
             })
             .then(result => {
                   console.log(result)
-                  // if(result.data.message === "successfully created"){
-                  //       clickCloseAll();
-                  //       //회원가입완료 모달 띄우면 좋을것 같음 
-                  // }
+                  if(result.data.message === "ok"){
+                        clickCloseAll();
+                        //회원가입완료 모달 띄우면 좋을것 같음 
+                  }
             })
 
       }

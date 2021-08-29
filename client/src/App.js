@@ -12,6 +12,7 @@ import Feed from './pages/feed/Feed';
 import Signin from './components/signin/Signin';
 import VoteResult from './components/voteResult/VoteResult';
 import axios from 'axios';
+import LoadingIndicator from './components/LoadingIndicator';
 
 
 
@@ -45,6 +46,7 @@ function App() {
     const [info, setInfo] = useState(null);
 
 
+
   //유저데이터를 여기서 불러온다 ! //로그인 인증여기서!! 
   const isAuthenticated = () => {    
     // axios.get("http://ec2-3-34-191-91.ap-northeast-2.compute.amazonaws.com/userdata")
@@ -61,7 +63,7 @@ function App() {
   };
   //로그인 정상적으로 완료하면 핸들리스폰스 호출 (signin 페이지)
   const handleResponseSuccess = (msg) => {  //result.data.message="ok"!!
-    if(msg.message==="ok"){
+    if(msg.data.message==="ok"){
       isAuthenticated();
     }
   };
@@ -70,6 +72,8 @@ function App() {
 
   const [feeds, setFeeds] = useState(dummyData);
   const [selectedFeed, setSelectedFeed] = useState(null);
+  const [isLoading,setIsLoading] = useState(true);
+
   const select = (el) => {
     setSelectedFeed(el);
   }
@@ -80,6 +84,18 @@ function App() {
     setFeeds(dummyData.filter(el => el.tags.includes(tag)));
     }
   } 
+
+  // useEffect(() => {   
+  //   //feed정보 get요청
+  //     .then(result => {
+  //       setIsLoading(false);
+  //      })
+
+  // }, [feeds]]);
+
+
+
+
 
  /**********************sign in 컨트롤 부분***************************/ 
  
@@ -93,6 +109,7 @@ function App() {
     axios.post('http://ec2-3-34-191-91.ap-northeast-2.compute.amazonaws.com/sign-out')
     .then(result => {
       setIsLogin(false);
+      setInfo(null);
      //메인만 나오면 되서 아무것도 안해도 될거 같음 ! 
     });
   }
@@ -100,8 +117,11 @@ function App() {
 
 
   return (
-    
-    <div className={styles.body}>
+    <>
+    {/* {
+      isLoading ? <LoadingIndicator /> 
+      : */}
+      <div className={styles.body}>
       <Router>
          <Navbar handleResponseSuccess={handleResponseSuccess} onSignout={onSignout} isLogin={isLogin} info={info}/>
         <div id="page">
@@ -115,27 +135,24 @@ function App() {
             <Route path="/writing">
               <Writing />
             </Route>
-
-
       {/* Navbar */}
       {/* 4개의 메인 컴포넌트 상태에 따라서 랜더링 */}
       {/* Footer */}
-      
-
             {selectedFeed ? 
             <Route path="/feed">
               <Feed feed={selectedFeed}/>
             </Route>
             : null} 
-             
             {/* 이부분 투표창에서 새로고침시 페이지 사라지는거 막아야함 */}
-
           </Switch>
         </div>
         <Footer></Footer>
       </Router> 
 
-    </div>
+    </div> 
+    {/* } */}
+
+    </>
   );
 }
 
