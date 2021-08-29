@@ -5,9 +5,12 @@ import axios from 'axios';
 
 axios.defaults.withCredentials = true;
 
+
 const Writing = ({isLogin, feedList, feedsHandle}) => {
 
+
   const tags=['#의류', '#리빙', '#뷰티', '#식품', '#잡화', '#디지털']
+
   const [title, setTitle] = useState(''); //제목
   const [firstOpt, setFirstOpt]= useState('')//옵션명1
   const [secondOpt, setSecondOpt]= useState('')//옵션명2

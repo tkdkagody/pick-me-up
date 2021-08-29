@@ -1,3 +1,4 @@
+
 import styles from "./App.module.css";
 import React, { useState, useEffect } from "react";
 import Navbar from "./pages/navbar/Navbar";
@@ -15,6 +16,7 @@ import ScrollButton from "./components/scrollButton/ScrollButton";
 import axios from "axios";
 import LoadingIndicator from "./components/LoadingIndicator";
 import Update from "./pages/update/Update";
+
 
 function App() {
   const dummyData = [
@@ -94,8 +96,10 @@ function App() {
   };
 
   const createFeeds = (el) => {
+
     setFeeds(feeds.concat(el));
   };
+
 
   useEffect(() => {
     //feeds 불러오기 axios GET 요청(지영)
@@ -121,56 +125,50 @@ function App() {
   };
 
   return (
-    <>
-      {/* {
-      isLoading ? <LoadingIndicator /> 
-      : */}
-      <div className={styles.body}>
-        <Router>
-          <Navbar
-            filterHandle={listFilter}
-            handleResponseSuccess={handleResponseSuccess}
-            onSignout={onSignout}
-            isLogin={isLogin}
-            info={info}
-          />
 
-          <div id="page">
-            <Switch>
-              <Route exact={true} path="/">
-                <MainFeeds
-                  feeds={feeds}
-                  filterHandle={listFilter}
-                  handleClick={select}
-                />
-              </Route>
-              <Route path="/mypage">
-                <Mypage handleContent={revise} info={info} setInfo={setInfo} />
-              </Route>
-              <Route path="/writing">
-                <Writing
-                  isLogin={isLogin}
-                  feedList={feeds}
-                  feedsHandle={createFeeds}
-                />
-              </Route>
-              <Route path="/update">
-                <Update feed={revised} />
-              </Route>
-              {selectedFeed ? (
-                <Route path="/feed">
-                  <Feed feed={selectedFeed} />
-                </Route>
-              ) : null}
-              {/* 이부분 투표창에서 새로고침시 페이지 사라지는거 막아야함 */}
-            </Switch>
-          </div>
-          <Footer></Footer>
-          <ScrollButton />
-        </Router>
-      </div>
-      {/* } */}
-    </>
+    
+    <div className={styles.body}>
+      <Router>
+         <Navbar 
+          filterHandle={listFilter} 
+          handleResponseSuccess={handleResponseSuccess} 
+          onSignout={onSignout} 
+          isLogin={isLogin} 
+          info={info}/>
+
+        <div id="page">
+          <Switch>
+            <Route exact={true} path="/">
+              <MainFeeds feeds={feeds} filterHandle={listFilter} handleClick={select}/>
+            </Route>
+            <Route path="/mypage">
+              <Mypage 
+                handleContent={revise}
+                info={info} 
+                setInfo={setInfo}/>
+            </Route>
+            <Route path="/writing">
+              <Writing isLogin={isLogin} feedList={feeds} feedsHandle={createFeeds}/>
+            </Route>
+            <Route path="/update">
+              <Update feed={revised}/>
+            </Route>
+            {selectedFeed ? 
+            <Route path="/feed">
+              <Feed feed={selectedFeed}/>
+            </Route>
+            : null} 
+             
+            {/* 이부분 투표창에서 새로고침시 페이지 사라지는거 막아야함 */}
+
+          </Switch>
+        </div>
+        <Footer></Footer>
+        <ScrollButton/>
+      </Router> 
+
+    </div>
+
   );
 }
 
