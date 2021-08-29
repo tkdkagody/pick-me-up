@@ -66,10 +66,15 @@ router.post("/sign-in", async (req, res) => {
 
   const accessToken = jwt.sign(userInfo, process.env.ACCESS_SECRET);
 
-  res.cookie("jwt", accessToken);
-  return res.status(200).json({
-    message: "ok",
-  });
+  return res
+    .status(200)
+    .cookie("jwt", accessToken, {
+      httpOnly: true,
+      secure: false,
+    })
+    .json({
+      message: "ok",
+    });
 });
 
 router.post("/sign-out", (req, res) => {
