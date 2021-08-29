@@ -70,7 +70,6 @@ router.post("/sign-in", async (req, res) => {
     .status(200)
     .cookie("jwt", accessToken, {
       httpOnly: true,
-      secure: false,
     })
     .json({
       message: "ok",
