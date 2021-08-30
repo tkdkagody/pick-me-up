@@ -2,6 +2,7 @@ require("dotenv").config();
 const { Router } = require("express");
 const router = Router();
 const { users } = require("../models");
+const { getMyPost } = require("../controllers/GetMyPost");
 const jwt = require("jsonwebtoken");
 
 //아이디 닉네임 모바일 비밀번호
@@ -41,5 +42,7 @@ router.post("/sign-up", (req, res) => {
 router.get("/", (res, req) => {
   res.send("hello world!");
 });
+
+router.get("/user/posting-list/:id", getMyPost);
 
 module.exports = router;

@@ -1,5 +1,5 @@
 const { post } = require("../models");
-const jwt = require("jsonwebtoken");
+// const jwt = require("jsonwebtoken");
 require("dotenv").config();
 const { isAuthorized } = require("../controllers/tokenFunction");
 
@@ -11,7 +11,7 @@ module.exports = {
     if (!accessTokendata) {
       res.status(401).send({ data: null, message: "invalid access token" });
     } else {
-      const postsList = post
+      post
         .findAll({
           where: {
             user_id: user_id,
@@ -21,8 +21,9 @@ module.exports = {
           if (!postList) {
             return res
               .status(404)
-              .send({ data: null, message: "user not exists" });
+              .send({ data: null, message: "posts not exist" });
           } else {
+            console.log("postList", postList);
             return res.status(200).send({ data: postList, message: "ok" });
           }
         });
