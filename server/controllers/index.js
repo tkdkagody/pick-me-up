@@ -4,7 +4,9 @@ const { Router } = require("express");
 const router = Router();
 const { users } = require("../models");
 const jwt = require("jsonwebtoken");
+const { changeProfile } = require("../controllers/ProfileChange");
 const { getAllPost } = require("./MainPage");
+
 //아이디 닉네임 모바일 비밀번호
 
 router.patch("/user/profile/:id", changeProfile);
@@ -81,10 +83,12 @@ router.post("/sign-out", (req, res) => {
   res.status(205).json({ message: "successfully signed out!" });
 });
 
+router.post("/user/profile/:id", changeProfile);
+
 router.get("/get-all-post", getAllPost);
 
 router.get("/", (req, res) => {
-  res.send("hello world!");
+  res.send("hello world");
 });
 
 module.exports = router;
