@@ -3,6 +3,7 @@ require("dotenv").config();
 const { Router } = require("express");
 const router = Router();
 const { users } = require("../models");
+const { getMyPost } = require("../controllers/GetMyPost");
 const jwt = require("jsonwebtoken");
 const { sendPost } = require("../controllers/Post");
 const { getAllPost } = require("./MainPage");
@@ -97,5 +98,7 @@ router.get("/vote/isvote?", isVote);
 router.get("/", (req, res) => {
   res.send("hello world");
 });
+
+router.get("/user/posting-list/:id", getMyPost);
 
 module.exports = router;
