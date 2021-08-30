@@ -44,7 +44,7 @@
   text-align: center;
   position: relative;
   cursor: pointer;
-  z-index: 1;
+  /* z-index: 1; */
 }
 
 .editbtn {
@@ -112,7 +112,8 @@
   border: none;
 }
 
-/* 모달창 확인하기 => 나중에 realVote로 변경 */
+/*모달*/
+/* 상위 컴포넌트에서 flex걸어서 로그인창 가운데정렬하기  */
 
 @import url("https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap");
 span {
@@ -129,7 +130,6 @@ span {
   background-color: rgba(0, 0, 0, 0.2);
   display: grid;
   place-items: center;
-  border: 1px solid red;
 }
 
 .realVote {
@@ -153,13 +153,13 @@ span {
   font-family: "Fredoka One", cursive;
 }
 
-.btns {
+.btns1 {
   margin-top: 10px;
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
 }
-.btn {
+.btn2 {
   outline: none;
   background-color: white;
   border: none;
@@ -170,7 +170,7 @@ span {
   cursor: pointer;
   border-radius: 5px;
 }
-.btn:hover {
+.btn2:hover {
   background-color: black;
   color: white;
 }

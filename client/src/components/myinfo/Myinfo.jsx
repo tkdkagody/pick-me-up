@@ -5,15 +5,8 @@ import NullPage from "../NullPage/Nullpage";
 import { useHistory } from "react-router";
 import { Link } from "react-router-dom";
 
-const Myinfo = ({ info, setInfo }) => {
+const Myinfo = ({ info, setInfo, accessToken, isLogin }) => {
   const history = useHistory();
-  if (info) {
-    const { userid, nickname, mobile } = info;
-  }
-
-  //   /* 내정보수정이동*/
-  //   const [isModifyClicked, setIsModifyClicked] = useState(false);
-  //   //수정하기 버튼 클릭시 이동
 
   const handleClickModify = () => {
     //setIsModifyClicked(true);
@@ -22,7 +15,7 @@ const Myinfo = ({ info, setInfo }) => {
 
   return (
     <>
-      {info.userid ? (
+      {isLogin ? (
         <>
           <div className={styles.infobox}>
             <div className={styles.imgbox}>
@@ -65,16 +58,10 @@ const Myinfo = ({ info, setInfo }) => {
 
           <div className={styles.btns}>
             <button className={styles.btn}>회원탈퇴(optional)</button>
-            {/* <Link to="/myinfoModify" info={info} setInfo={setInfo}> */}
-            <button
-              className={styles.btn}
-              onClick={handleClickModify}
-              //   isModifyClicked={isModifyClicked}
-              //   setIsModifyClicked={setIsModifyClicked}
-            >
+
+            <button className={styles.btn} onClick={handleClickModify}>
               수정하기
             </button>
-            {/* </Link> */}
           </div>
         </>
       ) : (
