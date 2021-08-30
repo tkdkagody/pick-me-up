@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import styles from "./Writing.module.css";
 import { Link } from "react-router-dom";
@@ -5,8 +6,13 @@ import axios from "axios";
 
 axios.defaults.withCredentials = true;
 
+
+
+
+
 const Writing = ({ isLogin, feedList, feedsHandle }) => {
   const tags = ["#의류", "#리빙", "#뷰티", "#식품", "#잡화", "#디지털"];
+
 
   const [title, setTitle] = useState(""); //제목
   const [firstOpt, setFirstOpt] = useState(""); //옵션명1
@@ -52,6 +58,7 @@ const Writing = ({ isLogin, feedList, feedsHandle }) => {
     }
   };
 
+
   const tagHandle = (tag) => {
     if (isClicked.includes(tag)) {
       setClicked(isClicked.filter((el) => !(el === tag)));
@@ -64,24 +71,22 @@ const Writing = ({ isLogin, feedList, feedsHandle }) => {
     setContent(event.target.value);
   };
 
+  const contentHandle = (event) => {
+    setContent(event.target.value)
+  }
+
   const createFeedHandle = () => {
     // 피드테이블에 레코드 생성하는 axios POST 요청(지영)
     // 해당 피드 페이지로 Redirect 필요
 
-    if (
-      title === "" ||
-      firstOpt === "" ||
-      secondOpt === "" ||
-      firstImg === null ||
-      secondImg === null ||
-      content === "" ||
-      isClicked.length === 0
-    ) {
-      return setErrorMessage("항목을 모두 입력하세요!🙏");
+
+    if(title === '' || firstOpt === '' || secondOpt ==='' || firstImg === null || secondImg === null || content === '' || isClicked.length === 0){
+      return setErrorMessage('항목을 모두 입력하세요!🙏')
     }
 
     // axios
-    //   .post('https://localhost:4000/signin',
+    //   .post('https://localhost:4000/signin', 
+
     //   { email: loginInfo.email, password: loginInfo.password }
     // )
     // .then(res => {
@@ -93,6 +98,7 @@ const Writing = ({ isLogin, feedList, feedsHandle }) => {
       title: title,
       option_1: firstOpt,
       option_2: secondOpt,
+
       image_1: firstImg,
       image_2: secondImg,
       content: content,
@@ -101,6 +107,7 @@ const Writing = ({ isLogin, feedList, feedsHandle }) => {
     });
   };
 
+
   // if(!isLogin){
   //   return (
   //     <section action="" className={styles.container}>
@@ -108,6 +115,7 @@ const Writing = ({ isLogin, feedList, feedsHandle }) => {
   //     </section>
   //   )
   // } else{
+// <<<<<<< feature/mypageEdit
   return (
     <section className={styles.container}>
       <div className={styles.category}>
@@ -179,6 +187,38 @@ const Writing = ({ isLogin, feedList, feedsHandle }) => {
       <div className={styles.category}>
         <div>
           카테고리<span class={styles.subTitle}>(복수선택가능)</span>
+
+//     return (
+//       <section className={styles.container}>
+
+//         <div className={styles.category}>
+//           <div>제목</div>
+//           <input className={styles.textBoxTitle} type="text" value={title} onChange={titleHandle}/>
+//         </div>
+        
+//         <div className={styles.category}>    
+//           <div>투표 옵션 1</div>
+//           <input className={styles.textBoxOpt} type="text" placeholder="항목명" value={firstOpt} onChange={firstOptHandle}/>
+//           <div className={styles.filebox}>
+//             <input type="file" id="ex_file" accept="image/*" onChange={firstImgHandle}></input>
+//             {firstImg? <img className={styles.fileView} src={firstImg}></img> : null}
+//           </div>
+//         </div>
+    
+    
+//         <div className={styles.category}>    
+//           <div>투표 옵션 2</div>
+//           <input className={styles.textBoxOpt} type="text" placeholder="항목명" value={secondOpt} onChange={secondOptHandle}/>
+//           <div className={styles.filebox}>
+//             <input type="file" id="ex_file" accept="image/*" onChange={secondImgHandle}></input>
+//             {secondImg? <img className={styles.fileView} src={secondImg}></img> : null}
+//           </div>
+//         </div>
+    
+//         <div className={styles.category}>
+//           <div>내용</div>
+//           <textarea name="content" id="" cols="30" rows="10" value={content} onChange={contentHandle}></textarea>
+
         </div>
         <div className={styles.tags}>
           {tags.map((el) => {
@@ -196,6 +236,7 @@ const Writing = ({ isLogin, feedList, feedsHandle }) => {
                   {el}
                 </label>
               </>
+
             );
           })}
         </div>
@@ -213,6 +254,7 @@ const Writing = ({ isLogin, feedList, feedsHandle }) => {
     </section>
   );
   //}
+
 };
 
 export default Writing;

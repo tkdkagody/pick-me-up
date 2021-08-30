@@ -68,24 +68,29 @@ router.post("/sign-in", async (req, res) => {
 
   const accessToken = jwt.sign(userInfo, process.env.ACCESS_SECRET);
 
-  return res
-    .status(200)
-    .cookie("jwt", accessToken, {
-      httpOnly: true,
-      secure: false,
-    })
-    .json({
-      message: "ok",
-    });
+  return (
+    res
+      .status(200)
+      // .cookie("jwt", accessToken, {
+      //   httpOnly: true,
+      //   sameSite: "lax",
+      // })
+      .json({
+        accessToken,
+        message: "ok",
+      })
+  );
 });
 
 router.post("/sign-out", (req, res) => {
   res.status(205).json({ message: "successfully signed out!" });
 });
 
+
 router.post("/user/profile/:id", changeProfile);
 
 router.get("/get-all-post", getAllPost);
+
 
 router.get("/", (req, res) => {
   res.send("hello world");

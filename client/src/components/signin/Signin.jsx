@@ -4,6 +4,7 @@ import styles from "./Signin.module.css";
 import axios from "axios";
 
 axios.defaults.withCredentials = true;
+
 const Signin = ({ clickCloseBtn, handleResponseSuccess }) => {
   const [loginInfo, setLoginInfo] = useState({
     userId: "",
@@ -12,15 +13,18 @@ const Signin = ({ clickCloseBtn, handleResponseSuccess }) => {
   const { userId, password } = loginInfo;
   /**********************페이지 컨트롤 부분***************************/
   const [errorMessage, setErrorMessage] = useState("");
+
   const [isSignUpClicked, setIsSignUpClicked] = useState(false);
   const clickSignUpBtn = () => {
     setIsSignUpClicked(!isSignUpClicked);
   };
+
   const handleInputValue = (key) => (e) => {
     setLoginInfo({ ...loginInfo, [key]: e.target.value });
   };
 
   /**********************sign in 컨트롤 부분***************************/
+
 
   //로그인버튼 클릭시 호출 메소드
   const handleLogin = () => {
@@ -42,15 +46,20 @@ const Signin = ({ clickCloseBtn, handleResponseSuccess }) => {
     }
   };
 
-  return (
+
+    return(
+
+
     <section className={styles.backdrop}>
       {isSignUpClicked ? (
         <Signup
           isSignUpClicked={isSignUpClicked}
           setIsSignUpClicked={setIsSignUpClicked}
+
           clickCloseBtn={clickCloseBtn}
         />
       ) : null}
+
       <div className={styles.signin}>
         <div className={styles.titlebox}>
           <span className={styles.title}>sign in</span>
@@ -58,6 +67,7 @@ const Signin = ({ clickCloseBtn, handleResponseSuccess }) => {
             <img src="../../../images/close.svg" className={styles.img}></img>
           </span>
         </div>
+
 
         <form className={styles.form} onSubmit={(e) => e.preventDefault()}>
           <ul className={styles.list}>
@@ -78,9 +88,11 @@ const Signin = ({ clickCloseBtn, handleResponseSuccess }) => {
               />
             </li>
 
+
             {errorMessage ? (
               <li className={styles.alert}>{errorMessage}</li>
             ) : null}
+
 
             <li className={styles.item}>
               <button className={styles.button} onClick={handleLogin}>
@@ -97,6 +109,7 @@ const Signin = ({ clickCloseBtn, handleResponseSuccess }) => {
             </li>
           </ul>
         </form>
+
       </div>
     </section>
   );

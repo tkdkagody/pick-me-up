@@ -1,3 +1,4 @@
+
 import styles from "./App.module.css";
 import React, { useState, useEffect } from "react";
 import Navbar from "./pages/navbar/Navbar";
@@ -7,6 +8,7 @@ import {
   Route,
   useHistory,
 } from "react-router-dom";
+
 import Footer from "./pages/footer/Footer";
 import MainFeeds from "./pages/mainFeeds/MainFeeds";
 import Mypage from "./pages/mypage/Mypage";
@@ -18,8 +20,14 @@ import Signin from "./components/signin/Signin";
 import VoteResult from "./components/voteResult/VoteResult";
 import ScrollButton from "./components/scrollButton/ScrollButton";
 import axios from "axios";
+
 import Update from "./pages/update/Update";
 import MyinfoModify from "./pages/myinfoModify/MyinfoModify";
+
+import LoadingIndicator from "./components/LoadingIndicator";
+
+
+
 
 function App() {
   const dummyData = [
@@ -53,6 +61,7 @@ function App() {
       createdAt: "2021-08-27",
     },
   ];
+
   const history = useHistory();
   //로그인상태
   const [isLogin, setIsLogin] = useState(false);
@@ -69,25 +78,27 @@ function App() {
         },
         "Content-Type": "application/json",
       }
-    );
-    //성공할 경우 (토큰은 쿠키에 있음)
-    // .then(result => {}
+    )
+    .then(result => {
     setIsLogin(true); //로그인상태  => 아마 로그인 창 닫힐듯!
     setInfo({
       //인포상태 변화 //받아온 데이터로 넣어주기
       userid: "abc1234",
       nickname: "춘식",
       mobile: "010-0000-0000",
+
       password: "",
       password2: "",
     });
     loginHandler();
     // //로그인창 닫기
   };
+          
+
   //로그인 정상적으로 완료하면 핸들리스폰스 호출 (signin 페이지)
   const handleResponseSuccess = (data) => {
-    //result.data.message="ok"!!
     if (data.message === "ok") {
+    loginHandler();
       isAuthenticated();
       setAccessToken(data.accessToken);
     }
@@ -113,9 +124,11 @@ function App() {
     setRevised(el);
   };
 
+
   const createFeeds = (el) => {
     setFeeds(feeds.concat(el));
   };
+
 
   useEffect(() => {
     //feeds 불러오기 axios GET 요청(지영)
@@ -136,11 +149,14 @@ function App() {
       .then((result) => {
         setIsLogin(false);
         setInfo(null);
+
         // history.push("/");
+
       });
   };
 
   return (
+
     <>
       {/* {
       isLoading ? <LoadingIndicator /> 
@@ -195,6 +211,7 @@ function App() {
       </div>
       {/* } */}
     </>
+
   );
 }
 
