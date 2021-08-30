@@ -1,3 +1,6 @@
+/* .outCategory {
+  overflow-x: hidden;
+} */
 .categories {
   height: 3.5rem;
   display: flex;
@@ -7,6 +10,8 @@
   /* position: sticky;
   background-color: white;
   top: 90px; */
+  width: 500px;
+  overflow: hidden;
 }
 
 .hashtag {
@@ -48,15 +53,4 @@
 }
 .feedList {
   border: 1px solid red;
-}
-
-@media screen and (max-width: 33rem) {
-  .categories {
-    width: 100%;
-  }
-  /*li 태그 확인 */
-  .feedList {
-    border: 1px solid red;
-    width: 100%;
-  }
 }

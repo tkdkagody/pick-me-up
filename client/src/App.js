@@ -27,6 +27,7 @@ import MyinfoModify from "./pages/myinfoModify/MyinfoModify";
 import LoadingIndicator from "./components/LoadingIndicator";
 
 function App() {
+
   const dummyData = [
     {
       userName: "구름이",
@@ -96,9 +97,11 @@ function App() {
       password: "",
       password2: "",
     });
+
   };
   console.log(isLogin);
   //로그인 성공시 리스폰스
+
   const handleResponseSuccess = (data) => {
     const { accessToken, message } = data;
     setAccessToken(accessToken); //액세스토큰 넣기
@@ -111,7 +114,8 @@ function App() {
   const [feeds, setFeeds] = useState(dummyData); //전체 피드리스트
   const [selectedFeed, setSelectedFeed] = useState(null); //선택된 피드페이지로 이동할 때
   const [revised, setRevised] = useState(null); //writing 할 피드 선택된 것.
-  const select = (el) => {
+  
+  const select = (el) => { //해당 피드로 이동...
     setSelectedFeed(el);
   };
   const listFilter = (tag) => {
@@ -133,8 +137,16 @@ function App() {
 
   useEffect(() => {
     //feeds 불러오기 axios GET 요청(지영)
-    //최신순으로 불러와야 하니까 받은 data에서 createdAt이 최신인 순으로 정렬해서 feeds
-  }, []);
+    //최신순으로 불러와야 하니까 받은 data에서 createdAt이 최신인 순으로 정렬해서 feeds 
+    
+    // axios.get('http://ec2-3-34-191-91.ap-northeast-2.compute.amazonaws.com/get-all-post', 
+    // { withCredentials: true })
+    // .then(res => {
+    //   console.log(res)
+    // })   
+  }, [])
+
+
 
   /**********************sign in 컨트롤 부분***************************/
 
@@ -169,12 +181,13 @@ function App() {
     }
   }, [accessToken]);
 
+
   return (
     <>
       {/* {
       isLoading ? <LoadingIndicator /> 
       : */}
-      <div className={styles.body}>
+      <body className={styles.body}>
         <Router>
           <Navbar
             filterHandle={listFilter}
@@ -214,6 +227,7 @@ function App() {
               </Route>
               <Route path="/writing">
                 <Writing
+                  accessToken={accessToken}
                   isLogin={isLogin}
                   feedList={feeds}
                   feedsHandle={createFeeds}
@@ -222,7 +236,7 @@ function App() {
               <Route path="/update">
                 <Update feed={revised} />
               </Route>
-              {selectedFeed ? (
+              {selectedFeed ? ( //피드 클릭했으면 여기서 feed페이지로 감!
                 <Route path="/feed">
                   <Feed feed={selectedFeed} />
                 </Route>
@@ -233,10 +247,11 @@ function App() {
           <Footer></Footer>
           <ScrollButton />
         </Router>
-      </div>
+      </body>
       {/* } */}
     </>
   );
+
 }
 
 export default App;
