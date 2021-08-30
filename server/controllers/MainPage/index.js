@@ -6,6 +6,6 @@ module.exports = {
     const data = result.map((obj) => {
       return obj.dataValues;
     });
-    res.status(200).send(data);
+    res.status(200).send({ data, message: "ok" });
   },
 };

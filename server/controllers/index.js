@@ -4,7 +4,6 @@ const { Router } = require("express");
 const router = Router();
 const { users } = require("../models");
 const jwt = require("jsonwebtoken");
-const { changeProfile } = require("../controllers/ProfileChange");
 const { sendPost } = require("../controllers/Post");
 const { getAllPost } = require("./MainPage");
 
