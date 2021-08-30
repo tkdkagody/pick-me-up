@@ -1,5 +1,6 @@
 require("dotenv").config();
 const { post } = require("../models");
+const { vote } = require("../models");
 // const jwt = require("jsonwebtoken");
 const { isAuthorized } = require("./tokenFunction");
 
@@ -40,9 +41,15 @@ module.exports = {
             updated_at: new Date(),
           })
           .then((data) => {
-            console.log("data:", data);
+            vote.create({
+              post_id: data.dataValues.id,
+              agreement: 0,
+              oppostion: 0,
+            });
+          })
+          .then((data) => {
+            // console.log("data:", data);
             res.status(201).json({
-              data: data,
               message: "ok",
             });
           })
