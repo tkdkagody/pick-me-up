@@ -13,7 +13,7 @@ module.exports = function (sequelize, DataTypes) {
         type: DataTypes.INTEGER,
         allowNull: true,
         references: {
-          model: "vote",
+          model: "post",
           key: "id",
         },
       },
@@ -24,6 +24,10 @@ module.exports = function (sequelize, DataTypes) {
           model: "users",
           key: "id",
         },
+      },
+      options_check: {
+        type: DataTypes.BOOLEAN,
+        allowNull: true,
       },
     },
     {

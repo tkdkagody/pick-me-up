@@ -9,7 +9,7 @@ module.exports = function (sequelize, DataTypes) {
         allowNull: false,
         primaryKey: true,
       },
-      user_id: {
+      userid: {
         type: DataTypes.STRING(255),
         allowNull: true,
       },
@@ -21,15 +21,15 @@ module.exports = function (sequelize, DataTypes) {
         type: DataTypes.STRING(255),
         allowNull: true,
       },
-      sign_up_type: {
+      signUpType: {
         type: DataTypes.STRING(255),
         allowNull: true,
       },
-      phone_number: {
+      phoneNumber: {
         type: DataTypes.STRING(255),
         allowNull: true,
       },
-      account_type: {
+      accountType: {
         type: DataTypes.INTEGER,
         allowNull: true,
       },

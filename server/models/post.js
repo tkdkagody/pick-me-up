@@ -9,7 +9,7 @@ module.exports = function (sequelize, DataTypes) {
         allowNull: false,
         primaryKey: true,
       },
-      user_id: {
+      userid: {
         type: DataTypes.INTEGER,
         allowNull: true,
         references: {
@@ -33,14 +33,6 @@ module.exports = function (sequelize, DataTypes) {
         type: DataTypes.STRING(255),
         allowNull: true,
       },
-      created_at: {
-        type: DataTypes.DATE,
-        allowNull: true,
-      },
-      updated_at: {
-        type: DataTypes.DATE,
-        allowNull: true,
-      },
       option1: {
         type: DataTypes.STRING(255),
         allowNull: true,
@@ -49,8 +41,20 @@ module.exports = function (sequelize, DataTypes) {
         type: DataTypes.STRING(255),
         allowNull: true,
       },
-      tags: {
-        type: DataTypes.STRING(255),
+      option1_count: {
+        type: DataTypes.INTEGER,
+        allowNull: true,
+      },
+      option2_count: {
+        type: DataTypes.INTEGER,
+        allowNull: true,
+      },
+      created_at: {
+        type: DataTypes.DATE,
+        allowNull: true,
+      },
+      updated_at: {
+        type: DataTypes.DATE,
         allowNull: true,
       },
     },
@@ -68,7 +72,7 @@ module.exports = function (sequelize, DataTypes) {
         {
           name: "userid",
           using: "BTREE",
-          fields: [{ name: "user_id" }],
+          fields: [{ name: "userid" }],
         },
       ],
     }
