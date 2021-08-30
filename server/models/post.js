@@ -38,6 +38,18 @@ module.exports = function(sequelize, DataTypes) {
     updated_at: {
       type: DataTypes.DATE,
       allowNull: true
+    },
+    option1: {
+      type: DataTypes.STRING(255),
+      allowNull: true
+    },
+    option2: {
+      type: DataTypes.STRING(255),
+      allowNull: true
+    },
+    tags: {
+      type: DataTypes.STRING(255),
+      allowNull: true
     }
   }, {
     sequelize,
