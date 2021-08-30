@@ -7,7 +7,7 @@ module.exports = {
     const user_id = req.params.id;
 
     if (!accessTokendata) {
-      res.status(401).send({ data: null, message: "invalid access token" });
+      res.status(401).json({ data: null, message: "invalid access token" });
     } else {
       users
         .findOne({
@@ -19,12 +19,12 @@ module.exports = {
           if (!data) {
             return res
               .status(404)
-              .send({ data: null, message: "user not exist" });
+              .json({ data: null, message: "user not exist" });
           } else {
             console.log("data:", data);
             return res
               .status(200)
-              .send({ data: data.dataValues, message: "ok" });
+              .json({ data: data.dataValues, message: "ok" });
           }
         })
         .catch((err) => {
