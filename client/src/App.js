@@ -2,7 +2,13 @@
 import styles from "./App.module.css";
 import React, { useState, useEffect } from "react";
 import Navbar from "./pages/navbar/Navbar";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  useHistory,
+} from "react-router-dom";
+
 import Footer from "./pages/footer/Footer";
 import MainFeeds from "./pages/mainFeeds/MainFeeds";
 import Mypage from "./pages/mypage/Mypage";
@@ -14,8 +20,13 @@ import Signin from "./components/signin/Signin";
 import VoteResult from "./components/voteResult/VoteResult";
 import ScrollButton from "./components/scrollButton/ScrollButton";
 import axios from "axios";
-import LoadingIndicator from "./components/LoadingIndicator";
+
 import Update from "./pages/update/Update";
+import MyinfoModify from "./pages/myinfoModify/MyinfoModify";
+
+import LoadingIndicator from "./components/LoadingIndicator";
+
+
 
 
 function App() {
@@ -50,33 +61,51 @@ function App() {
       createdAt: "2021-08-27",
     },
   ];
+
+  const history = useHistory();
   //로그인상태
   const [isLogin, setIsLogin] = useState(false);
   const [info, setInfo] = useState(null);
+  const [accessToken, setAccessToken] = useState(null);
 
-  //유저데이터를 여기서 불러온다 ! //로그인 인증여기서!!
+  //로그인인증 & 유저데이터 Get으로 불러오기(mypage)
   const isAuthenticated = () => {
-    // axios.get("http://ec2-3-34-191-91.ap-northeast-2.compute.amazonaws.com/userdata")
-    //성공할 경우 (토큰은 쿠키에 있음)
-    // .then(result => {}
+    axios.get(
+      "http://ec2-3-34-191-91.ap-northeast-2.compute.amazonaws.com/userdata",
+      {
+        headers: {
+          authorization: `Bearer ${accessToken}`,
+        },
+        "Content-Type": "application/json",
+      }
+    )
+    .then(result => {
     setIsLogin(true); //로그인상태  => 아마 로그인 창 닫힐듯!
     setInfo({
       //인포상태 변화 //받아온 데이터로 넣어주기
       userid: "abc1234",
       nickname: "춘식",
       mobile: "010-0000-0000",
+
+      password: "",
+      password2: "",
     });
     loginHandler();
+    // //로그인창 닫기
   };
+          
+
   //로그인 정상적으로 완료하면 핸들리스폰스 호출 (signin 페이지)
-  const handleResponseSuccess = (msg) => {
-    //result.data.message="ok"!!
-    if (msg.data.message === "ok") {
+  const handleResponseSuccess = (data) => {
+    if (data.message === "ok") {
+    loginHandler();
       isAuthenticated();
+      setAccessToken(data.accessToken);
     }
   };
 
   /**********************페이지 컨트롤 부분***************************/
+
   const [feeds, setFeeds] = useState(dummyData); //전체 피드리스트
   const [selectedFeed, setSelectedFeed] = useState(null); //선택된 피드
   const [revised, setRevised] = useState(null); //writing 할 피드
@@ -95,8 +124,8 @@ function App() {
     setRevised(el);
   };
 
-  const createFeeds = (el) => {
 
+  const createFeeds = (el) => {
     setFeeds(feeds.concat(el));
   };
 
@@ -120,54 +149,68 @@ function App() {
       .then((result) => {
         setIsLogin(false);
         setInfo(null);
-        //메인만 나오면 되서 아무것도 안해도 될거 같음 !
+
+        // history.push("/");
+
       });
   };
 
   return (
 
-    
-    <div className={styles.body}>
-      <Router>
-         <Navbar 
-          filterHandle={listFilter} 
-          handleResponseSuccess={handleResponseSuccess} 
-          onSignout={onSignout} 
-          isLogin={isLogin} 
-          info={info}/>
+    <>
+      {/* {
+      isLoading ? <LoadingIndicator /> 
+      : */}
+      <div className={styles.body}>
+        <Router>
+          <Navbar
+            filterHandle={listFilter}
+            handleResponseSuccess={handleResponseSuccess}
+            onSignout={onSignout}
+            isLogin={isLogin}
+            info={info}
+          />
 
-        <div id="page">
-          <Switch>
-            <Route exact={true} path="/">
-              <MainFeeds feeds={feeds} filterHandle={listFilter} handleClick={select}/>
-            </Route>
-            <Route path="/mypage">
-              <Mypage 
-                handleContent={revise}
-                info={info} 
-                setInfo={setInfo}/>
-            </Route>
-            <Route path="/writing">
-              <Writing isLogin={isLogin} feedList={feeds} feedsHandle={createFeeds}/>
-            </Route>
-            <Route path="/update">
-              <Update feed={revised}/>
-            </Route>
-            {selectedFeed ? 
-            <Route path="/feed">
-              <Feed feed={selectedFeed}/>
-            </Route>
-            : null} 
-             
-            {/* 이부분 투표창에서 새로고침시 페이지 사라지는거 막아야함 */}
-
-          </Switch>
-        </div>
-        <Footer></Footer>
-        <ScrollButton/>
-      </Router> 
-
-    </div>
+          <div id="page">
+            <Switch>
+              <Route exact={true} path="/">
+                <MainFeeds
+                  feeds={feeds}
+                  filterHandle={listFilter}
+                  handleClick={select}
+                />
+              </Route>
+              <Route path="/mypage">
+                <Mypage handleContent={revise} info={info} setInfo={setInfo} />
+              </Route>
+              <Route path="/modifyinfo">
+                <MyinfoModify info={info} setInfo={setInfo} />
+                {/* <Mypage handleContent={revise} info={info} setInfo={setInfo} /> */}
+              </Route>
+              <Route path="/writing">
+                <Writing
+                  isLogin={isLogin}
+                  feedList={feeds}
+                  feedsHandle={createFeeds}
+                />
+              </Route>
+              <Route path="/update">
+                <Update feed={revised} />
+              </Route>
+              {selectedFeed ? (
+                <Route path="/feed">
+                  <Feed feed={selectedFeed} />
+                </Route>
+              ) : null}
+              {/* 이부분 투표창에서 새로고침시 페이지 사라지는거 막아야함 */}
+            </Switch>
+          </div>
+          <Footer></Footer>
+          <ScrollButton />
+        </Router>
+      </div>
+      {/* } */}
+    </>
 
   );
 }
