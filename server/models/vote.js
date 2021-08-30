@@ -21,7 +21,7 @@ module.exports = function (sequelize, DataTypes) {
         type: DataTypes.INTEGER,
         allowNull: true,
       },
-      oppostion: {
+      opposition: {
         type: DataTypes.INTEGER,
         allowNull: true,
       },
