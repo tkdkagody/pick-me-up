@@ -26,7 +26,8 @@ class App {
     this.app.use(express.urlencoded({ extended: false }));
     this.app.use(
       cors({
-        origin: true,
+        origin: ["http://localhost:3000"],
+
         credentials: true,
         methods: ["GET", "POST", "PATCH", "PUT", "DELETE", "OPTIONS"],
       })

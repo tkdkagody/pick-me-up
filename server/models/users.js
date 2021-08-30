@@ -36,12 +36,10 @@ module.exports = function (sequelize, DataTypes) {
       created_at: {
         type: DataTypes.DATE,
         allowNull: true,
-        timestamps: true,
       },
       updated_at: {
         type: DataTypes.DATE,
         allowNull: true,
-        timestamps: true,
       },
     },
     {
