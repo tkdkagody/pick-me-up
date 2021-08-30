@@ -24,7 +24,7 @@ module.exports = {
         .status(200)
         .json({ message: "user did not vote", isVote: true });
     } else {
-      return res.status(200).json({ message: "voted user", isVote: false });
+      return res.status(202).json({ message: "voted user", isVote: false });
     }
   },
 };
