@@ -84,3 +84,14 @@
   font-size: 0.68rem;
   margin-bottom: 0.5rem;
 }
+
+@media screen and (max-width: 33rem) {
+  .container {
+    /*최상위 바디 컨테이너*/
+    width: 100%;
+    margin: 0 auto;
+  }
+  .images {
+    width: 100%;
+  }
+}

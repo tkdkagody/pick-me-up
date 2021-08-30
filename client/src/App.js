@@ -77,7 +77,7 @@ function App() {
   const select = (el) => {
     setSelectedFeed(el);
   }
-  const listFilter =(tag) =>{ //필터기능 구현 수정 필요...
+  const listFilter =(tag) =>{ //필터기능 구현 수정 필요... 서버에 요청 보내야 할 듯
     // if(tag === '전체'){
     //   //setFeeds(feeds);
     // }else{
