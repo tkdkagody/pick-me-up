@@ -1,4 +1,3 @@
-
 import styles from "./App.module.css";
 import React, { useState, useEffect } from "react";
 import Navbar from "./pages/navbar/Navbar";
@@ -8,6 +7,7 @@ import {
   Route,
   useHistory,
 } from "react-router-dom";
+import { createBrowserHistory } from "history";
 
 import Footer from "./pages/footer/Footer";
 import MainFeeds from "./pages/mainFeeds/MainFeeds";
@@ -25,9 +25,6 @@ import Update from "./pages/update/Update";
 import MyinfoModify from "./pages/myinfoModify/MyinfoModify";
 
 import LoadingIndicator from "./components/LoadingIndicator";
-
-
-
 
 function App() {
   const dummyData = [
@@ -68,40 +65,45 @@ function App() {
   const [info, setInfo] = useState(null);
   const [accessToken, setAccessToken] = useState(null);
 
-  //로그인인증 & 유저데이터 Get으로 불러오기(mypage)
+  //로그인인증 & 유저데이터 Get으로 불러오기(mypage) 정보 잘 받아왔으면 인포에 정보를 넣어준다.
   const isAuthenticated = () => {
-    axios.get(
-      "http://ec2-3-34-191-91.ap-northeast-2.compute.amazonaws.com/userdata",
-      {
-        headers: {
-          authorization: `Bearer ${accessToken}`,
-        },
-        "Content-Type": "application/json",
-      }
-    )
-    .then(result => {
-    setIsLogin(true); //로그인상태  => 아마 로그인 창 닫힐듯!
+    // axios
+    //   .get(
+    //     "http://ec2-3-34-191-91.ap-northeast-2.compute.amazonaws.com/userdata",
+    //     {
+    //       headers: {
+    //         authorization: `Bearer ${accessToken}`,
+    //       },
+    //       "Content-Type": "application/json",
+    //     }
+    //   )
+    //   .then((result) => {
+    //     //console.log(result.data.userinfo)
+    //     setInfo({
+    //       //인포상태 변화 //받아온 데이터로 넣어주기
+    //       userid: "abc1234",
+    //       nickname: "춘식",
+    //       mobile: "010-0000-0000",
+    //       password: "",
+    //       password2: "",
+    //     });
+    //   });
     setInfo({
       //인포상태 변화 //받아온 데이터로 넣어주기
       userid: "abc1234",
       nickname: "춘식",
       mobile: "010-0000-0000",
-
       password: "",
       password2: "",
     });
-    loginHandler();
-    // //로그인창 닫기
   };
-          
-
-  //로그인 정상적으로 완료하면 핸들리스폰스 호출 (signin 페이지)
+  console.log(isLogin);
+  //로그인 성공시 리스폰스
   const handleResponseSuccess = (data) => {
-    if (data.message === "ok") {
-    loginHandler();
-      isAuthenticated();
-      setAccessToken(data.accessToken);
-    }
+    const { accessToken, message } = data;
+    setAccessToken(accessToken); //액세스토큰 넣기
+    loginHandler(); //로그인 true
+    window.localStorage.setItem("accessToken", accessToken);
   };
 
   /**********************페이지 컨트롤 부분***************************/
@@ -111,33 +113,30 @@ function App() {
   const [revised, setRevised] = useState(null); //writing 할 피드 선택된 것.
   const select = (el) => {
     setSelectedFeed(el);
-
-  }
-  const listFilter =(tag) =>{ //필터기능 구현 수정 필요... 서버에 요청 보내야 할 듯
+  };
+  const listFilter = (tag) => {
+    //필터기능 구현 수정 필요... 서버에 요청 보내야 할 듯
     // if(tag === '전체'){
     //   //setFeeds(feeds);
     // }else{
     //   setFeeds(feeds.filter(el => el.tags.includes(tag)));
     // }
-  } 
+  };
 
   const revise = (el) => {
     setRevised(el);
   };
 
-
   const createFeeds = (el) => {
-    setFeeds([el, ...feeds]) //최신 피드니까 상단에 뜨게끔 0번째 인덱스로 추가됨.
-  }
+    setFeeds([el, ...feeds]); //최신 피드니까 상단에 뜨게끔 0번째 인덱스로 추가됨.
+  };
 
   useEffect(() => {
     //feeds 불러오기 axios GET 요청(지영)
-    //최신순으로 불러와야 하니까 받은 data에서 createdAt이 최신인 순으로 정렬해서 feeds 
-  }, [])
-
+    //최신순으로 불러와야 하니까 받은 data에서 createdAt이 최신인 순으로 정렬해서 feeds
+  }, []);
 
   /**********************sign in 컨트롤 부분***************************/
-
 
   //로그인상태 변경 메소드
   const loginHandler = () => {
@@ -150,16 +149,27 @@ function App() {
         "http://ec2-3-34-191-91.ap-northeast-2.compute.amazonaws.com/sign-out"
       )
       .then((result) => {
+        //비워진 엑세스 토큰을 받아서
         setIsLogin(false);
         setInfo(null);
-
+        setAccessToken(result.data.accessToken);
+        browserHistory.push("/");
         // history.push("/");
-
+        //첫화면으로 랜더시키기 !
       });
+    setIsLogin(false);
+    localStorage.removeItem("accessToken");
+    setAccessToken(null);
   };
 
-  return (
+  useEffect(() => {
+    if (window.localStorage.getItem("accessToken")) {
+      loginHandler();
+      setAccessToken(window.localStorage.getItem("accessToken"));
+    }
+  }, [accessToken]);
 
+  return (
     <>
       {/* {
       isLoading ? <LoadingIndicator /> 
@@ -172,6 +182,7 @@ function App() {
             onSignout={onSignout}
             isLogin={isLogin}
             info={info}
+            isAuthenticated={isAuthenticated}
           />
 
           <div id="page">
@@ -184,10 +195,21 @@ function App() {
                 />
               </Route>
               <Route path="/mypage">
-                <Mypage handleContent={revise} info={info} setInfo={setInfo} />
+                <Mypage
+                  handleContent={revise}
+                  info={info}
+                  setInfo={setInfo}
+                  accessToken={accessToken}
+                  isLogin={isLogin}
+                />
               </Route>
               <Route path="/modifyinfo">
-                <MyinfoModify info={info} setInfo={setInfo} />
+                <MyinfoModify
+                  info={info}
+                  setInfo={setInfo}
+                  accessToken={accessToken}
+                  isLogin={isLogin}
+                />
                 {/* <Mypage handleContent={revise} info={info} setInfo={setInfo} /> */}
               </Route>
               <Route path="/writing">
@@ -214,9 +236,8 @@ function App() {
       </div>
       {/* } */}
     </>
-
   );
 }
 
 export default App;
-
+export const browserHistory = createBrowserHistory();
