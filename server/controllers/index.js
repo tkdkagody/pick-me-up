@@ -6,6 +6,7 @@ const { users } = require("../models");
 const jwt = require("jsonwebtoken");
 const { sendPost } = require("../controllers/Post");
 const { getAllPost } = require("./MainPage");
+const { isVote } = require("./Vote");
 
 //아이디 닉네임 모바일 비밀번호
 
@@ -91,6 +92,7 @@ router.post("/user/profile/:id", changeProfile);
 router.post("/posting", sendPost);
 
 router.get("/get-all-post", getAllPost);
+router.get("/vote/isvote?", isVote);
 
 router.get("/", (req, res) => {
   res.send("hello world");
