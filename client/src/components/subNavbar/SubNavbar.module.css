@@ -10,6 +10,8 @@
   /* position: sticky;
   background-color: white;
   top: 90px; */
+  width: 500px;
+  overflow: hidden;
 }
 
 .hashtag {
@@ -54,9 +56,9 @@
 }
 
 @media screen and (max-width: 33rem) {
-  .categories {
+  /* .categories {
     width: 100%;
-  }
+  } */
   /*li 태그 확인 */
   /* .feedList {
     border: 1px solid red;
