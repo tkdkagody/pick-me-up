@@ -1,3 +1,6 @@
+/* .outCategory {
+  overflow-x: hidden;
+} */
 .categories {
   height: 3.5rem;
   display: flex;
@@ -55,8 +58,11 @@
     width: 100%;
   }
   /*li 태그 확인 */
-  .feedList {
+  /* .feedList {
     border: 1px solid red;
     width: 100%;
-  }
+  } */
+  /* .hashtag {
+    font-size: 1px;
+  } */
 }

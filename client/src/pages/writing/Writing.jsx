@@ -84,17 +84,17 @@ const Writing = ({isLogin, feedList, feedsHandle}) => {
 
       // });
 
-    // feedsHandle({
-    //   userName: "구름이",
-    //   title: title,
-    //   option_1: firstOpt,
-    //   option_2: secondOpt,
-    //   image_1 : firstImg,
-    //   image_2: secondImg,
-    //   content: content,
-    //   tags: isClicked,
-    //   createdAt: "2021-08-27"
-    // })
+    feedsHandle({
+      userName: "구름이",
+      title: title,
+      option_1: firstOpt,
+      option_2: secondOpt,
+      image_1 : firstImg,
+      image_2: secondImg,
+      content: content,
+      tags: isClicked,
+      createdAt: "2021-08-27"
+    })
     }
   }
 
