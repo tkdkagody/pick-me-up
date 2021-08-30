@@ -72,25 +72,29 @@ const Writing = ({isLogin, feedList, feedsHandle}) => {
       setErrorMessage('항목을 모두 입력하세요!🙏')
     } else{
 
-    // axios
-    //   .post('https://localhost:4000/signin', 
-    //   { email: loginInfo.email, password: loginInfo.password }
-    // )
-    // .then(res => {
-    //   //console.log(res.data.message, "login 성공~~~~~~~~~~~~~~!")
-    //   handleResponseSuccess();
+      // axios
+      // .post(
+      //   "http://ec2-3-34-191-91.ap-northeast-2.compute.amazonaws.com/user"
+      // )
+      // .then((result) => {
+      //   setIsLogin(false);
+      //   setInfo(null);
+
+      //   // history.push("/");
+
+      // });
+
+    // feedsHandle({
+    //   userName: "구름이",
+    //   title: title,
+    //   option_1: firstOpt,
+    //   option_2: secondOpt,
+    //   image_1 : firstImg,
+    //   image_2: secondImg,
+    //   content: content,
+    //   tags: isClicked,
+    //   createdAt: "2021-08-27"
     // })
-    feedsHandle({
-      userName: "구름이",
-      title: title,
-      option_1: firstOpt,
-      option_2: secondOpt,
-      image_1 : firstImg,
-      image_2: secondImg,
-      content: content,
-      tags: isClicked,
-      createdAt: "2021-08-27"
-    })
     }
   }
 

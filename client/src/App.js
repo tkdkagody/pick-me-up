@@ -1,4 +1,3 @@
-
 import styles from "./App.module.css";
 import React, { useState, useEffect } from "react";
 import Navbar from "./pages/navbar/Navbar";
@@ -30,6 +29,7 @@ import LoadingIndicator from "./components/LoadingIndicator";
 
 
 function App() {
+
   const dummyData = [
     {
       userName: "구름이",
@@ -92,8 +92,10 @@ function App() {
     });
     loginHandler();
     // //로그인창 닫기
-  };
-          
+    })    
+  }  
+  
+
 
   //로그인 정상적으로 완료하면 핸들리스폰스 호출 (signin 페이지)
   const handleResponseSuccess = (data) => {
@@ -216,6 +218,7 @@ function App() {
     </>
 
   );
+
 }
 
 export default App;
