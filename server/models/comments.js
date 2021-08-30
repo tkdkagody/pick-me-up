@@ -1,6 +1,6 @@
 const Sequelize = require("sequelize");
 module.exports = function (sequelize, DataTypes) {
-  return sequelize.define(
+  const comments = sequelize.define(
     "comments",
     {
       id: {
@@ -9,7 +9,7 @@ module.exports = function (sequelize, DataTypes) {
         allowNull: false,
         primaryKey: true,
       },
-      post_id: {
+      feedId: {
         type: DataTypes.INTEGER,
         allowNull: true,
         references: {
@@ -17,7 +17,7 @@ module.exports = function (sequelize, DataTypes) {
           key: "id",
         },
       },
-      user_id: {
+      userId: {
         type: DataTypes.INTEGER,
         allowNull: true,
         references: {
@@ -25,7 +25,7 @@ module.exports = function (sequelize, DataTypes) {
           key: "id",
         },
       },
-      text_content: {
+      textContent: {
         type: DataTypes.STRING(255),
         allowNull: true,
       },
@@ -41,7 +41,7 @@ module.exports = function (sequelize, DataTypes) {
     {
       sequelize,
       tableName: "comments",
-      timestamps: false,
+      timestamps: true,
       indexes: [
         {
           name: "PRIMARY",
@@ -52,14 +52,20 @@ module.exports = function (sequelize, DataTypes) {
         {
           name: "feedId",
           using: "BTREE",
-          fields: [{ name: "post_id" }],
+          fields: [{ name: "feedId" }],
         },
         {
           name: "userId",
           using: "BTREE",
-          fields: [{ name: "user_id" }],
+          fields: [{ name: "userId" }],
         },
       ],
     }
   );
+  comments.associate = function (models) {
+    comments.belongsTo(models.post, { as: "feed", foreignKey: "feedId" });
+    comments.belongsTo(models.users, { as: "user", foreignKey: "userId" });
+  };
+
+  return comments;
 };

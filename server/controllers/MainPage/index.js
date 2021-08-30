@@ -1,11 +1,15 @@
-const { vote: voteModel, post: postModel } = require("../../models");
+const { vote, post: postModel } = require("../../models");
 
 module.exports = {
   getAllPost: async (req, res) => {
-    const result = await postModel.findAll();
-    const data = result.map((obj) => {
+    const postResult = await postModel.findAll({
+      include: vote,
+    });
+
+    const postData = postResult.map((obj) => {
       return obj.dataValues;
     });
-    res.status(200).send({ data, message: "ok" });
+
+    console.log(postData);
   },
 };
