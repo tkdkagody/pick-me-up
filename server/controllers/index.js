@@ -5,9 +5,11 @@ const router = Router();
 const { users } = require("../models");
 const { getMyPost } = require("../controllers/GetMyPost");
 const jwt = require("jsonwebtoken");
+const { getMyInfo } = require("./GetMyInfo");
 const { sendPost } = require("../controllers/Post");
 const { getAllPost } = require("./MainPage");
 const { isVote } = require("./Vote");
+
 
 //아이디 닉네임 모바일 비밀번호
 
@@ -100,5 +102,7 @@ router.get("/", (req, res) => {
 });
 
 router.get("/user/posting-list/:id", getMyPost);
+
+router.get("/user/:id", getMyInfo);
 
 module.exports = router;
