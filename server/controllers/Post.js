@@ -1,5 +1,4 @@
 const { post } = require("../models");
-// const { vote } = require("../models");
 const { isAuthorized } = require("./tokenFunction");
 
 module.exports = {
@@ -49,7 +48,7 @@ module.exports = {
             updated_at: new Date(),
           })
           .then((data) => {
-            // console.log("data:", data);
+            console.log("data:", data);
             res.status(201).json({
               message: "ok",
             });
