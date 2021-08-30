@@ -44,7 +44,7 @@ module.exports = {
             vote.create({
               post_id: data.dataValues.id,
               agreement: 0,
-              oppostion: 0,
+              opposition: 0,
             });
           })
           .then((data) => {
