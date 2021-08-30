@@ -19,7 +19,7 @@ const Navbar = ({handleResponseSuccess, onSignout, isLogin , info, filterHandle}
     setIsSigninClicked(false); 
   }
 
-  const reset = () =>{
+  const reset = () =>{// 로고 홈버튼 클릭하면 해시태그 선택 안 되고 전체로 reset
     filterHandle();
   }
 

@@ -107,18 +107,19 @@ function App() {
   /**********************페이지 컨트롤 부분***************************/
 
   const [feeds, setFeeds] = useState(dummyData); //전체 피드리스트
-  const [selectedFeed, setSelectedFeed] = useState(null); //선택된 피드
-  const [revised, setRevised] = useState(null); //writing 할 피드
+  const [selectedFeed, setSelectedFeed] = useState(null); //선택된 피드페이지로 이동할 때
+  const [revised, setRevised] = useState(null); //writing 할 피드 선택된 것.
   const select = (el) => {
     setSelectedFeed(el);
-  };
-  const listFilter = (tag) => {
-    if (tag === "전체") {
-      setFeeds(dummyData);
-    } else {
-      setFeeds(dummyData.filter((el) => el.tags.includes(tag)));
-    }
-  };
+
+  }
+  const listFilter =(tag) =>{ //필터기능 구현 수정 필요... 서버에 요청 보내야 할 듯
+    // if(tag === '전체'){
+    //   //setFeeds(feeds);
+    // }else{
+    //   setFeeds(feeds.filter(el => el.tags.includes(tag)));
+    // }
+  } 
 
   const revise = (el) => {
     setRevised(el);
@@ -126,15 +127,17 @@ function App() {
 
 
   const createFeeds = (el) => {
-    setFeeds(feeds.concat(el));
-  };
-
+    setFeeds([el, ...feeds]) //최신 피드니까 상단에 뜨게끔 0번째 인덱스로 추가됨.
+  }
 
   useEffect(() => {
     //feeds 불러오기 axios GET 요청(지영)
-  }, []);
+    //최신순으로 불러와야 하니까 받은 data에서 createdAt이 최신인 순으로 정렬해서 feeds 
+  }, [])
+
 
   /**********************sign in 컨트롤 부분***************************/
+
 
   //로그인상태 변경 메소드
   const loginHandler = () => {
@@ -216,3 +219,4 @@ function App() {
 }
 
 export default App;
+
