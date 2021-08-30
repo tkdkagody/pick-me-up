@@ -6,13 +6,22 @@ const { isAuthorized } = require("./tokenFunction");
 module.exports = {
   sendPost: (req, res) => {
     const accessTokendata = isAuthorized(req);
-    const { title, contents, choice_1, choice_2, hashTags } = req.body;
+    const { title, contents, choice_1, choice_2, img_1, img_2, hashTags } =
+      req.body;
     console.log(accessTokendata);
-    console.log(title, contents, choice_1, choice_2, hashTags);
+    console.log(title, contents, choice_1, choice_2, hashTags, img_1, img_2);
     if (!accessTokendata) {
       res.status(401).send("invalid");
     } else {
-      if (!title || !contents || !choice_1 || !choice_2 || !hashTags) {
+      if (
+        !title ||
+        !contents ||
+        !choice_1 ||
+        !choice_2 ||
+        !img_1 ||
+        !img_2 ||
+        !hashTags
+      ) {
         res
           .status(422)
           .json({ data: null, message: "insufficient parameters supplied" });
@@ -22,6 +31,8 @@ module.exports = {
             user_id: accessTokendata.id,
             title: title,
             contents: contents,
+            imgInfo1: img_1,
+            imgInfo2: img_2,
             option1: choice_1,
             option2: choice_2,
             tags: hashTags,
