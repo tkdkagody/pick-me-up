@@ -5,7 +5,7 @@ import styles from './Navbar.module.css';
 
 
 
-const Navbar = ({handleResponseSuccess, onSignout, isLogin , info, resetRevised, filterHandle}) => {
+const Navbar = ({handleResponseSuccess, onSignout, isLogin , info, filterHandle}) => {
 
   //props로 isSignIn받고 true일경우 login/ false일경우 logout버튼
 
@@ -19,8 +19,7 @@ const Navbar = ({handleResponseSuccess, onSignout, isLogin , info, resetRevised,
     setIsSigninClicked(false); 
   }
 
-  const reset = () =>{
-    resetRevised();
+  const reset = () =>{// 로고 홈버튼 클릭하면 해시태그 선택 안 되고 전체로 reset
     filterHandle();
   }
 
