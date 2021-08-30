@@ -9,7 +9,7 @@ module.exports = {
       },
     });
     if (!voteModelResult) {
-      return res.status(403).res("post does not exist.");
+      return res.status(403).json({ message: "post does not exist." });
     }
     const votingId = voteModelResult.dataValues.id;
     const result = await voterModel.findOne({
@@ -18,6 +18,13 @@ module.exports = {
         user_id: userId,
       },
     });
-    console.log(result);
+
+    if (!result) {
+      return res
+        .status(200)
+        .json({ message: "user did not vote", isVote: true });
+    } else {
+      return res.status(200).json({ message: "voted user", isVote: false });
+    }
   },
 };
