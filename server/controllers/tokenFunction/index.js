@@ -16,11 +16,12 @@ module.exports = {
       .json({ message: "ok" });
   },
   isAuthorized: (req) => {
-    const authorization = req.headers["cookie"];
+    const authorization = req.headers.authorization;
     if (!authorization) {
       return null;
     }
-    const token = authorization.split(";")[0].split("=")[1]; //토큰 들어오는 것 보고 수정
+    const token =
+      authorization; /*.split(";")[0].split("=")[1]; //토큰 들어오는 것 보고 수정*/
 
     try {
       return verify(token, process.env.ACCESS_SECRET);
