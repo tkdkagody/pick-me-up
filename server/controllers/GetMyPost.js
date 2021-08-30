@@ -4,7 +4,6 @@ require("dotenv").config();
 const e = require('express');
 
 module.exports = {
-    // modified
     getMyPost: async (req, res) => {
         const Authentication = await req.headers.Authentication;
         
