@@ -1,7 +1,7 @@
 const Sequelize = require("sequelize");
 module.exports = function (sequelize, DataTypes) {
   return sequelize.define(
-    "comments",
+    "voter",
     {
       id: {
         autoIncrement: true,
@@ -9,11 +9,11 @@ module.exports = function (sequelize, DataTypes) {
         allowNull: false,
         primaryKey: true,
       },
-      post_id: {
+      voting_id: {
         type: DataTypes.INTEGER,
         allowNull: true,
         references: {
-          model: "post",
+          model: "vote",
           key: "id",
         },
       },
@@ -25,22 +25,10 @@ module.exports = function (sequelize, DataTypes) {
           key: "id",
         },
       },
-      text_content: {
-        type: DataTypes.STRING(255),
-        allowNull: true,
-      },
-      created_at: {
-        type: DataTypes.DATE,
-        allowNull: true,
-      },
-      updated_at: {
-        type: DataTypes.DATE,
-        allowNull: true,
-      },
     },
     {
       sequelize,
-      tableName: "comments",
+      tableName: "voter",
       timestamps: false,
       indexes: [
         {
@@ -50,14 +38,14 @@ module.exports = function (sequelize, DataTypes) {
           fields: [{ name: "id" }],
         },
         {
-          name: "feedId",
-          using: "BTREE",
-          fields: [{ name: "post_id" }],
-        },
-        {
-          name: "userId",
+          name: "user_id",
           using: "BTREE",
           fields: [{ name: "user_id" }],
+        },
+        {
+          name: "voting_id",
+          using: "BTREE",
+          fields: [{ name: "voting_id" }],
         },
       ],
     }

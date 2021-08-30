@@ -25,7 +25,6 @@ const Signin = ({ clickCloseBtn, handleResponseSuccess }) => {
 
   /**********************sign in 컨트롤 부분***************************/
 
-
   //로그인버튼 클릭시 호출 메소드
   const handleLogin = () => {
     if (!userId || !password) {
@@ -35,27 +34,25 @@ const Signin = ({ clickCloseBtn, handleResponseSuccess }) => {
       axios
         .post(
           "http://ec2-3-34-191-91.ap-northeast-2.compute.amazonaws.com/sign-in",
-          loginInfo,
-          {}
+          loginInfo
         )
         .then((result) => {
-          console.log(result.data);
+          //console.log(result);
           handleResponseSuccess(result.data); //result.data.message="ok"!!
           clickCloseBtn(); //::제대로 받아왔을경우 사인인창 없애기
+        })
+        .catch((err) => {
+          throw err;
         });
     }
   };
 
-
-    return(
-
-
+  return (
     <section className={styles.backdrop}>
       {isSignUpClicked ? (
         <Signup
           isSignUpClicked={isSignUpClicked}
           setIsSignUpClicked={setIsSignUpClicked}
-
           clickCloseBtn={clickCloseBtn}
         />
       ) : null}
@@ -67,7 +64,6 @@ const Signin = ({ clickCloseBtn, handleResponseSuccess }) => {
             <img src="../../../images/close.svg" className={styles.img}></img>
           </span>
         </div>
-
 
         <form className={styles.form} onSubmit={(e) => e.preventDefault()}>
           <ul className={styles.list}>
@@ -88,11 +84,9 @@ const Signin = ({ clickCloseBtn, handleResponseSuccess }) => {
               />
             </li>
 
-
             {errorMessage ? (
               <li className={styles.alert}>{errorMessage}</li>
             ) : null}
-
 
             <li className={styles.item}>
               <button className={styles.button} onClick={handleLogin}>
@@ -109,7 +103,6 @@ const Signin = ({ clickCloseBtn, handleResponseSuccess }) => {
             </li>
           </ul>
         </form>
-
       </div>
     </section>
   );

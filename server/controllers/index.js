@@ -3,9 +3,11 @@ require("dotenv").config();
 const { Router } = require("express");
 const router = Router();
 const { users } = require("../models");
+const { getMyPost } = require("../controllers/GetMyPost");
 const jwt = require("jsonwebtoken");
-const { changeProfile } = require("../controllers/ProfileChange");
+const { sendPost } = require("../controllers/Post");
 const { getAllPost } = require("./MainPage");
+const { isVote } = require("./Vote");
 
 //아이디 닉네임 모바일 비밀번호
 
@@ -86,14 +88,17 @@ router.post("/sign-out", (req, res) => {
   res.status(205).json({ message: "successfully signed out!" });
 });
 
-
 router.post("/user/profile/:id", changeProfile);
 
-router.get("/get-all-post", getAllPost);
+router.post("/posting", sendPost);
 
+router.get("/get-all-post", getAllPost);
+router.get("/vote/isvote?", isVote);
 
 router.get("/", (req, res) => {
   res.send("hello world");
 });
+
+router.get("/user/posting-list/:id", getMyPost);
 
 module.exports = router;
