@@ -77,4 +77,24 @@ module.exports = {
       if (!doUpdate) res.status(201).json({ message: "failed to vote" });
     }
   },
+  voteResult: async (req, res) => {
+    const { postId } = req.body;
+
+    const result = await postModel.findOne({
+      attributes: ["option1_count", "option2_count"],
+      where: {
+        id: postId,
+      },
+    });
+
+    const { option1_count, option2_count } = result.dataValues;
+
+    res.status(200).json({
+      data: {
+        option1_count,
+        option2_count,
+      },
+      message: "ok",
+    });
+  },
 };
