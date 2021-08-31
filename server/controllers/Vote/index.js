@@ -27,7 +27,7 @@ module.exports = {
     const { postId: voting_id, option: options_check } = req.body;
 
     const user_id = userInfo.id;
-    const result = await voterModel.create({
+    await voterModel.create({
       voting_id,
       user_id,
       options_check,
