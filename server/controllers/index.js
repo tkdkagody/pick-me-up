@@ -6,10 +6,13 @@ const { users } = require("../models");
 const { getMyPost } = require("../controllers/GetMyPost");
 const jwt = require("jsonwebtoken");
 const { getMyInfo } = require("./GetMyInfo");
+const { auth } = require("../controllers/auth");
 const { updateMyPost } = require("./UpdateMyPost");
 const { sendPost } = require("../controllers/Post");
 const { getAllPost } = require("./MainPage");
+
 const { isVote, vote } = require("./Vote");
+
 
 //아이디 닉네임 모바일 비밀번호
 
@@ -103,6 +106,8 @@ router.get("/", (req, res) => {
 });
 
 router.get("/user/posting-list/:id", getMyPost);
+
+router.get("/user/auth", auth);
 
 router.get("/user/:id", getMyInfo);
 
