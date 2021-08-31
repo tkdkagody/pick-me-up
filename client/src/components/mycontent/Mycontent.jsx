@@ -1,9 +1,10 @@
 import styles from './Mycontent.module.css'
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 
-const Mycontent = ({handleContent, feeds}) => { //feeds로 마이리스트가 들어옴.
+const Mycontent = ({handleContent, feeds, accessToken}) => { //feeds로 마이리스트가 들어옴.
     
   const [isPicked, setIsPicked] = useState(null);
   const [moreOpt, isMoreOpt] = useState(false);
@@ -19,6 +20,12 @@ const Mycontent = ({handleContent, feeds}) => { //feeds로 마이리스트가 �
     // 삭제 후 feeds 상태가 자동으로 변화되어 myfeeds 상태값도 바로 변화되는지 확인해봐야 함.
     // 삭제 후 myContent 컴포넌트로 redirect 필요.
     // el.id를 payload에 보내야 함(삭제할 피드의 피드아이디)
+    axios.delete(`http://ec2-3-34-191-91.ap-northeast-2.compute.amazonaws.com/user/posting-list/${el.id}`, { 
+        headers: {
+          authorization: accessToken,
+        },
+        "Content-Type": "application/json",
+    })
   }
 
   return(

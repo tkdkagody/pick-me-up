@@ -72,7 +72,8 @@ const Mypage = ({ info, setInfo, handleContent, accessToken, isLogin }) => {
         ) : (
           <Mycontent 
           handleContent={handleContent}
-          feeds={myContent} />
+          feeds={myContent}
+          accessToken={accessToken} />
         )}
       </div>
     </section>
