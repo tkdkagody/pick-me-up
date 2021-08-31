@@ -106,6 +106,10 @@ function App() {
         "http://ec2-3-34-191-91.ap-northeast-2.compute.amazonaws.com/get-all-post"
       )
       .then((res) => {
+
+
+        console.log(res);
+
         const result = res.data.data.sort((a, b) => {
           return new Date(b.created_at) - new Date(a.created_at);
         });
