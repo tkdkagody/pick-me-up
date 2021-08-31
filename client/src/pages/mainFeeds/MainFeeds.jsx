@@ -1,22 +1,21 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import styles from './MainFeeds.module.css';
 import SubNavbar from '../../components/subNavbar/SubNavbar';
 import FeedContent from '../../components/feedContent/FeedContent';
 
 
-const MainFeeds = (props) => {
+const MainFeeds = ({feeds, filterHandle, handleClick}) => {
+  
   return (
-  <section className={styles.main}>
-    <SubNavbar />
-    <ul className={styles.feedList}>
-        <FeedContent/>  
-        <FeedContent/> 
-        <FeedContent/> 
-        <FeedContent/>  
-        <FeedContent/> 
-        <FeedContent/> 
-    </ul>
-  </section>
+    <section className={styles.main}>
+      <SubNavbar filterHandle={filterHandle}/>
+      <ul className={styles.feedList}>
+      <Link to="/feed">
+        {feeds.map(el => <FeedContent feed={el} handleSelect={handleClick}/>)}
+      </Link>
+      </ul>
+    </section>
   )
 };
 

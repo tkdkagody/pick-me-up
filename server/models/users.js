@@ -1,6 +1,6 @@
 const Sequelize = require("sequelize");
 module.exports = function (sequelize, DataTypes) {
-  return sequelize.define(
+  const users = sequelize.define(
     "users",
     {
       id: {
@@ -9,7 +9,7 @@ module.exports = function (sequelize, DataTypes) {
         allowNull: false,
         primaryKey: true,
       },
-      userid: {
+      user_id: {
         type: DataTypes.STRING(255),
         allowNull: true,
       },
@@ -21,15 +21,15 @@ module.exports = function (sequelize, DataTypes) {
         type: DataTypes.STRING(255),
         allowNull: true,
       },
-      signUpType: {
+      sign_up_type: {
         type: DataTypes.STRING(255),
         allowNull: true,
       },
-      phoneNumber: {
+      phone_number: {
         type: DataTypes.STRING(255),
         allowNull: true,
       },
-      accountType: {
+      account_type: {
         type: DataTypes.INTEGER,
         allowNull: true,
       },
@@ -56,4 +56,13 @@ module.exports = function (sequelize, DataTypes) {
       ],
     }
   );
+
+  users.associate = function (models) {
+    users.hasMany(models.comments, { as: "comments", foreignKey: "user_id" });
+
+    users.hasMany(models.post, { as: "posts", foreignKey: "user_id" });
+
+    users.hasMany(models.voter, { as: "voters", foreignKey: "user_id" });
+  };
+  return users;
 };
