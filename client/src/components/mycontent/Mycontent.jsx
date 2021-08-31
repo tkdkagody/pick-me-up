@@ -8,7 +8,7 @@ const Mycontent = ({handleContent, feeds, accessToken}) => { //feeds로 마이�
     
   const [isPicked, setIsPicked] = useState(null);
   const [moreOpt, isMoreOpt] = useState(false);
-  console.log('**********************', feeds)
+  //console.log('**********************', feeds)
 
   const handleOptions = (el) =>{  
     setIsPicked(el);
@@ -26,6 +26,8 @@ const Mycontent = ({handleContent, feeds, accessToken}) => { //feeds로 마이�
         },
         "Content-Type": "application/json",
     })
+    .then(res => 
+      console.log('**************', res))
   }
 
   return(
