@@ -7,7 +7,7 @@ import AWS from "aws-sdk"
 
 axios.defaults.withCredentials = true;
 
-const Writing = ({accessToken, isLogin}) => {
+const Writing = ({accessToken, isLogin, setWriteDone}) => {
 
   const tags=['#의류', '#리빙', '#뷰티', '#식품', '#잡화', '#디지털']
 
@@ -116,6 +116,7 @@ const Writing = ({accessToken, isLogin}) => {
     if(title === '' || firstOpt === '' || secondOpt ==='' || firstImg === null || secondImg === null || content === '' || isClicked.length === 0){
       setErrorMessage('항목을 모두 입력하세요!🙏')
     } else{
+      console.log('*********************', accessToken)
       axios.post('http://ec2-3-34-191-91.ap-northeast-2.compute.amazonaws.com/posting', {
         title: title,
         choice_1: firstOpt,
@@ -130,6 +131,8 @@ const Writing = ({accessToken, isLogin}) => {
         },
         "Content-Type": "application/json",
       })
+
+      setWriteDone();
     };
   }
 

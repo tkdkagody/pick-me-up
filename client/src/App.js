@@ -38,6 +38,7 @@ function App() {
   //로그인인증 & 유저데이터 Get으로 불러오기(mypage) 정보 잘 받아왔으면 인포에 정보를 넣어준다.
   const isAuthenticated = (accessToken) => {
     console.log(accessToken, "d");
+    setAccessToken(accessToken);
     axios
       .get(
         "http://ec2-3-34-191-91.ap-northeast-2.compute.amazonaws.com/user/auth",
@@ -78,6 +79,7 @@ function App() {
   const [selectedFeed, setSelectedFeed] = useState(null); //선택된 피드페이지(투표)로 이동할 때
   const [revised, setRevised] = useState(null); //writing 할 피드 선택된 것.
   const [isFiltered, setIsFiltered] = useState(false); //해시태그 클릭.
+  const [writeDone, setWriteDone] = useState(false);
   
 
   const select = (el) => {//썸네일 클릭 시
@@ -116,8 +118,7 @@ function App() {
           tags: JSON.parse(el.tags)
         }
       }))
-      //console.log(res.data.data[0].imgInfo2)
-  })},[])
+  })}, [writeDone])
 
 
 
@@ -215,7 +216,7 @@ function App() {
                 {/* <Mypage handleContent={revise} info={info} setInfo={setInfo} /> */}
               </Route>
               <Route path="/writing">
-                <Writing accessToken={accessToken} isLogin={isLogin} />
+                <Writing accessToken={accessToken} isLogin={isLogin} setWriteDone={()=> setWriteDone(!writeDone)}/>
               </Route>
               <Route path="/update">
                 <Update feed={revised} />
