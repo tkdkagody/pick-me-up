@@ -6,12 +6,15 @@ import AWS from "aws-sdk";
 
 // axios.defaults.withCredentials = true;
 
-const Writing = ({ accessToken, isLogin }) => {
-  const tags = ["#의류", "#리빙", "#뷰티", "#식품", "#잡화", "#디지털"];
 
-  const [title, setTitle] = useState(""); //제목
-  const [firstOpt, setFirstOpt] = useState(""); //옵션명1
-  const [secondOpt, setSecondOpt] = useState(""); //옵션명2
+const Writing = ({accessToken, isLogin, setListRender}) => {
+
+  const tags=['#의류', '#리빙', '#뷰티', '#식품', '#잡화', '#디지털']
+
+  const [title, setTitle] = useState(''); //제목
+  const [firstOpt, setFirstOpt]= useState('')//옵션명1
+  const [secondOpt, setSecondOpt]= useState('')//옵션명2
+
   const [firstImg, setFirstImg] = useState(null); //이미지파일
   const [secondImg, setSecondImg] = useState(null); //이미지파일
   const [content, setContent] = useState(""); // 컨텐츠
@@ -70,6 +73,7 @@ const Writing = ({ accessToken, isLogin }) => {
     promise.then(
       function (data) {
         setFirstImg(data.Location);
+        console.log(data.Location)
       },
       function (err) {
         console.log(err);
@@ -97,6 +101,7 @@ const Writing = ({ accessToken, isLogin }) => {
     promise.then(
       function (data) {
         setSecondImg(data.Location);
+        console.log(data.Location)
       },
       function (err) {
         console.log(err);
@@ -132,6 +137,7 @@ const Writing = ({ accessToken, isLogin }) => {
           contents: content,
           hashTags: JSON.stringify(isClicked), //배열이니까 JSON?
         },
+
         {
           headers: {
             authorization: accessToken,
@@ -139,8 +145,11 @@ const Writing = ({ accessToken, isLogin }) => {
           "Content-Type": "application/json",
         }
       );
+      setListRender(); //홈화면으로 갈 때 바로 useEffect가 호출되어 전체 피드리스트 GET요청이 작동하도록 함.
+    };
     }
   };
+
 
   if (!isLogin) {
     return (
