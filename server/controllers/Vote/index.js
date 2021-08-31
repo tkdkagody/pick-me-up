@@ -1,4 +1,5 @@
 const { voter: voterModel, post: postModel } = require("../../models");
+const voter = require("../../models/voter");
 module.exports = {
   isVote: async (req, res) => {
     const { postId, userId } = req.query;
@@ -20,5 +21,11 @@ module.exports = {
   },
   vote: async (req, res) => {
     const { postId, userId, option } = req.body;
+
+    const result = await voter.create({
+      voting_id: postId,
+      user_id: userId,
+      options_check: 99,
+    });
   },
 };
