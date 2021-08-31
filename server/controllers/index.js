@@ -13,7 +13,6 @@ const { deleteMyPost } = require("./DestroyMyPost");
 const { getAllPost } = require("./MainPage");
 const { isVote, vote } = require("./Vote");
 
-
 //아이디 닉네임 모바일 비밀번호
 
 router.patch("/user/profile/:id", changeProfile);

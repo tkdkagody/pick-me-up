@@ -6,7 +6,7 @@ import {
   Switch,
   Route,
   useHistory,
-  Redirect
+  Redirect,
 } from "react-router-dom";
 import { createBrowserHistory } from "history";
 import Footer from "./pages/footer/Footer";
@@ -28,7 +28,6 @@ import LoadingIndicator from "./components/LoadingIndicator";
 import FeedResult from "./pages/feedResult/FeedResult";
 
 function App() {
-
   const history = useHistory();
   //로그인상태
   const [isLogin, setIsLogin] = useState(false);
@@ -78,9 +77,9 @@ function App() {
   const [selectedFeed, setSelectedFeed] = useState(null); //선택된 피드페이지(투표)로 이동할 때
   const [revised, setRevised] = useState(null); //writing 할 피드 선택된 것.
   const [isFiltered, setIsFiltered] = useState(false); //해시태그 클릭.
-  
 
-  const select = (el) => {//썸네일 클릭 시
+  const select = (el) => {
+    //썸네일 클릭 시
     setSelectedFeed(el);
   };
 
@@ -105,22 +104,26 @@ function App() {
   // };
 
   useEffect(() => {
-    axios.get('http://ec2-3-34-191-91.ap-northeast-2.compute.amazonaws.com/get-all-post')
-    .then(res => {
-      const result = res.data.data.sort((a,b)=>{
-            return new Date(b.created_at) - new Date(a.created_at);
+    axios
+      .get(
+        "http://ec2-3-34-191-91.ap-northeast-2.compute.amazonaws.com/get-all-post"
+      )
+      .then((res) => {
+        console.log(res);
+        const result = res.data.data.sort((a, b) => {
+          return new Date(b.created_at) - new Date(a.created_at);
+        });
+        setFeeds(
+          result.map((el) => {
+            return {
+              ...el,
+              tags: JSON.parse(el.tags),
+            };
+          })
+        );
+        //console.log(res.data.data[0].imgInfo2)
       });
-      setFeeds(result.map(el => {
-        return {
-          ...el, 
-          tags: JSON.parse(el.tags)
-        }
-      }))
-      //console.log(res.data.data[0].imgInfo2)
-  })},[])
-
-
-
+  }, []);
 
   // axios.get('http://ec2-3-34-191-91.ap-northeast-2.compute.amazonaws.com/get-all-post')
   // .then(res => {
@@ -222,7 +225,11 @@ function App() {
               </Route>
               {selectedFeed ? ( //피드 클릭했으면 여기서 feed페이지로 감!
                 <Route path="/feed">
-                  <Feed feed={selectedFeed} accessToken={accessToken} isLogin={isLogin}/>
+                  <Feed
+                    feed={selectedFeed}
+                    accessToken={accessToken}
+                    isLogin={isLogin}
+                  />
                 </Route>
               ) : null}
               {/* <Route path="/feedresult">
@@ -244,7 +251,7 @@ export default App;
 export const browserHistory = createBrowserHistory();
 
 // const dummyData = [
-//   { 
+//   {
 //     id: 1,
 //     userName: "구름이",
 //     title: "회사에 입고 다닐 데일리 니트 색깔 골라주세요🙏",
