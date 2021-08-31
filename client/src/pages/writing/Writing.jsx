@@ -73,7 +73,7 @@ const Writing = ({accessToken, isLogin}) => {
     promise.then(
       function (data) {
         setFirstImg(data.Location);
-        console.log('22222222',data.Location)
+        console.log(data.Location)
       },
       function (err) {
       console.log(err);
@@ -100,7 +100,7 @@ const Writing = ({accessToken, isLogin}) => {
     promise.then(
       function (data) {
         setSecondImg(data.Location);
-        console.log('22222222',data.Location)
+        console.log(data.Location)
       },
       function (err) {
       console.log(err);
