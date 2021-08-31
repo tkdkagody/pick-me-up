@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from './FeedContent.module.css'
+import { Link } from "react-router-dom";
 
 const FeedContent = ({feed, handleSelect}) => {
   return (  

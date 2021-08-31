@@ -1,11 +1,9 @@
 import React from 'react';
-import RealVote from '../modals/RealVote';
-import Vote from '../vote/Vote';
 import styles from './VoteResult.module.css';
 import Feed from '../../pages/feed/Feed';
 
+
 const VoteResult = ({feed, isVoted,setIsVoted}) => {
-//console.log(isVoted)
 
   const voteDate = {
     per1 : {

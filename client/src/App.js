@@ -6,6 +6,7 @@ import {
   Switch,
   Route,
   useHistory,
+  Redirect
 } from "react-router-dom";
 import { createBrowserHistory } from "history";
 import Footer from "./pages/footer/Footer";
@@ -24,6 +25,7 @@ import Update from "./pages/update/Update";
 import MyinfoModify from "./pages/myinfoModify/MyinfoModify";
 
 import LoadingIndicator from "./components/LoadingIndicator";
+import FeedResult from "./pages/feedResult/FeedResult";
 
 function App() {
   const dummyData = [
@@ -111,14 +113,15 @@ function App() {
   /**********************페이지 컨트롤 부분***************************/
 
   const [feeds, setFeeds] = useState(dummyData); //전체 피드리스트
-  const [selectedFeed, setSelectedFeed] = useState(null); //선택된 피드페이지로 이동할 때
+  const [selectedFeed, setSelectedFeed] = useState(null); //선택된 피드페이지(투표)로 이동할 때
   const [revised, setRevised] = useState(null); //writing 할 피드 선택된 것.
   const [isFiltered, setIsFiltered] = useState(false); //해시태그 클릭.
+  
 
-  const select = (el) => {
-    //해당 피드로 이동...
+  const select = (el) => {//썸네일 클릭 시
     setSelectedFeed(el);
   };
+
   const listFilter = (tag) => {
     // 필터기능 구현 수정 필요... 서버에 요청 보내야 할 듯
     // feeds에서 전체 리스트 GET받고(필터링을 서버에서 하는 게 아님), 
@@ -134,9 +137,9 @@ function App() {
     setRevised(el);
   };
 
-  const createFeeds = (el) => {
-    setFeeds([el, ...feeds]); //최신 피드니까 상단에 뜨게끔 0번째 인덱스로 추가됨.
-  };
+  // const createFeeds = (el) => {
+  //   setFeeds([el, ...feeds]); //최신 피드니까 상단에 뜨게끔 0번째 인덱스로 추가됨.
+  // };
 
   useEffect(() => {
 
@@ -244,9 +247,12 @@ function App() {
               </Route>
               {selectedFeed ? ( //피드 클릭했으면 여기서 feed페이지로 감!
                 <Route path="/feed">
-                  <Feed feed={selectedFeed} />
+                  <Feed feed={selectedFeed} accessToken={accessToken} isLogin={isLogin}/>
                 </Route>
               ) : null}
+              {/* <Route path="/feedresult">
+                <FeedResult feed={selectedResult}/>
+              </Route> */}
               {/* 이부분 투표창에서 새로고침시 페이지 사라지는거 막아야함 */}
             </Switch>
           </div>
