@@ -96,7 +96,7 @@ router.post("/user/profile/:id", changeProfile);
 router.post("/posting", sendPost);
 router.get("/get-all-post", getAllPost);
 
-router.get("/vote/isvote?", isVote);
+router.get("/vote/isVote?", isVote);
 router.post("/vote", vote);
 
 router.get("/", (req, res) => {
