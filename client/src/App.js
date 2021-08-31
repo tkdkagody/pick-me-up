@@ -79,7 +79,7 @@ function App() {
   const [selectedFeed, setSelectedFeed] = useState(null); //선택된 피드페이지(투표)로 이동할 때
   const [revised, setRevised] = useState(null); //writing 할 피드 선택된 것.
   const [isFiltered, setIsFiltered] = useState(false); //해시태그 클릭.
-  const [writeDone, setWriteDone] = useState(false);
+  const [listRender, setListRender] = useState(false);
   
 
   const select = (el) => {//썸네일 클릭 시
@@ -141,7 +141,7 @@ function App() {
           tags: JSON.parse(el.tags)
         }
       }))
-  })}, [writeDone]) //글쓰기 버튼이 눌려질 때 마다 axiosGET요청 보내기.
+  })}, [listRender]) //글쓰기 버튼이 눌려질 때 마다 axiosGET요청 보내기.
 
   /**********************sign in 컨트롤 부분***************************/
 
@@ -187,7 +187,7 @@ function App() {
       <body className={styles.body}>
         <Router>
           <Navbar
-            filterHandle={listFilter}
+            setListRender={()=> setListRender(!listRender)}
             handleResponseSuccess={handleResponseSuccess}
             onSignout={onSignout}
             isLogin={isLogin}
@@ -225,7 +225,7 @@ function App() {
                 {/* <Mypage handleContent={revise} info={info} setInfo={setInfo} /> */}
               </Route>
               <Route path="/writing">
-                <Writing accessToken={accessToken} isLogin={isLogin} setWriteDone={()=> setWriteDone(!writeDone)}/>
+                <Writing accessToken={accessToken} isLogin={isLogin} setListRender={()=> setListRender(!listRender)}/>
               </Route>
               <Route path="/update">
                 <Update feed={revised} />

@@ -9,7 +9,7 @@ const Navbar = ({
   onSignout,
   isLogin,
   info,
-  filterHandle,
+  setListRender,
   isAuthenticated,
   setInfo,
   accessToken,
@@ -27,7 +27,7 @@ const Navbar = ({
 
   const reset = () => {
     // 로고 홈버튼 클릭하면 해시태그 선택 안 되고 전체로 reset
-    filterHandle();
+    setListRender();
   };
 
   const clickmypage = () => {
