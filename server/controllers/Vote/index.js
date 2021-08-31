@@ -25,13 +25,25 @@ module.exports = {
   vote: async (req, res) => {
     const userInfo = isAuthorized(req);
     const { postId: voting_id, option: options_check } = req.body;
+
     const user_id = userInfo.id;
     const result = await voterModel.create({
       voting_id,
-      user_id: userId,
+      user_id,
       options_check,
     });
 
-    console.log(result);
+    //    if(options_check===1) {
+    const result = await postModel.findOne({
+      attributes: ["option1_count"],
+      where: {
+        id: voting_id,
+      },
+    });
+
+    const count = result.dataValues;
+    //postModel.update({option1_count:})
   },
+
+  //},
 };
