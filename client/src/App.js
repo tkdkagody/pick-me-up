@@ -1,7 +1,12 @@
 import styles from "./App.module.css";
 import React, { useState, useEffect } from "react";
 import Navbar from "./pages/navbar/Navbar";
-import {BrowserRouter as Router, Switch, Route, useHistory} from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  useHistory,
+} from "react-router-dom";
 import { createBrowserHistory } from "history";
 import Footer from "./pages/footer/Footer";
 import MainFeeds from "./pages/mainFeeds/MainFeeds";
@@ -12,8 +17,8 @@ import ScrollButton from "./components/scrollButton/ScrollButton";
 import axios from "axios";
 import Update from "./pages/update/Update";
 import MyinfoModify from "./pages/myinfoModify/MyinfoModify";
-
-
+import NullPage from "./components/NullPage/Nullpage";
+import LoadingIndicator from "./components/LoadingIndicator";
 
 function App() {
   const history = useHistory();
@@ -56,62 +61,81 @@ function App() {
     isAuthenticated(accessToken);
   };
 
+  useEffect(() => {
+    setListRender();
+  });
+
   /**********************페이지 컨트롤 부분***************************/
 
   const [feeds, setFeeds] = useState([]); //전체 피드리스트
   const [selectedFeed, setSelectedFeed] = useState(null); //선택된 피드페이지(투표)로 이동할 때
   const [revised, setRevised] = useState(null); //writing 할 피드 선택된 것.
-  const [listRender, setListRender] = useState(false);
-  
-  useEffect(() => {
-    axios.get('http://ec2-3-34-191-91.ap-northeast-2.compute.amazonaws.com/get-all-post')
-    .then(res => {
-      const result = res.data.data.sort((a,b)=>{
-            return new Date(b.created_at) - new Date(a.created_at);
-      });
-      setFeeds(result.map(el => {
-        return {
-          ...el, 
-          tags: JSON.parse(el.tags)
-        }
-      }))
-  })}, [listRender]) //글쓰기 버튼이 눌려질 때 마다 axiosGET요청 보내기.
+  const [listRender, setListRender] = useState(true);
 
-  const select = (el) => {//썸네일 클릭 시
+  useEffect(() => {
+    axios
+      .get(
+        "http://ec2-3-34-191-91.ap-northeast-2.compute.amazonaws.com/get-all-post"
+      )
+      .then((res) => {
+        const result = res.data.data.sort((a, b) => {
+          return new Date(b.created_at) - new Date(a.created_at);
+        });
+
+        setFeeds(
+          result.map((el) => {
+            return {
+              ...el,
+              tags: JSON.parse(el.tags),
+            };
+          })
+        );
+      });
+  }, [listRender]); //글쓰기 버튼이 눌려질 때 마다 axiosGET요청 보내기.
+
+  const select = (el) => {
+    //썸네일 클릭 시
     setSelectedFeed(el);
   };
 
   const listFilter = (tag) => {
-    
-    if(tag==='전체'){
-       axios.get('http://ec2-3-34-191-91.ap-northeast-2.compute.amazonaws.com/get-all-post')
-      .then(res => {
-        let result = res.data.data.sort((a,b)=>{
-              return new Date(b.created_at) - new Date(a.created_at);
+    if (tag === "전체") {
+      axios
+        .get(
+          "http://ec2-3-34-191-91.ap-northeast-2.compute.amazonaws.com/get-all-post"
+        )
+        .then((res) => {
+          let result = res.data.data.sort((a, b) => {
+            return new Date(b.created_at) - new Date(a.created_at);
+          });
+
+          setFeeds(
+            result.map((el) => {
+              return {
+                ...el,
+                tags: JSON.parse(el.tags),
+              };
+            })
+          );
         });
-  
-        setFeeds(result.map(el => {
-          return {
-            ...el, 
-            tags: JSON.parse(el.tags)
-          }
-        }))
-      })
-    } else{
-      axios.get('http://ec2-3-34-191-91.ap-northeast-2.compute.amazonaws.com/get-all-post')
-      .then(res => {
-        let result = res.data.data.sort((a,b)=>{
-              return new Date(b.created_at) - new Date(a.created_at);
-        }); //최신순으로 정렬
-        result = result.map(el => {
-          return {
-            ...el, 
-            tags: JSON.parse(el.tags)
-          }
-        }) //배열 파싱하고...
-        result = result.filter(el => el.tags.includes(tag))
-        setFeeds(result);
-      })
+    } else {
+      axios
+        .get(
+          "http://ec2-3-34-191-91.ap-northeast-2.compute.amazonaws.com/get-all-post"
+        )
+        .then((res) => {
+          let result = res.data.data.sort((a, b) => {
+            return new Date(b.created_at) - new Date(a.created_at);
+          }); //최신순으로 정렬
+          result = result.map((el) => {
+            return {
+              ...el,
+              tags: JSON.parse(el.tags),
+            };
+          }); //배열 파싱하고...
+          result = result.filter((el) => el.tags.includes(tag));
+          setFeeds(result);
+        });
     }
   };
 
@@ -162,7 +186,7 @@ function App() {
       <body className={styles.body}>
         <Router>
           <Navbar
-            setListRender={()=> setListRender(!listRender)}
+            setListRender={() => setListRender(!listRender)}
             handleResponseSuccess={handleResponseSuccess}
             onSignout={onSignout}
             isLogin={isLogin}
@@ -200,13 +224,14 @@ function App() {
                 {/* <Mypage handleContent={revise} info={info} setInfo={setInfo} /> */}
               </Route>
               <Route path="/writing">
-                <Writing accessToken={accessToken} 
-                isLogin={isLogin} 
-                setListRender={()=> setListRender(!listRender)}/>
+                <Writing
+                  accessToken={accessToken}
+                  isLogin={isLogin}
+                  setListRender={() => setListRender(!listRender)}
+                />
               </Route>
               <Route path="/update">
-                <Update feed={revised} 
-                accessToken={accessToken} />
+                <Update feed={revised} accessToken={accessToken} />
               </Route>
               {selectedFeed ? ( //피드 클릭했으면 여기서 feed페이지로 감!
                 <Route path="/feed">

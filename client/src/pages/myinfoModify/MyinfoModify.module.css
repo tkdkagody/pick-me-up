@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap");
+
 .contain {
   width: 500px;
   margin: 0 auto;
@@ -105,7 +107,9 @@
 .btn {
   padding: 0.8em 2em;
   background-color: rgb(240, 199, 35);
-  color: white;
+  color: black;
+  font-family: "Fredoka One", cursive;
+  font-size: 17px;
   outline: none;
   cursor: pointer;
   font-weight: bold;
@@ -115,7 +119,6 @@
 /*모달*/
 /* 상위 컴포넌트에서 flex걸어서 로그인창 가운데정렬하기  */
 
-@import url("https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap");
 span {
   display: block;
 }
