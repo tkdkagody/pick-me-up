@@ -7,12 +7,10 @@ const VoteResult = ({feed, isVoted,setIsVoted}) => {
 
   const voteDate = {
     per1 : {
-      percent:30,
-      option_1:"살구"
+      percent: Math.round((feed.option1_count/(feed.option1_count+feed.option2_count))*100)
     },
     per2 : {
-      percent:70,
-      option_1:"네이비"
+      percent: Math.round((feed.option2_count/(feed.option1_count+feed.option2_count))*100)
     }
   }
 

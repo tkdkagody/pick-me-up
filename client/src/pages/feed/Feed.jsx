@@ -14,12 +14,8 @@ const Feed = ({feed, accessToken, isLogin}) => {
 
 
   const vote =(el) => {
-
-    // if(!isLogin){
-    //   alert('로그인 해주세요:)')
-    // }
+    //로그인 했는지 안했는지에 따라서 랜더링 해야 함.
     //진짜로 투표하시겠습니까?에 '네'로 답했기 때문에 
-
     //투표한 사람인지 아닌지 확인하는 axios 요청.
     axios.get(`http://ec2-3-34-191-91.ap-northeast-2.compute.amazonaws.com/vote/isVote?postId=${feed.id}?`, { 
       headers: {
@@ -45,7 +41,6 @@ const Feed = ({feed, accessToken, isLogin}) => {
             "Content-Type": "application/json",
           })
           .then(res => {
-            console.log(res)
             setIsVoteReal(true); // 투표한 상태로 바꿔서 result 페이지 보여주기
           })
 
@@ -60,18 +55,19 @@ const Feed = ({feed, accessToken, isLogin}) => {
             "Content-Type": "application/json",
           })
           .then(res => {
-            console.log(res)
-            //setIsVoteReal(true); // 투표한 상태로 바꿔서 result 페이지 보여주기
+            setIsVoteReal(true); // 투표한 상태로 바꿔서 result 페이지 보여주기
           })
 
         }
       } else{
         //투표 한 사람
-        console.log('투표 했다~')
+        setIsVoteReal(true);
+        alert('이미 투표를 완료하셨어요')
+
         
       }
     })
-    //setIsVoteReal(true);
+    
   }
   const clickOpt = (el) => {
   
