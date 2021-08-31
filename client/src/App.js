@@ -63,47 +63,42 @@ function App() {
   const [isLogin, setIsLogin] = useState(false);
   const [info, setInfo] = useState(null);
   const [accessToken, setAccessToken] = useState(null);
-
+  //console.log(accessToken, "--------------");
   //로그인인증 & 유저데이터 Get으로 불러오기(mypage) 정보 잘 받아왔으면 인포에 정보를 넣어준다.
-  const isAuthenticated = () => {
-    // axios
-    //   .get(
-    //     "http://ec2-3-34-191-91.ap-northeast-2.compute.amazonaws.com/user/:id",
-    //     {
-    //       headers: {
-    //         authorization: `Bearer ${accessToken}`,
-    //       },
-    //       "Content-Type": "application/json",
-    //     }
-    //   )
-    //   .then((result) => {
-    //     //console.log(result.data.userinfo)
-    //     setInfo({
-    //       //인포상태 변화 //받아온 데이터로 넣어주기
-    //       userid: "abc1234",
-    //       nickname: "춘식",
-    //       mobile: "010-0000-0000",
-    //       password: "",
-    //       password2: "",
-    //     });
-    //   });
-    setInfo({
-      //인포상태 변화 //받아온 데이터로 넣어주기
-      userid: "abc1234",
-      nickname: "춘식",
-      mobile: "010-0000-0000",
-      password: "",
-      password2: "",
-    });
+  const isAuthenticated = (accessToken) => {
+    console.log(accessToken, "d");
+    axios
+      .get(
+        "http://ec2-3-34-191-91.ap-northeast-2.compute.amazonaws.com/user/auth",
+        {
+          headers: {
+            authorization: accessToken,
+          },
+          "Content-Type": "application/json",
+        }
+      )
+      .then((result) => {
+        console.log(result);
+        //user정보 받아서 setInfo해주기
+        // setInfo({
+        //   //인포상태 변화 //받아온 데이터로 넣어주기
+        //   userid: "abc1234",
+        //   nickname: "춘식",
+        //   mobile: "010-0000-0000",
+        //   password: "",
+        //   password2: "",
+        // });
+      });
   };
-  console.log(isLogin);
+  //console.log(isLogin);
   //로그인 성공시 리스폰스
 
   const handleResponseSuccess = (data) => {
     const { accessToken, message } = data;
     setAccessToken(accessToken); //액세스토큰 넣기
     loginHandler(); //로그인 true
-    window.localStorage.setItem("accessToken", accessToken);
+    isAuthenticated(accessToken);
+    console.log(accessToken, "dd");
   };
 
   /**********************페이지 컨트롤 부분***************************/
@@ -118,7 +113,7 @@ function App() {
   };
   const listFilter = (tag) => {
     // 필터기능 구현 수정 필요... 서버에 요청 보내야 할 듯
-    // feeds에서 전체 리스트 GET받고(필터링을 서버에서 하는 게 아님), 
+    // feeds에서 전체 리스트 GET받고(필터링을 서버에서 하는 게 아님),
     // 아래 조건문에 따라 필터링 시키기.
     // if(tag === '전체'){
     //   //setFeeds(feeds);
@@ -127,7 +122,8 @@ function App() {
     // }
   };
 
-  const revise = (el) => { //update할 포스트 정보 상태에 끼워넣고 /update페이지로 보내주기.
+  const revise = (el) => {
+    //update할 포스트 정보 상태에 끼워넣고 /update페이지로 보내주기.
     setRevised(el);
   };
 
@@ -137,7 +133,6 @@ function App() {
 
   useEffect(() => {
     //feeds 불러오기 axios GET 요청(지영)
-
     //최신순으로 불러와야 하니까 받은 data에서 createdAt이 최신인 순으로 정렬해서 feeds
     // axios.get('http://ec2-3-34-191-91.ap-northeast-2.compute.amazonaws.com/get-all-post',
     // { withCredentials: true })
@@ -146,21 +141,18 @@ function App() {
     // })
   }, []);
 
-    //최신순으로 불러와야 하니까 받은 data에서 createdAt이 최신인 순으로 정렬해서 feeds 
-    
-    // axios.get('http://ec2-3-34-191-91.ap-northeast-2.compute.amazonaws.com/get-all-post')
-    // .then(res => {
-    //   const result = res.data.data;
-    //   result.sort((a,b)=>{
-    //     return new Date(b.created_at) - new Date(a.created_at);
-    //   });
-    //   setFeeds(result);
-    // })
-    console.log('hi')
-  }, [])
+  //최신순으로 불러와야 하니까 받은 data에서 createdAt이 최신인 순으로 정렬해서 feeds
 
-
-
+  // axios.get('http://ec2-3-34-191-91.ap-northeast-2.compute.amazonaws.com/get-all-post')
+  // .then(res => {
+  //   const result = res.data.data;
+  //   result.sort((a,b)=>{
+  //     return new Date(b.created_at) - new Date(a.created_at);
+  //   });
+  //   setFeeds(result);
+  // })
+  //   console.log('hi')
+  // }, [])
 
   /**********************sign in 컨트롤 부분***************************/
 
@@ -189,11 +181,13 @@ function App() {
   };
 
   useEffect(() => {
-    if (window.localStorage.getItem("accessToken")) {
+    const storageToken = localStorage.getItem("accessToken");
+    // console.log(JSON.parse(storageToken), "요게 똑바로 나오면됨");
+    // const storageToken = JSON.parse(localStorage.getItem("accessToken"));
+    if (storageToken) {
       loginHandler();
-      setAccessToken(window.localStorage.getItem("accessToken"));
+      //setAccessToken({ accessToken: JSON.parse(storageToken) });
     }
-    
   }, [accessToken]);
 
   return (
@@ -210,6 +204,8 @@ function App() {
             isLogin={isLogin}
             info={info}
             isAuthenticated={isAuthenticated}
+            setInfo={setInfo}
+            accessToken={accessToken}
           />
 
           <div id="page">
@@ -240,10 +236,7 @@ function App() {
                 {/* <Mypage handleContent={revise} info={info} setInfo={setInfo} /> */}
               </Route>
               <Route path="/writing">
-                <Writing
-                  accessToken={accessToken}
-                  isLogin={isLogin}
-                />
+                <Writing accessToken={accessToken} isLogin={isLogin} />
               </Route>
               <Route path="/update">
                 <Update feed={revised} />
