@@ -33,10 +33,9 @@ function App() {
   const [isLogin, setIsLogin] = useState(false);
   const [info, setInfo] = useState(null);
   const [accessToken, setAccessToken] = useState(null);
-  //console.log(accessToken, "--------------");
-  //로그인인증 & 유저데이터 Get으로 불러오기(mypage) 정보 잘 받아왔으면 인포에 정보를 넣어준다.
+
   const isAuthenticated = (accessToken) => {
-    console.log(accessToken, "d");
+    setAccessToken(accessToken);
     axios
       .get(
         "http://ec2-3-34-191-91.ap-northeast-2.compute.amazonaws.com/user/auth",
@@ -48,27 +47,25 @@ function App() {
         }
       )
       .then((result) => {
-        console.log(result);
-        //user정보 받아서 setInfo해주기
-        // setInfo({
-        //   //인포상태 변화 //받아온 데이터로 넣어주기
-        //   userid: "abc1234",
-        //   nickname: "춘식",
-        //   mobile: "010-0000-0000",
-        //   password: "",
-        //   password2: "",
-        // });
+        const { id, user_id, nickname, password, phone_number, sign_up_type } =
+          result.data.data.userInfo;
+        setInfo({
+          id: id,
+          userid: user_id,
+          nickname: nickname,
+          mobile: phone_number,
+          password: password,
+          password2: "",
+        });
+        browserHistory.push("/");
       });
   };
-  //console.log(isLogin);
-  //로그인 성공시 리스폰스
 
   const handleResponseSuccess = (data) => {
     const { accessToken, message } = data;
-    setAccessToken(accessToken); //액세스토큰 넣기
+    setAccessToken(accessToken);
     loginHandler(); //로그인 true
     isAuthenticated(accessToken);
-    console.log(accessToken, "dd");
   };
 
   /**********************페이지 컨트롤 부분***************************/
@@ -109,7 +106,10 @@ function App() {
         "http://ec2-3-34-191-91.ap-northeast-2.compute.amazonaws.com/get-all-post"
       )
       .then((res) => {
+
+
         console.log(res);
+
         const result = res.data.data.sort((a, b) => {
           return new Date(b.created_at) - new Date(a.created_at);
         });
@@ -154,7 +154,7 @@ function App() {
         setInfo(null);
         setAccessToken(result.data.accessToken);
         browserHistory.push("/");
-        // history.push("/");
+
         //첫화면으로 랜더시키기 !
       });
     setIsLogin(false);
@@ -164,11 +164,9 @@ function App() {
 
   useEffect(() => {
     const storageToken = localStorage.getItem("accessToken");
-    // console.log(JSON.parse(storageToken), "요게 똑바로 나오면됨");
-    // const storageToken = JSON.parse(localStorage.getItem("accessToken"));
     if (storageToken) {
       loginHandler();
-      //setAccessToken({ accessToken: JSON.parse(storageToken) });
+      isAuthenticated(JSON.parse(storageToken));
     }
   }, [accessToken]);
 
