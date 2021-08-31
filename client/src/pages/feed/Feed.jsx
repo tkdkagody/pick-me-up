@@ -62,7 +62,7 @@ const Feed = ({feed, accessToken, isLogin}) => {
       } else{
         //투표 한 사람
         setIsVoteReal(true);
-        alert('이미 투표를 완료하셨어요')
+        alert('이미 투표를 완료하셨어요!(alert창 없애고 컴포넌트 띄울 예정)')
 
       }
     })
