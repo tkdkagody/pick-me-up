@@ -9,8 +9,8 @@ const { getMyInfo } = require("./GetMyInfo");
 const { auth } = require("../controllers/auth");
 const { updateMyPost } = require("./UpdateMyPost");
 const { sendPost } = require("../controllers/Post");
+const { deleteMyPost } = require("./DestroyMyPost");
 const { getAllPost } = require("./MainPage");
-
 const { isVote, vote } = require("./Vote");
 
 
@@ -100,6 +100,8 @@ router.get("/get-all-post", getAllPost);
 
 router.get("/vote/isVote?", isVote);
 router.post("/vote", vote);
+
+router.delete("/user/posting-list/:postid", deleteMyPost);
 
 router.get("/", (req, res) => {
   res.send("hello world");
