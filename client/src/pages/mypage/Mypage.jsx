@@ -4,7 +4,7 @@ import Myinfo from "../../components/myinfo/Myinfo";
 import styles from "./Mypage.module.css";
 
 const Mypage = ({ info, setInfo, handleContent, accessToken, isLogin }) => {
-  // console.log(info)
+  //console.log(info, "마이페이지");
 
   /* 카테고리이동 핸들러*/
   const [infoClicked, setInfoClicked] = useState(true);
