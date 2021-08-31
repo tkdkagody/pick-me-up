@@ -19,6 +19,6 @@ module.exports = {
     }
   },
   vote: async (req, res) => {
-    const { postId, userId } = req.body;
+    const { postId, userId, option } = req.body;
   },
 };
