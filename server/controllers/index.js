@@ -11,7 +11,6 @@ const { sendPost } = require("../controllers/Post");
 const { getAllPost } = require("./MainPage");
 const { isVote } = require("./Vote");
 
-
 //아이디 닉네임 모바일 비밀번호
 
 router.patch("/user/profile/:id", changeProfile);
@@ -47,7 +46,7 @@ router.post("/sign-up", (req, res) => {
       }
       const data = result.dataValues;
 
-      return res.status(201).json({ message: "ok" });
+      return res.status(201).json({ data, message: "ok" });
     })
     .catch((err) => {
       console.log(err);
