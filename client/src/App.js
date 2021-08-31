@@ -8,7 +8,6 @@ import {
   useHistory,
 } from "react-router-dom";
 import { createBrowserHistory } from "history";
-
 import Footer from "./pages/footer/Footer";
 import MainFeeds from "./pages/mainFeeds/MainFeeds";
 import Mypage from "./pages/mypage/Mypage";
@@ -27,7 +26,6 @@ import MyinfoModify from "./pages/myinfoModify/MyinfoModify";
 import LoadingIndicator from "./components/LoadingIndicator";
 
 function App() {
-
   const dummyData = [
     {
       userName: "구름이",
@@ -70,7 +68,7 @@ function App() {
   const isAuthenticated = () => {
     // axios
     //   .get(
-    //     "http://ec2-3-34-191-91.ap-northeast-2.compute.amazonaws.com/userdata",
+    //     "http://ec2-3-34-191-91.ap-northeast-2.compute.amazonaws.com/user/:id",
     //     {
     //       headers: {
     //         authorization: `Bearer ${accessToken}`,
@@ -97,7 +95,6 @@ function App() {
       password: "",
       password2: "",
     });
-
   };
   console.log(isLogin);
   //로그인 성공시 리스폰스
@@ -114,8 +111,9 @@ function App() {
   const [feeds, setFeeds] = useState(dummyData); //전체 피드리스트
   const [selectedFeed, setSelectedFeed] = useState(null); //선택된 피드페이지로 이동할 때
   const [revised, setRevised] = useState(null); //writing 할 피드 선택된 것.
-  
-  const select = (el) => { //해당 피드로 이동...
+
+  const select = (el) => {
+    //해당 피드로 이동...
     setSelectedFeed(el);
   };
   const listFilter = (tag) => {
@@ -137,16 +135,13 @@ function App() {
 
   useEffect(() => {
     //feeds 불러오기 axios GET 요청(지영)
-    //최신순으로 불러와야 하니까 받은 data에서 createdAt이 최신인 순으로 정렬해서 feeds 
-    
-    // axios.get('http://ec2-3-34-191-91.ap-northeast-2.compute.amazonaws.com/get-all-post', 
+    //최신순으로 불러와야 하니까 받은 data에서 createdAt이 최신인 순으로 정렬해서 feeds
+    // axios.get('http://ec2-3-34-191-91.ap-northeast-2.compute.amazonaws.com/get-all-post',
     // { withCredentials: true })
     // .then(res => {
     //   console.log(res)
-    // })   
-  }, [])
-
-
+    // })
+  }, []);
 
   /**********************sign in 컨트롤 부분***************************/
 
@@ -180,7 +175,6 @@ function App() {
       setAccessToken(window.localStorage.getItem("accessToken"));
     }
   }, [accessToken]);
-
 
   return (
     <>
@@ -251,7 +245,6 @@ function App() {
       {/* } */}
     </>
   );
-
 }
 
 export default App;

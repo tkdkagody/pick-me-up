@@ -93,6 +93,7 @@ const Signin = ({ clickCloseBtn, handleResponseSuccess }) => {
                 Sign in
               </button>
             </li>
+
             <li className={styles.item}>
               <button className={styles.button}>Google</button>
             </li>
