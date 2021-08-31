@@ -3,7 +3,7 @@ const { post } = require("../models");
 
 module.exports = {
   deleteMyPost: (req, res) => {
-    const post_id = req.params.id;
+    const post_id = req.params.postid;
     const accessTokendata = isAuthorized(req);
 
     if (!accessTokendata) {
