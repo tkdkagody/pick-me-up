@@ -87,14 +87,37 @@ function App() {
   };
 
   const listFilter = (tag) => {
-    // 필터기능 구현 수정 필요... 서버에 요청 보내야 할 듯
-    // feeds에서 전체 리스트 GET받고(필터링을 서버에서 하는 게 아님),
-    // 아래 조건문에 따라 필터링 시키기.
-    // if(tag === '전체'){
-    //   //setFeeds(feeds);
-    // }else{
-    //   setFeeds(feeds.filter(el => el.tags.includes(tag)));
-    // }
+    
+    if(tag==='전체'){
+       axios.get('http://ec2-3-34-191-91.ap-northeast-2.compute.amazonaws.com/get-all-post')
+      .then(res => {
+        let result = res.data.data.sort((a,b)=>{
+              return new Date(b.created_at) - new Date(a.created_at);
+        });
+  
+        setFeeds(result.map(el => {
+          return {
+            ...el, 
+            tags: JSON.parse(el.tags)
+          }
+        }))
+      })
+    } else{
+      axios.get('http://ec2-3-34-191-91.ap-northeast-2.compute.amazonaws.com/get-all-post')
+      .then(res => {
+        let result = res.data.data.sort((a,b)=>{
+              return new Date(b.created_at) - new Date(a.created_at);
+        }); //최신순으로 정렬
+        result = result.map(el => {
+          return {
+            ...el, 
+            tags: JSON.parse(el.tags)
+          }
+        }) //배열 파싱하고...
+        result = result.filter(el => el.tags.includes(tag))
+        setFeeds(result);
+      })
+    }
   };
 
   const revise = (el) => {
@@ -118,21 +141,7 @@ function App() {
           tags: JSON.parse(el.tags)
         }
       }))
-  })}, [writeDone])
-
-
-
-
-  // axios.get('http://ec2-3-34-191-91.ap-northeast-2.compute.amazonaws.com/get-all-post')
-  // .then(res => {
-  //   const result = res.data.data;
-  //   result.sort((a,b)=>{
-  //     return new Date(b.created_at) - new Date(a.created_at);
-  //   });
-  //   setFeeds(result);
-  // })
-  //   console.log('hi')
-  // }, [])
+  })}, [writeDone]) //글쓰기 버튼이 눌려질 때 마다 axiosGET요청 보내기.
 
   /**********************sign in 컨트롤 부분***************************/
 
