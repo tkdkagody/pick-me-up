@@ -46,7 +46,7 @@ router.post("/sign-up", (req, res) => {
       }
       const data = result.dataValues;
 
-      return res.status(201).json({ data, message: "ok" });
+      return res.status(201).json({ message: "ok" });
     })
     .catch((err) => {
       console.log(err);
