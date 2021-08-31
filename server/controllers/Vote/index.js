@@ -22,10 +22,12 @@ module.exports = {
   vote: async (req, res) => {
     const { postId, userId, option } = req.body;
 
-    const result = await voter.create({
+    const result = await voterModel.create({
       voting_id: postId,
       user_id: userId,
-      options_check: 99,
+      options_check: option,
     });
+
+    console.log(result);
   },
 };

@@ -9,7 +9,7 @@ const { getMyInfo } = require("./GetMyInfo");
 const { updateMyPost } = require("./UpdateMyPost");
 const { sendPost } = require("../controllers/Post");
 const { getAllPost } = require("./MainPage");
-const { isVote } = require("./Vote");
+const { isVote, vote } = require("./Vote");
 
 //아이디 닉네임 모바일 비밀번호
 
@@ -93,9 +93,10 @@ router.post("/sign-out", (req, res) => {
 router.post("/user/profile/:id", changeProfile);
 
 router.post("/posting", sendPost);
-
 router.get("/get-all-post", getAllPost);
+
 router.get("/vote/isvote?", isVote);
+router.post("/vote", vote);
 
 router.get("/", (req, res) => {
   res.send("hello world");
