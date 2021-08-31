@@ -4,8 +4,6 @@ import styles from "./Signin.module.css";
 import axios from "axios";
 import { useHistory } from "react-router";
 
-// axios.defaults.withCredentials = true;
-
 const Signin = ({
   clickCloseBtn,
   handleResponseSuccess,
@@ -18,7 +16,7 @@ const Signin = ({
     password: "",
   });
   const { userId, password } = loginInfo;
-  /**********************페이지 컨트롤 부분***************************/
+
   const [errorMessage, setErrorMessage] = useState("");
 
   const [isSignUpClicked, setIsSignUpClicked] = useState(false);
@@ -29,8 +27,6 @@ const Signin = ({
   const handleInputValue = (key) => (e) => {
     setLoginInfo({ ...loginInfo, [key]: e.target.value });
   };
-
-  /**********************sign in 컨트롤 부분***************************/
 
   //로그인버튼 클릭시 호출 메소드
   const handleLogin = () => {
@@ -48,10 +44,9 @@ const Signin = ({
             window.localStorage.setItem(
               "accessToken",
               JSON.stringify(result.data.accessToken)
-              // result.data.accessToken
             );
-            handleResponseSuccess(result.data); //result.data.message="ok"!!
-            clickCloseBtn(); //::제대로 받아왔을경우 사인인창 없애기
+            handleResponseSuccess(result.data);
+            clickCloseBtn();
             history.push("/");
           }
         })

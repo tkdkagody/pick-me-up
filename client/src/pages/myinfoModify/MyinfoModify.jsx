@@ -27,14 +27,11 @@ const MyinfoModify = ({
       [event.currentTarget.name]: event.currentTarget.value,
     });
   };
-  //console.log(info.id, "ddddddd");
   const doneModify = () => {
     setModifyYes(true);
   };
 
   const realModify = () => {
-    //모달에서 네!
-    //axios.post 프로필수정.=> ok시
     axios
       .post(
         "http://ec2-3-34-191-91.ap-northeast-2.compute.amazonaws.com/user/profile/:id",
@@ -50,7 +47,6 @@ const MyinfoModify = ({
         }
       )
       .then((result) => {
-        //console.log(result.data.message === "profile changed");
         if (result.data.message === "profile changed") {
           setModifyYes(false);
           history.push("/");
@@ -65,7 +61,6 @@ const MyinfoModify = ({
     history.push("/mypage");
   };
   const noModify = () => {
-    //취소하기버튼
     history.push("/");
   };
   return (
@@ -86,11 +81,7 @@ const MyinfoModify = ({
                 </span>
               </div>
             </section>
-          ) : // <div className={styles.modalcontainer}>
-          //   진짜 진짜 수정할꼬얌 ?<button onClick={realModify}>네</button>
-          //   <button onClick={realno}>아니오</button>
-          // </div>
-          null}
+          ) : null}
           <div className={styles.contain}>
             <div className={styles.infobox}>
               <div className={styles.imgbox}>

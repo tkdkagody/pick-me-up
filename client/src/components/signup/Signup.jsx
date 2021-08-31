@@ -29,20 +29,17 @@ const Signup = ({ setIsSignUpClicked, clickCloseBtn }) => {
         password: password,
         userName: userName,
         mobile: mobile,
-        // signUpType:signUpType,
       };
-      // http://ec2-3-34-191-91.ap-northeast-2.compute.amazonaws.com/
+
       axios
         .post(
           "http://ec2-3-34-191-91.ap-northeast-2.compute.amazonaws.com/sign-up",
           userData,
           {
             "Content-Type": "application/json",
-            // withCredentials: true,
           }
         )
         .then((result) => {
-          // console.log(result.data);
           if (result.data.message === "ok") {
             clickCloseAll();
             //회원가입완료 모달 띄우면 좋을것 같음
@@ -50,7 +47,7 @@ const Signup = ({ setIsSignUpClicked, clickCloseBtn }) => {
           }
         })
         .catch((err) => {
-          //임시로 해뒀어요 요부분 나중에 고칠게요.. ㅠㅜ
+          //임시로 해뒀어요 요부분 나중에 고칠게요..
           setErrorMessage("사용중인 아이디입니다.");
         });
     }
@@ -63,7 +60,7 @@ const Signup = ({ setIsSignUpClicked, clickCloseBtn }) => {
       [key]: e.target.value,
     });
   };
-  // 가입하기에서 x눌렀을때 전체다는 버튼
+  // 모달 2개 닫기
   const clickCloseAll = () => {
     setIsSignUpClicked(false);
     clickCloseBtn();

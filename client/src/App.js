@@ -13,11 +13,9 @@ import Footer from "./pages/footer/Footer";
 import MainFeeds from "./pages/mainFeeds/MainFeeds";
 import Mypage from "./pages/mypage/Mypage";
 import Writing from "./pages/writing/Writing";
-import Login from "./components/signin/Signin";
-import Signup from "./components/signup/Signup";
+
 import Feed from "./pages/feed/Feed";
-import Signin from "./components/signin/Signin";
-import VoteResult from "./components/voteResult/VoteResult";
+
 import ScrollButton from "./components/scrollButton/ScrollButton";
 import axios from "axios";
 
@@ -29,7 +27,6 @@ import FeedResult from "./pages/feedResult/FeedResult";
 
 function App() {
   const history = useHistory();
-  //로그인상태
   const [isLogin, setIsLogin] = useState(false);
   const [info, setInfo] = useState(null);
   const [accessToken, setAccessToken] = useState(null);
@@ -66,6 +63,10 @@ function App() {
     setAccessToken(accessToken);
     loginHandler(); //로그인 true
     isAuthenticated(accessToken);
+  };
+
+  const loginHandler = () => {
+    setIsLogin(true);
   };
 
   /**********************페이지 컨트롤 부분***************************/
@@ -119,6 +120,12 @@ function App() {
         );
         //console.log(res.data.data[0].imgInfo2)
       });
+
+    const storageToken = localStorage.getItem("accessToken");
+    if (storageToken) {
+      loginHandler();
+      isAuthenticated(JSON.parse(storageToken));
+    }
   }, []);
 
   // axios.get('http://ec2-3-34-191-91.ap-northeast-2.compute.amazonaws.com/get-all-post')
@@ -132,39 +139,29 @@ function App() {
   //   console.log('hi')
   // }, [])
 
-  /**********************sign in 컨트롤 부분***************************/
+  // useEffect(() => {
+  //   const storageToken = localStorage.getItem("accessToken");
+  //   if (storageToken) {
+  //     loginHandler();
+  //     isAuthenticated(JSON.parse(storageToken));
+  //   }
+  // }, [accessToken]);
 
-  //로그인상태 변경 메소드
-  const loginHandler = () => {
-    setIsLogin(true);
-  };
-  //사인아웃클릭시
   const onSignout = () => {
     axios
       .post(
         "http://ec2-3-34-191-91.ap-northeast-2.compute.amazonaws.com/sign-out"
       )
       .then((result) => {
-        //비워진 엑세스 토큰을 받아서
         setIsLogin(false);
         setInfo(null);
         setAccessToken(result.data.accessToken);
         browserHistory.push("/");
-
-        //첫화면으로 랜더시키기 !
       });
     setIsLogin(false);
     localStorage.removeItem("accessToken");
     setAccessToken(null);
   };
-
-  useEffect(() => {
-    const storageToken = localStorage.getItem("accessToken");
-    if (storageToken) {
-      loginHandler();
-      isAuthenticated(JSON.parse(storageToken));
-    }
-  }, [accessToken]);
 
   return (
     <>
@@ -209,7 +206,6 @@ function App() {
                   accessToken={accessToken}
                   isLogin={isLogin}
                 />
-                {/* <Mypage handleContent={revise} info={info} setInfo={setInfo} /> */}
               </Route>
               <Route path="/writing">
                 <Writing accessToken={accessToken} isLogin={isLogin} />
@@ -217,7 +213,7 @@ function App() {
               <Route path="/update">
                 <Update feed={revised} />
               </Route>
-              {selectedFeed ? ( //피드 클릭했으면 여기서 feed페이지로 감!
+              {selectedFeed ? (
                 <Route path="/feed">
                   <Feed
                     feed={selectedFeed}
