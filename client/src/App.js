@@ -28,39 +28,6 @@ import LoadingIndicator from "./components/LoadingIndicator";
 import FeedResult from "./pages/feedResult/FeedResult";
 
 function App() {
-  const dummyData = [
-    { 
-      id: 1,
-      userName: "구름이",
-      title: "회사에 입고 다닐 데일리 니트 색깔 골라주세요🙏",
-      option1: "살구",
-      option2: "네이비",
-      imgInfo1:
-        "https://image.thehyundai.com/static/4/8/3/37/A1/hnm40A1373847_01_0989040_003_003_1600.jpg",
-      imgInfo2:
-        "https://image.thehyundai.com/static/4/8/3/37/A1/hnm40A1373849_01_0989040_012_001_1600.jpg",
-      contents:
-        "봄이 다가오고 있어서 화사한 살구색으로 사고 싶은데... 제가 요즘에 급격히 살이 쪄서(ㅠㅠ😭)ㅋㅋㅋㅋ 뚱뚱해 보일까바 선뜻 지르기가 고민되네요... 안전하게 네이비 고를까요??? 참고로 저는 옷이 몇 개 없어용🥲 자주 입을만한 니트로 고르고 있습니다!",
-      tags: ["#의류", "#뷰티", "#리빙"],
-      votes: "N",
-      created_at: "2021-08-27",
-    },
-    {
-      id: 2,
-      userName: "구름이",
-      title: "춘식이 무드등 어떤 게 더 귀엽나요!?👀",
-      option1: "냥냥펀치",
-      option2: "뚱춘식",
-      imgInfo1:
-        "https://t1.kakaocdn.net/friends/prod/product/20210818173346267_8809814920335_BW_08.jpg",
-      imgInfo2:
-        "https://imgc.1300k.com/aaaaaib/goods/215026/27/215026279751.jpg?10",
-      contents: "발바닥도 귀엽고 뚱춘식도 귀엽다 ㅠㅠ! ❤️",
-      tags: ["#잡화", "#리빙"],
-      votes: "N",
-      created_at: "2021-08-27",
-    },
-  ];
 
   const history = useHistory();
   //로그인상태
@@ -112,7 +79,7 @@ function App() {
 
   /**********************페이지 컨트롤 부분***************************/
 
-  const [feeds, setFeeds] = useState(dummyData); //전체 피드리스트
+  const [feeds, setFeeds] = useState([]); //전체 피드리스트
   const [selectedFeed, setSelectedFeed] = useState(null); //선택된 피드페이지(투표)로 이동할 때
   const [revised, setRevised] = useState(null); //writing 할 피드 선택된 것.
   const [isFiltered, setIsFiltered] = useState(false); //해시태그 클릭.
@@ -142,19 +109,19 @@ function App() {
   // };
 
   useEffect(() => {
-
-    //최신순으로 불러와야 하니까 받은 data에서 createdAt이 최신인 순으로 정렬해서 feeds 
-    
-    // axios.get('http://ec2-3-34-191-91.ap-northeast-2.compute.amazonaws.com/get-all-post')
-    // .then(res => {
-    //   const result = res.data.data;
-    //   result.sort((a,b)=>{
-    //     return new Date(b.created_at) - new Date(a.created_at);
-    //   });
-    //   setFeeds(result);
-    // })
-  //   console.log('hi')
-  }, [])
+    axios.get('http://ec2-3-34-191-91.ap-northeast-2.compute.amazonaws.com/get-all-post')
+    .then(res => {
+      const result = res.data.data.sort((a,b)=>{
+            return new Date(b.created_at) - new Date(a.created_at);
+      });
+      setFeeds(result.map(el => {
+        return {
+          ...el, 
+          tags: JSON.parse(el.tags)
+        }
+      }))
+      //console.log(res.data.data[0].imgInfo2)
+  })},[])
 
 
 
@@ -267,3 +234,41 @@ function App() {
 
 export default App;
 export const browserHistory = createBrowserHistory();
+
+// const dummyData = [
+//   { 
+//     id: 1,
+//     userName: "구름이",
+//     title: "회사에 입고 다닐 데일리 니트 색깔 골라주세요🙏",
+//     option1: "살구",
+//     option2: "네이비",
+//     imgInfo1:
+//       "https://image.thehyundai.com/static/4/8/3/37/A1/hnm40A1373847_01_0989040_003_003_1600.jpg",
+//     imgInfo2:
+//       "https://image.thehyundai.com/static/4/8/3/37/A1/hnm40A1373849_01_0989040_012_001_1600.jpg",
+//     contents:
+//       "봄이 다가오고 있어서 화사한 살구색으로 사고 싶은데... 제가 요즘에 급격히 살이 쪄서(ㅠㅠ😭)ㅋㅋㅋㅋ 뚱뚱해 보일까바 선뜻 지르기가 고민되네요... 안전하게 네이비 고를까요??? 참고로 저는 옷이 몇 개 없어용🥲 자주 입을만한 니트로 고르고 있습니다!",
+//     tags: ["#의류", "#뷰티", "#리빙"],
+//     votes: "N",
+//     option1_count: 0,
+//     option2_count: 0,
+//     created_at: "2021-08-27",
+//   },
+//   {
+//     id: 2,
+//     userName: "구름이",
+//     title: "춘식이 무드등 어떤 게 더 귀엽나요!?👀",
+//     option1: "냥냥펀치",
+//     option2: "뚱춘식",
+//     imgInfo1:
+//       "https://t1.kakaocdn.net/friends/prod/product/20210818173346267_8809814920335_BW_08.jpg",
+//     imgInfo2:
+//       "https://imgc.1300k.com/aaaaaib/goods/215026/27/215026279751.jpg?10",
+//     contents: "발바닥도 귀엽고 뚱춘식도 귀엽다 ㅠㅠ! ❤️",
+//     tags: ["#잡화", "#리빙"],
+//     votes: "N",
+//     option1_count: 0,
+//     option2_count: 0,
+//     created_at: "2021-08-27",
+//   },
+// ];

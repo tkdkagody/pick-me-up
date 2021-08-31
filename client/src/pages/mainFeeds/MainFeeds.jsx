@@ -14,13 +14,6 @@ const MainFeeds = ({feeds, filterHandle, handleClick}) => {
       <Link to="/feed">
         {feeds.map(el => <FeedContent feed={el} handleSelect={handleClick}/>)}
       </Link>
-      <Link to="/feed">
-        {feeds.map(el => <FeedContent feed={el} handleSelect={handleClick}/>)}
-      </Link>
-      <Link to="/feed">
-        {feeds.map(el => <FeedContent feed={el} handleSelect={handleClick}/>)}
-      </Link>
-        
       </ul>
     </section>
   )
