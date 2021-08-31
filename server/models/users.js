@@ -1,6 +1,6 @@
 const Sequelize = require("sequelize");
 module.exports = function (sequelize, DataTypes) {
-  return sequelize.define(
+  const users = sequelize.define(
     "users",
     {
       id: {
@@ -56,4 +56,13 @@ module.exports = function (sequelize, DataTypes) {
       ],
     }
   );
+
+  users.associate = function (models) {
+    users.hasMany(models.comments, { as: "comments", foreignKey: "user_id" });
+
+    users.hasMany(models.post, { as: "posts", foreignKey: "user_id" });
+
+    users.hasMany(models.voter, { as: "voters", foreignKey: "user_id" });
+  };
+  return users;
 };

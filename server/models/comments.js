@@ -1,6 +1,6 @@
 const Sequelize = require("sequelize");
 module.exports = function (sequelize, DataTypes) {
-  return sequelize.define(
+  const comments = sequelize.define(
     "comments",
     {
       id: {
@@ -50,16 +50,23 @@ module.exports = function (sequelize, DataTypes) {
           fields: [{ name: "id" }],
         },
         {
-          name: "feedId",
+          name: "post_id",
           using: "BTREE",
           fields: [{ name: "post_id" }],
         },
         {
-          name: "userId",
+          name: "user_id",
           using: "BTREE",
           fields: [{ name: "user_id" }],
         },
       ],
     }
   );
+
+  comments.associate = function (models) {
+    comments.belongsTo(models.post, { as: "post", foreignKey: "post_id" });
+    comments.belongsTo(models.users, { as: "user", foreignKey: "user_id" });
+  };
+
+  return comments;
 };

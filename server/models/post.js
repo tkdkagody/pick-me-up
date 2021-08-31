@@ -1,6 +1,6 @@
 const Sequelize = require("sequelize");
 module.exports = function (sequelize, DataTypes) {
-  return sequelize.define(
+  const post = sequelize.define(
     "post",
     {
       id: {
@@ -33,20 +33,28 @@ module.exports = function (sequelize, DataTypes) {
         type: DataTypes.STRING(255),
         allowNull: true,
       },
-      created_at: {
-        type: DataTypes.DATE,
-        allowNull: true,
-      },
-      updated_at: {
-        type: DataTypes.DATE,
-        allowNull: true,
-      },
       option1: {
         type: DataTypes.STRING(255),
         allowNull: true,
       },
       option2: {
         type: DataTypes.STRING(255),
+        allowNull: true,
+      },
+      option1_count: {
+        type: DataTypes.INTEGER,
+        allowNull: true,
+      },
+      option2_count: {
+        type: DataTypes.INTEGER,
+        allowNull: true,
+      },
+      created_at: {
+        type: DataTypes.DATE,
+        allowNull: true,
+      },
+      updated_at: {
+        type: DataTypes.DATE,
         allowNull: true,
       },
       tags: {
@@ -66,11 +74,19 @@ module.exports = function (sequelize, DataTypes) {
           fields: [{ name: "id" }],
         },
         {
-          name: "userid",
+          name: "user_id",
           using: "BTREE",
           fields: [{ name: "user_id" }],
         },
       ],
     }
   );
+  post.associate = function (models) {
+    post.hasMany(models.comments, { as: "comments", foreignKey: "post_id" });
+    post.hasMany(models.voter, { as: "voters", foreignKey: "voting_id" });
+
+    post.belongsTo(models.users, { as: "user", foreignKey: "user_id" });
+  };
+
+  return post;
 };
