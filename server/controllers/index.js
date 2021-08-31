@@ -11,7 +11,7 @@ const { updateMyPost } = require("./UpdateMyPost");
 const { sendPost } = require("../controllers/Post");
 const { deleteMyPost } = require("./DestroyMyPost");
 const { getAllPost } = require("./MainPage");
-const { isVote, vote } = require("./Vote");
+const { isVote, vote, voteResult } = require("./Vote");
 
 //아이디 닉네임 모바일 비밀번호
 
@@ -99,8 +99,10 @@ router.get("/get-all-post", getAllPost);
 
 router.get("/vote/isVote?", isVote);
 router.post("/vote", vote);
+router.post("/vote/vote-result", voteResult);
 
 router.delete("/user/posting-list/:postid", deleteMyPost);
+
 
 router.get("/", (req, res) => {
   res.send("hello world");
