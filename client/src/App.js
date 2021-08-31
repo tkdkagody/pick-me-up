@@ -27,7 +27,8 @@ import LoadingIndicator from "./components/LoadingIndicator";
 
 function App() {
   const dummyData = [
-    {
+    { 
+      id: 1,
       userName: "구름이",
       title: "회사에 입고 다닐 데일리 니트 색깔 골라주세요🙏",
       option1: "살구",
@@ -43,6 +44,7 @@ function App() {
       created_at: "2021-08-27",
     },
     {
+      id: 2,
       userName: "구름이",
       title: "춘식이 무드등 어떤 게 더 귀엽나요!?👀",
       option1: "냥냥펀치",
@@ -111,6 +113,7 @@ function App() {
   const [feeds, setFeeds] = useState(dummyData); //전체 피드리스트
   const [selectedFeed, setSelectedFeed] = useState(null); //선택된 피드페이지로 이동할 때
   const [revised, setRevised] = useState(null); //writing 할 피드 선택된 것.
+  const [isFiltered, setIsFiltered] = useState(false); //해시태그 클릭.
 
   const select = (el) => {
     //해당 피드로 이동...
@@ -136,15 +139,6 @@ function App() {
   };
 
   useEffect(() => {
-    //feeds 불러오기 axios GET 요청(지영)
-
-    //최신순으로 불러와야 하니까 받은 data에서 createdAt이 최신인 순으로 정렬해서 feeds
-    // axios.get('http://ec2-3-34-191-91.ap-northeast-2.compute.amazonaws.com/get-all-post',
-    // { withCredentials: true })
-    // .then(res => {
-    //   console.log(res)
-    // })
-  }, []);
 
     //최신순으로 불러와야 하니까 받은 data에서 createdAt이 최신인 순으로 정렬해서 feeds 
     
@@ -156,7 +150,7 @@ function App() {
     //   });
     //   setFeeds(result);
     // })
-    console.log('hi')
+  //   console.log('hi')
   }, [])
 
 
