@@ -7,6 +7,7 @@ const Mycontent = ({handleContent, feeds}) => { //feeds로 마이리스트가 �
     
   const [isPicked, setIsPicked] = useState(null);
   const [moreOpt, isMoreOpt] = useState(false);
+  console.log('**********************', feeds)
 
   const handleOptions = (el) =>{  
     setIsPicked(el);
@@ -64,7 +65,8 @@ const Mycontent = ({handleContent, feeds}) => { //feeds로 마이리스트가 �
               <span className={styles.voteText}>{el.option1_count+el.option2_count}명이 투표했어요</span>
             </div> 
           </li>
-    }})}
+    }
+    })}
   </ul>
   );
 }
