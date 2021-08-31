@@ -33,17 +33,48 @@ module.exports = {
       options_check,
     });
 
-    //    if(options_check===1) {
-    const result = await postModel.findOne({
-      attributes: ["option1_count"],
-      where: {
-        id: voting_id,
-      },
-    });
+    if (options_check === 1) {
+      const result = await postModel.findOne({
+        attributes: ["option1_count"],
+        where: {
+          id: voting_id,
+        },
+      });
 
-    const count = result.dataValues;
-    //postModel.update({option1_count:})
+      const { option1_count: count } = result.dataValues;
+
+      console.log(count);
+      const doUpdate = await postModel.update(
+        { option1_count: count + 1 },
+        {
+          where: {
+            id: voting_id,
+          },
+        }
+      );
+      if (!!doUpdate) res.status(201).json({ message: "ok" });
+      if (!doUpdate) res.status(201).json({ message: "failed to vote" });
+    } else if (options_check === 2) {
+      const result = await postModel.findOne({
+        attributes: ["option2_count"],
+        where: {
+          id: voting_id,
+        },
+      });
+
+      const { option2_count: count } = result.dataValues;
+
+      console.log(count);
+      const doUpdate = await postModel.update(
+        { option2_count: count + 1 },
+        {
+          where: {
+            id: voting_id,
+          },
+        }
+      );
+      if (!!doUpdate) res.status(201).json({ message: "ok" });
+      if (!doUpdate) res.status(201).json({ message: "failed to vote" });
+    }
   },
-
-  //},
 };
