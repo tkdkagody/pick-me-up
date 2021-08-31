@@ -20,7 +20,7 @@ const VoteResult = ({feed, isVoted,setIsVoted}) => {
 
   return  (
     <>
-    {isVoted ? //모달창 닫고 
+    {isVoted ? //다시 피드로 돌아감. 
       <Feed feed={feed}/>
       :
     (

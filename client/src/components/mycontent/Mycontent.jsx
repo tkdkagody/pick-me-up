@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 
-const Mycontent = ({handleContent, feeds, accessToken}) => { //feeds로 마이리스트가 들어옴.
+const Mycontent = ({handleContent, feeds, accessToken, handleFeeds}) => { //feeds로 마이리스트가 들어옴.
     
   const [isPicked, setIsPicked] = useState(null);
   const [moreOpt, isMoreOpt] = useState(false);
@@ -36,8 +36,10 @@ const Mycontent = ({handleContent, feeds, accessToken}) => { //feeds로 마이�
         return <li className={styles.container}>
                 <div className={styles.feed}>
                   <div className={styles.img}>
-                    <img className={styles.image} src={el.imgInfo1} alt="option1"/>
-                    <img className={styles.image} src={el.imgInfo2} alt="option2"/>
+                  <Link to="/feed">
+                    <img className={styles.image} src={el.imgInfo1} onClick={()=>handleFeeds(el)} alt="option1"/>
+                    <img className={styles.image} src={el.imgInfo2} onClick={()=>handleFeeds(el)} alt="option2"/>
+                  </Link>
                   </div>
                   <div className={styles.titleAndBtn}>
                     <span className={styles.title}>{el.title}</span>
@@ -62,8 +64,10 @@ const Mycontent = ({handleContent, feeds, accessToken}) => { //feeds로 마이�
     return <li className={styles.container}>
             <div className={styles.feed}>
               <div className={styles.img}>
-                <img className={styles.image} src={el.imgInfo1} alt="option1"/>
-                <img className={styles.image} src={el.imgInfo2} alt="option2"/>
+              <Link to="/feed">
+                <img className={styles.image} src={el.imgInfo1} onClick={()=>handleFeeds(el)} alt="option1"/>
+                <img className={styles.image} src={el.imgInfo2} onClick={()=>handleFeeds(el)} alt="option2"/>
+              </Link>
               </div>
               <div className={styles.titleAndBtn}>
                 <span className={styles.title}>{el.title}</span>

@@ -4,7 +4,7 @@ import Myinfo from "../../components/myinfo/Myinfo";
 import styles from "./Mypage.module.css";
 import axios from 'axios';
 
-const Mypage = ({ info, setInfo, handleContent, accessToken, isLogin }) => {
+const Mypage = ({ info, setInfo, handleContent, accessToken, isLogin, handleFeeds }) => {
   //console.log(info, "마이페이지");
 
   /* 카테고리이동 핸들러*/
@@ -73,7 +73,8 @@ const Mypage = ({ info, setInfo, handleContent, accessToken, isLogin }) => {
           <Mycontent 
           handleContent={handleContent}
           feeds={myContent}
-          accessToken={accessToken} />
+          accessToken={accessToken}
+          handleFeeds={handleFeeds} />
         )}
       </div>
     </section>

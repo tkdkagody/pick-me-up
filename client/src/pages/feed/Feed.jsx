@@ -64,7 +64,6 @@ const Feed = ({feed, accessToken, isLogin}) => {
         setIsVoteReal(true);
         alert('이미 투표를 완료하셨어요')
 
-        
       }
     })
     
@@ -99,10 +98,10 @@ const Feed = ({feed, accessToken, isLogin}) => {
           <div className={styles.title}>{feed.title}</div>
           <div className={styles.user}>
             <div>{feed.created_at}</div>
-            <div>by 유저닉네임</div>
+            <div>by 익명</div>
           </div>
           <p className={styles.content}>{feed.contents}</p>
-          <div className={styles.voteText}>N명이 투표했어요</div>
+          <div className={styles.voteText}>{feed.option1_count+feed.option2_count}명이 투표했어요</div>
           {
             isVoted ?
             (<>
