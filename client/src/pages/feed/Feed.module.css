@@ -100,4 +100,12 @@
   .images {
     width: 100%;
   }
+  .categories,
+  .title,
+  .user,
+  .content,
+  .voteText {
+    margin-left: 0.7rem;
+    margin-right: 0.7rem;
+  }
 }

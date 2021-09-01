@@ -5,6 +5,7 @@ import styles from './Feed.module.css';
 import RealVote from '../../components/modals/RealVote';
 import axios from 'axios';
 import LoadingIndicator from '../../components/loadingIndicator/LoadingIndicator';
+import NullPage from '../../components/NullPage/Nullpage';
 
 
 const Feed = ({feed, accessToken, isLogin, setListRender}) => {
@@ -14,14 +15,12 @@ const Feed = ({feed, accessToken, isLogin, setListRender}) => {
   const [clickedOpt, setClickedOpt] = useState(null); //feed.option1(or feed.option2)
   const [isLoading, setIsLoading] = useState(false);
   const [voteMsg, setVoteMsg] = useState(false); //props로 넘겨서 이미 투표한 사람들 메세지 보여주기
-  const [newVoteCount, setNewVoteCount] = useState(null); //
-  // {
-  //   option1_count,
-  //   option2_count,
-  // }
+  const [newVoteCount, setNewVoteCount] = useState(null);
+  const [notUser, isNotUser] = useState(false);
 
   const vote =(el) => {
     //로그인 했는지 안했는지에 따라서 랜더링 해야 함.
+
     //진짜로 투표하시겠습니까?에 '네'로 답했기 때문에 
     //투표한 사람인지 아닌지 확인하는 axios 요청.
     if(isLogin){
@@ -83,8 +82,8 @@ const Feed = ({feed, accessToken, isLogin, setListRender}) => {
               setNewVoteCount(res.data.data)
               setIsVoteReal(true);
               setIsLoading(true); //로딩화면 켜지고 ... 
-              setTimeout(() => { 
-                setListRender();
+              setTimeout(() => {
+                setListRender(); 
                 setIsLoading(false);// 로딩화면 꺼짐.
               }, 1500);
             })
@@ -111,7 +110,8 @@ const Feed = ({feed, accessToken, isLogin, setListRender}) => {
     })
     } else{
       //로그인 안 한 사람.
-      alert('로그인 해주세요')
+      setIsVoteReal(true);
+      isNotUser(true);
     }
   }
 
@@ -134,14 +134,15 @@ const Feed = ({feed, accessToken, isLogin, setListRender}) => {
 <>
     {
       isVoteReal
-      ? isLoading? <LoadingIndicator/>: 
-       <VoteResult feed={feed} 
+      ? isLoading ? <LoadingIndicator/> //결과페이지 & 로딩화면
+      : notUser ? <section className={styles.container}><NullPage/></section> //로딩화면은 아님 & 비로그인자
+      :<VoteResult feed={feed} 
        isVoted={isVoted} 
        setIsVoted={setIsVoted}
        setIsVoteReal={setIsVoteReal}
        voteMsg={voteMsg}
        voteCount={newVoteCount}/>
-      :
+      : 
       (<section className={styles.container}>
         <div className={styles.feed}>
           <div className={styles.categories}>
