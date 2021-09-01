@@ -111,7 +111,8 @@ const Feed = ({feed, accessToken, isLogin}) => {
        isVoted={isVoted} 
        setIsVoted={setIsVoted}
        setIsVoteReal={setIsVoteReal}
-       voteMsg={voteMsg}/>
+       voteMsg={voteMsg}
+       clickedOpt={clickedOpt}/>
       :
       (<section className={styles.container}>
         <div className={styles.feed}>

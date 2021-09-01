@@ -134,3 +134,12 @@ label {
     height: 280px;
   }
 }
+
+@media screen and (max-height: 850px) {
+  .container {
+    padding: 3rem 0 4.5rem 0;
+  }
+  .images {
+    height: 230px;
+  }
+}
