@@ -6,7 +6,7 @@ const { users } = require("../models");
 const { getMyPost } = require("../controllers/GetMyPost");
 const jwt = require("jsonwebtoken");
 const { generateAccessToken } = require("./tokenFunction");
-const { changeProfile } = require("../controllers/ProfileChange");
+
 const { getMyInfo } = require("./GetMyInfo");
 const { auth } = require("../controllers/auth");
 const { updateMyPost } = require("./UpdateMyPost");
