@@ -73,12 +73,13 @@ const Update = ({feed, accessToken}) => { //수정하기 클릭했을 때 전달
     if(title === '' || firstOpt === '' || secondOpt ==='' || firstImg === null || secondImg === null || content === '' || isClicked.length === 0){
       setErrorMessage('항목을 모두 입력하세요!🙏')
     } else{
-      axios.post('http://ec2-3-34-191-91.ap-northeast-2.compute.amazonaws.com/posting', {
+      console.log('post수정 요청 완료')
+      axios.post(`http://ec2-3-34-191-91.ap-northeast-2.compute.amazonaws.com/user/posting-list/${feed.id}`, {
         title: title,
         choice_1: firstOpt,
         choice_2: secondOpt,
-        img_1 : firstImg, //url
-        img_2: secondImg, //url
+        img_1 : firstImg, 
+        img_2: secondImg, 
         contents: content,
         hashTags: JSON.stringify(isClicked), //배열이니까 JSON?
       }, { 
