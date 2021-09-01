@@ -73,7 +73,6 @@ const Update = ({feed, accessToken, setListRender}) => { //수정하기 클릭�
     if(title === '' || firstOpt === '' || secondOpt ==='' || firstImg === null || secondImg === null || content === '' || isClicked.length === 0){
       setErrorMessage('항목을 모두 입력하세요!🙏')
     } else{
-      console.log('post수정 요청 완료')
       axios.post(`http://ec2-3-34-191-91.ap-northeast-2.compute.amazonaws.com/user/posting-list/${feed.id}`, {
         title: title,
         choice_1: firstOpt,

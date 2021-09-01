@@ -70,7 +70,8 @@ function App() {
   const [listRender, setListRender] = useState(true);
 
   useEffect(() => {
-    axios
+    setTimeout(() => {
+      axios
       .get(
         "http://ec2-3-34-191-91.ap-northeast-2.compute.amazonaws.com/get-all-post"
       )
@@ -78,21 +79,17 @@ function App() {
         const result = res.data.data.sort((a, b) => {
           return new Date(b.created_at) - new Date(a.created_at);
         });
-
-        setFeeds(
-          result.map((el) => {
-            return {
-              ...el,
-              tags: JSON.parse(el.tags),
+        setFeeds(result.map((el) => {
+            return {...el, tags: JSON.parse(el.tags),
             };
-          })
-        );
+          }));
       });
+    }, 500);
   }, [listRender]); //글쓰기 버튼이 눌려질 때 마다 axiosGET요청 보내기.
 
-  useEffect(() => {
-    setListRender();
-  });
+  // useEffect(() => {
+  //   setListRender();
+  // }); //자꾸 undefined 떠서 주석처리 해놓음. 위처럼 비동기 처리 해놓음...
 
   const select = (el) => {
     //썸네일 클릭 시
@@ -112,9 +109,7 @@ function App() {
 
           setFeeds(
             result.map((el) => {
-              return {
-                ...el,
-                tags: JSON.parse(el.tags),
+              return {...el, tags: JSON.parse(el.tags),
               };
             })
           );
@@ -129,9 +124,7 @@ function App() {
             return new Date(b.created_at) - new Date(a.created_at);
           }); //최신순으로 정렬
           result = result.map((el) => {
-            return {
-              ...el,
-              tags: JSON.parse(el.tags),
+            return {...el, tags: JSON.parse(el.tags),
             };
           }); //배열 파싱하고...
           result = result.filter((el) => el.tags.includes(tag));
