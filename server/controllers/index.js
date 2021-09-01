@@ -14,6 +14,7 @@ const { sendPost } = require("../controllers/Post");
 const { deleteMyPost } = require("./DestroyMyPost");
 const { getAllPost } = require("./MainPage");
 const { isVote, vote, voteResult } = require("./Vote");
+const { getToken, getUserInfo } = require("../controllers/GoogleOAuth");
 
 //아이디 닉네임 모바일 비밀번호
 
@@ -91,6 +92,9 @@ router.post("/sign-in", async (req, res) => {
   );
 });
 
+router.post("/receive/token", getToken);
+router.get("/receive/userinfo?", getUserInfo);
+
 router.post("/sign-out", (req, res) => {
   res.status(205).json({ message: "successfully signed out!" });
 });
@@ -105,7 +109,6 @@ router.post("/vote", vote);
 router.post("/vote/vote-result", voteResult);
 
 router.delete("/user/posting-list/:postid", deleteMyPost);
-
 
 router.get("/", (req, res) => {
   res.send("hello world");
