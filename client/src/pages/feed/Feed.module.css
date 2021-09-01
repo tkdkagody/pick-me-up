@@ -91,10 +91,11 @@
 .loginMessage {
   text-align: center;
 }
-@media screen and (max-width: 33rem) {
+@media screen and (max-width: 500px) {
   .container {
     /*최상위 바디 컨테이너*/
     width: 100%;
+    min-height: 70vh;
   }
   .images {
     width: 100%;

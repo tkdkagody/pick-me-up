@@ -47,12 +47,12 @@
   position: absolute;
   top: 1rem;
   right: 0;
-  width: 4rem;
+  width: 3.8rem;
   text-align: center;
   list-style: none;
   border: 1px solid rgb(210, 210, 210);
   border-radius: 2px;
-  padding: 0.2rem 0;
+  padding: 0.4rem 0;
   color: grey;
   background-color: white;
   font-size: 0.8rem;
@@ -92,7 +92,7 @@
   font-weight: bold;
 }
 
-@media screen and (max-width: 33rem) {
+@media screen and (max-width: 500px) {
   .feedList {
     /*최상위 바디 컨테이너*/
     width: 100%;

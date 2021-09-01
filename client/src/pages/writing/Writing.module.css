@@ -117,7 +117,7 @@ input[type="checkbox"] {
   text-align: center;
 }
 
-@media screen and (max-width: 33rem) {
+@media screen and (max-width: 500px) {
   .container {
     margin: 0 auto;
     width: 100%;

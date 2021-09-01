@@ -92,7 +92,7 @@
   color: #fbc000;
 }
 /*반응형*/
-@media screen and (max-width: 33rem) {
+@media screen and (max-width: 500px) {
   .contentbox {
     width: 100%;
   }

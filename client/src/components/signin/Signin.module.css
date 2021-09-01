@@ -141,7 +141,7 @@ span {
   border-radius: 0.25rem;
 }
 
-@media screen and (max-width: 33rem) {
+@media screen and (max-width: 500px) {
   .signin {
     width: 100%;
   }
