@@ -190,14 +190,6 @@ function App() {
     if (storageToken) {
       loginHandler();
       if (isGoogle) {
-        const userInfo = getUserInfo(storageToken);
-        setInfo({
-          userId: userInfo.email,
-          password: "123456",
-          userName: `google1234`,
-          mobile: "010-1234-1234",
-          signUpType: "google",
-        });
       } else {
         isAuthenticated(JSON.parse(storageToken));
       }
@@ -208,7 +200,6 @@ function App() {
     const res = await axios.get(
       `http://localhost:8080/receive/userinfo?accessToken=${accessToken}`
     );
-
     return res.data;
   };
 
@@ -218,39 +209,49 @@ function App() {
         authorizationCode,
       });
 
-      localStorage.setItem("accessToken", res.data.access_token);
+      localStorage.setItem(
+        "accessToken",
+        JSON.stringify(res.data.access_token)
+      );
+      console.log(res.data.access_token);
       setIsGoogle(true);
       setAccessToken(res.data.access_token);
       const refreshToken = localStorage.getItem("refreshToken");
-      console.log(res.data);
-      if (!refreshToken) {
+      console.log(res.data.access_token);
+      const userInfo = await getUserInfo(res.data.access_token);
+      console.log(userInfo);
+
+      if (refreshToken === null) {
         //최초 1회
-        // isrefreshToken(false) //회원가입 필요한 상태
-        axios.post(
-          "http://ec2-3-34-191-91.ap-northeast-2.compute.amazonaws.com/sign-up",
-          info,
-          {
-            "Content-Type": "application/json",
-            // withCredentials: true,
-          }
-        );
+        //isrefreshToken(false); //회원가입 필요한 상태
+        //useEffect - getAccessToken이 종료되고 실행된다.
+        const tmpInfo = {
+          userId: userInfo.email,
+          password: "123456",
+          userName: `google1234`,
+          mobile: "010-1234-1234",
+          signUpType: "google",
+        };
+        setInfo(tmpInfo);
+        axios.post("http://localhost:8080/sign-up", tmpInfo, {
+          "Content-Type": "application/json",
+          // withCredentials: true,
+        });
         setIsLogin(true);
         localStorage.setItem("refreshToken", res.data.refresh_token);
       } else {
         setIsGoogle(true);
         setIsLogin(true);
-        setIsLogin(true);
         const loginInfo = {
-          userId: info.userId,
-          password: info.password,
+          userId: userInfo.email,
+          password: "123456",
         };
         axios
-          .post(
-            "http://ec2-3-34-191-91.ap-northeast-2.compute.amazonaws.com/sign-in",
-            loginInfo
-          )
+          .post("http://localhost:8080/sign-in", loginInfo)
           .then((result) => {
             if (result.data.message === "ok") {
+              window.localStorage.removeItem("accessToken");
+              console.log(result.data.accessToken);
               window.localStorage.setItem(
                 "accessToken",
                 JSON.stringify(result.data.accessToken)
@@ -258,9 +259,9 @@ function App() {
               );
               handleResponseSuccess(result.data); //result.data.message="ok"!!
               //::제대로 받아왔을경우 사인인창 없애기
-              history.push("/");
             }
           });
+        history.push("/");
         //이미 가입한 user
         //로그인 시켜줌.
       }
