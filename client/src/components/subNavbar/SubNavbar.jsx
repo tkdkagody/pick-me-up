@@ -13,7 +13,7 @@ const SubNavbar = ({filterHandle}) => {
   }
 
   // useEffect(() => {
-  //   filterHandle('전체')
+  //   setTagClicked('전체')
   // }, []) //default로 전체 피드 보여주기.
 
   return (
