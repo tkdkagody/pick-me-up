@@ -88,10 +88,10 @@ const Mycontent = ({handleContent, feeds, accessToken, handleFeeds, setListRende
         })}
       </ul>
       );
-  }
+  } else {
   return(
     <NullPage />
-  );
+  )};
 }
 
 export default Mycontent;
