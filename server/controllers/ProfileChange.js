@@ -2,6 +2,7 @@ const express = require("express");
 const { users } = require("../models");
 const jwt = require("jsonwebtoken");
 const { isAuthorized } = require("./tokenFunction");
+const { generateAccessToken } = require("./tokenFunction");
 require("dotenv").config();
 
 module.exports = {
@@ -9,9 +10,8 @@ module.exports = {
   changeProfile: (req, res) => {
     const user_id = req.params.id;
     console.log("user_id", user_id);
-    // const authorization = req.headers.cookie;
-    // console.log(authorization);
-    const { userName, mobile } = req.body;
+
+    const { userName, mobile, password } = req.body;
 
     const accessTokendata = isAuthorized(req);
     console.log(accessTokendata);
@@ -20,11 +20,13 @@ module.exports = {
       res.status(401).json({ message: "invalid access token" });
     } else {
       // res.status(200).json({ message: "ok" });
+      const newPasswordToken = generateAccessToken(password);
       users
         .update(
           {
             nickname: userName,
             phone_number: mobile,
+            password: newPasswordToken,
           },
           {
             where: {
@@ -38,7 +40,11 @@ module.exports = {
             res.status(404).json({ message: "user not exists" });
           } else {
             // console.log("userInfo:", userInfo);
-            res.status(200).json({ message: "profile changed" });
+            delete userInfo.dataValues.password;
+            const newAccessToken = generateAccessToken(userInfo);
+            res
+              .status(200)
+              .json({ data: newAccessToken, message: "profile changed" });
           }
         })
         .catch((err) => {

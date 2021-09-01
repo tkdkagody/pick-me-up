@@ -5,6 +5,8 @@ const router = Router();
 const { users } = require("../models");
 const { getMyPost } = require("../controllers/GetMyPost");
 const jwt = require("jsonwebtoken");
+const { generateAccessToken } = require("./tokenFunction");
+const { changeProfile } = require("../controllers/ProfileChange");
 const { getMyInfo } = require("./GetMyInfo");
 const { auth } = require("../controllers/auth");
 const { updateMyPost } = require("./UpdateMyPost");
@@ -25,7 +27,7 @@ router.post("/sign-up", (req, res) => {
   if (!userId || !password || !userName || !mobile) {
     return res.status(422).send("insufficient parameters supplied");
   }
-  const passwordToken = jwt.sign(password, process.env.ACCESS_SECRET);
+  const passwordToken = generateAccessToken(password);
 
   users
     .findOrCreate({
@@ -58,7 +60,7 @@ router.post("/sign-up", (req, res) => {
 router.post("/sign-in", async (req, res) => {
   const { userId, password } = req.body;
 
-  const passwordToken = jwt.sign(password, process.env.ACCESS_SECRET);
+  const passwordToken = generateAccessToken(password);
 
   const result = await users.findOne({
     where: {
@@ -71,8 +73,9 @@ router.post("/sign-in", async (req, res) => {
   }
   const userInfo = result.dataValues;
   console.log(userInfo);
+  delete userInfo.password;
 
-  const accessToken = jwt.sign(userInfo, process.env.ACCESS_SECRET);
+  const accessToken = generateAccessToken(userInfo);
 
   return (
     res
