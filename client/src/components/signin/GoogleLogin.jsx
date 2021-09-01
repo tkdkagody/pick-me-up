@@ -46,7 +46,7 @@ const GoogleLogin = () => {
   //   };
   return (
     <div>
-      <a href="https://accounts.google.com/o/oauth2/v2/auth?scope=openid%20https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email%20https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile%20&access_type=offline&include_granted_scopes=true&response_type=code&state=state_parameter_passthrough_value&redirect_uri=http://localhost:3000&client_id=420966848981-vbm3afu0qafe2j3jeuf5psdm7iqphhqq.apps.googleusercontent.com">
+      <a href="https://accounts.google.com/o/oauth2/v2/auth?scope=openid%20https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email%20https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile%20&access_type=offline&include_granted_scopes=true&response_type=code&state=state_parameter_passthrough_value&redirect_uri=http://pickmeup-client.s3-website.ap-northeast-2.amazonaws.com/&client_id=420966848981-vbm3afu0qafe2j3jeuf5psdm7iqphhqq.apps.googleusercontent.com">
         Google
       </a>
     </div>

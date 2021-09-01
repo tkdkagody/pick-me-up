@@ -198,16 +198,19 @@ function App() {
 
   const getUserInfo = async (accessToken) => {
     const res = await axios.get(
-      `http://localhost:8080/receive/userinfo?accessToken=${accessToken}`
+      `http://ec2-3-34-191-91.ap-northeast-2.compute.amazonaws.com/receive/userinfo?accessToken=${accessToken}`
     );
     return res.data;
   };
 
   const getAccessToken = async (authorizationCode) => {
     try {
-      const res = await axios.post(`http://localhost:8080/receive/token`, {
-        authorizationCode,
-      });
+      const res = await axios.post(
+        `http://ec2-3-34-191-91.ap-northeast-2.compute.amazonaws.com/receive/token`,
+        {
+          authorizationCode,
+        }
+      );
 
       localStorage.setItem(
         "accessToken",
@@ -233,10 +236,14 @@ function App() {
           signUpType: "google",
         };
         setInfo(tmpInfo);
-        axios.post("http://localhost:8080/sign-up", tmpInfo, {
-          "Content-Type": "application/json",
-          // withCredentials: true,
-        });
+        axios.post(
+          "http://ec2-3-34-191-91.ap-northeast-2.compute.amazonaws.com/sign-up",
+          tmpInfo,
+          {
+            "Content-Type": "application/json",
+            // withCredentials: true,
+          }
+        );
         setIsLogin(true);
         localStorage.setItem("refreshToken", res.data.refresh_token);
       } else {
@@ -247,7 +254,10 @@ function App() {
           password: "123456",
         };
         axios
-          .post("http://localhost:8080/sign-in", loginInfo)
+          .post(
+            "http://ec2-3-34-191-91.ap-northeast-2.compute.amazonaws.com/sign-in",
+            loginInfo
+          )
           .then((result) => {
             if (result.data.message === "ok") {
               window.localStorage.removeItem("accessToken");
