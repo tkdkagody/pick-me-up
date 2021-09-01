@@ -34,14 +34,14 @@ const Myinfo = ({ info, accessToken, isLogin }) => {
             </div>
             <div className={styles.textbox}>
               <div className={styles.ulbox}>
-                <span className={styles.list}>
+                {/* <span className={styles.list}>
                   아이디:
                   <input
                     className={styles.input}
                     value={info.userid}
                     readOnly
                   ></input>
-                </span>
+                </span> */}
                 <span className={styles.list}>
                   닉네임:
                   <input

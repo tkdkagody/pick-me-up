@@ -4,11 +4,8 @@ import Myinfo from "../../components/myinfo/Myinfo";
 import styles from "./Mypage.module.css";
 
 const Mypage = ({ info, setInfo, handleContent, accessToken, isLogin }) => {
-  //console.log(info, "마이페이지");
-
-  /* 카테고리이동 핸들러*/
   const [infoClicked, setInfoClicked] = useState(true);
-  const [myContent, setMycontent] =useState(null); 
+  const [myContent, setMycontent] = useState(null);
 
   const handleClickMyinfo = () => {
     setInfoClicked(true);
@@ -18,7 +15,7 @@ const Mypage = ({ info, setInfo, handleContent, accessToken, isLogin }) => {
 
     //여기서 mycontent불러오는 axios GET
     // axios.post('http://ec2-3-34-191-91.ap-northeast-2.compute.amazonaws.com/posting', {
-    //   }, { 
+    //   }, {
     //     headers: {
     //       authorization: accessToken,
     //     },
@@ -30,7 +27,7 @@ const Mypage = ({ info, setInfo, handleContent, accessToken, isLogin }) => {
     //   });
     //   setMycontent(result.map(el => {
     //     return {
-    //       ...el, 
+    //       ...el,
     //       tags: JSON.parse(el.tags)
     //     }
     //   }))
@@ -60,9 +57,7 @@ const Mypage = ({ info, setInfo, handleContent, accessToken, isLogin }) => {
             isLogin={isLogin}
           />
         ) : (
-          <Mycontent 
-          handleContent={handleContent}
-          feeds={myContent} />
+          <Mycontent handleContent={handleContent} feeds={myContent} />
         )}
       </div>
     </section>
