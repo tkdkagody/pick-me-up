@@ -18,7 +18,7 @@ import axios from "axios";
 import Update from "./pages/update/Update";
 import MyinfoModify from "./pages/myinfoModify/MyinfoModify";
 import NullPage from "./components/NullPage/Nullpage";
-import LoadingIndicator from "./components/LoadingIndicator";
+
 
 function App() {
   const history = useHistory();
@@ -61,10 +61,6 @@ function App() {
     isAuthenticated(accessToken);
   };
 
-  useEffect(() => {
-    setListRender();
-  });
-
   /**********************페이지 컨트롤 부분***************************/
 
   const [feeds, setFeeds] = useState([]); //전체 피드리스트
@@ -93,6 +89,10 @@ function App() {
       });
   }, [listRender]); //글쓰기 버튼이 눌려질 때 마다 axiosGET요청 보내기.
 
+  useEffect(() => {
+    setListRender();
+  });
+  
   const select = (el) => {
     //썸네일 클릭 시
     setSelectedFeed(el);

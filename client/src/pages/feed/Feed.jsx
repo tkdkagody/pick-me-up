@@ -4,6 +4,7 @@ import VoteResult from '../../components/voteResult/VoteResult';
 import styles from './Feed.module.css';
 import RealVote from '../../components/modals/RealVote';
 import axios from 'axios';
+import LoadingIndicator from '../../components/loadingIndicator/LoadingIndicator';
 
 
 const Feed = ({feed, accessToken, isLogin}) => {
@@ -11,7 +12,8 @@ const Feed = ({feed, accessToken, isLogin}) => {
   const [isVoted, setIsVoted] = useState(false); //vote하시겠습니까 모달창 띄울지 말지 
   const [isVoteReal, setIsVoteReal] = useState(false);
   const [clickedOpt, setClickedOpt] = useState(null); //feed.option1(or feed.option2)
-
+  const [isLoading, setIsLoading] = useState(false);
+  const [voteMsg, setVoteMsg] = useState(false); //props로 넘겨서 이미 투표한 사람들 메세지 보여주기
 
   const vote =(el) => {
     //로그인 했는지 안했는지에 따라서 랜더링 해야 함.
@@ -42,7 +44,11 @@ const Feed = ({feed, accessToken, isLogin}) => {
             "Content-Type": "application/json",
           })
           .then(res => {
-            setIsVoteReal(true); // 투표한 상태로 바꿔서 result 페이지 보여주기
+            setIsVoteReal(true);
+            setIsLoading(true);
+              setTimeout(() => {
+                setIsLoading(false);// 투표한 상태로 바꿔서 result 페이지 보여주기
+              }, 1500);
           })
 
         } else if(clickedOpt === el.option2){
@@ -56,21 +62,31 @@ const Feed = ({feed, accessToken, isLogin}) => {
             "Content-Type": "application/json",
           })
           .then(res => {
-            setIsVoteReal(true); // 투표한 상태로 바꿔서 result 페이지 보여주기
+            setIsVoteReal(true);
+            setIsLoading(true);
+              setTimeout(() => {
+                setIsLoading(false);// 투표한 상태로 바꿔서 result 페이지 보여주기
+              }, 1500);
           })
 
         }
       } else{
         //투표 한 사람
-          setIsVoteReal(true);
-          alert('이미 투표를 완료하셨어요!(alert창 없애고 컴포넌트 띄울 예정)')
+        setIsVoteReal(true);
+        setIsLoading(true);
+          setTimeout(() => {
+            setIsLoading(false);// 투표한 상태로 바꿔서 result 페이지 보여주기
+            //alert('이미 투표를 완료하셨어요!(alert창 없애고 컴포넌트 띄울 예정)')
+            setVoteMsg(true);
+          }, 500);
       }
     })
     } else{
       //로그인 안 한 사람.
       alert('로그인 해주세요')
-    } 
+    }
   }
+
   const clickOpt = (el) => {
   
     setIsVoted(true); //모달창 나오게 함.
@@ -90,11 +106,12 @@ const Feed = ({feed, accessToken, isLogin}) => {
 <>
     {
       isVoteReal
-      ? 
+      ? isLoading? <LoadingIndicator/>: 
        <VoteResult feed={feed} 
        isVoted={isVoted} 
        setIsVoted={setIsVoted}
-       setIsVoteReal={setIsVoteReal}/>
+       setIsVoteReal={setIsVoteReal}
+       voteMsg={voteMsg}/>
       :
       (<section className={styles.container}>
         <div className={styles.feed}>
