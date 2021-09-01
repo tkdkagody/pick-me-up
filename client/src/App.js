@@ -57,7 +57,7 @@ function App() {
       loginHandler();
       isAuthenticated(JSON.parse(storageToken));
     }
-  }, [accessToken, info]);
+  }, [accessToken]);
 
   const handleResponseSuccess = (data) => {
     const { accessToken, message } = data;
@@ -215,6 +215,7 @@ function App() {
                   setInfo={setInfo}
                   accessToken={accessToken}
                   isLogin={isLogin}
+                  setAccessToken={setAccessToken}
                 />
                 {/* <Mypage handleContent={revise} info={info} setInfo={setInfo} /> */}
               </Route>

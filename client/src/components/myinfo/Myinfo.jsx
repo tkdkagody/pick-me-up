@@ -63,9 +63,6 @@ const Myinfo = ({ info, accessToken, isLogin }) => {
           </div>
 
           <div className={styles.btns}>
-            {/* <button className={styles.out} onClick={clickDeleteUser}>
-              회원탈퇴
-            </button> */}
             <button className={styles.btn} onClick={handleClickModify}>
               수정하기
             </button>
