@@ -47,9 +47,9 @@
 @media screen and (max-width: 33rem) {
   .container {
     width: 100%;
-    /* margin: 0 auto; */
   }
   .img {
     width: 100%;
+    height: 300px;
   }
 }

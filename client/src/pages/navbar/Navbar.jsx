@@ -74,7 +74,7 @@ const Navbar = ({
       <div className={styles.contentbox}>
         <Link to="/" className={styles.underline}>
           <div className={styles.title} onClick={reset}>
-            Pick me Up
+            Pick me up
           </div>
         </Link>
         <div className={styles.btns}>

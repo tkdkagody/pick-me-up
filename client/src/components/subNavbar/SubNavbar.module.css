@@ -1,17 +1,18 @@
-/* .outCategory {
-  overflow-x: hidden;
+/* .outCategory{
+  position: relative;
 } */
 .categories {
   height: 3.5rem;
   display: flex;
   align-items: center;
   margin-top: 1rem;
-  margin-left: 0.5rem;
-  /* position: sticky;
+  padding-left: 0.5rem;
+  position: sticky;
   background-color: white;
-  top: 90px; */
-  width: 500px;
+  top: 75.5px;
+  width: 600px;
   overflow: hidden;
+  /* z-index: 1000; */
 }
 
 .hashtag {

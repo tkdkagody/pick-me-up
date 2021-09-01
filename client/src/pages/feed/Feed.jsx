@@ -17,7 +17,8 @@ const Feed = ({feed, accessToken, isLogin}) => {
     //로그인 했는지 안했는지에 따라서 랜더링 해야 함.
     //진짜로 투표하시겠습니까?에 '네'로 답했기 때문에 
     //투표한 사람인지 아닌지 확인하는 axios 요청.
-    axios.get(`http://ec2-3-34-191-91.ap-northeast-2.compute.amazonaws.com/vote/isVote?postId=${feed.id}?`, { 
+    if(isLogin){
+      axios.get(`http://ec2-3-34-191-91.ap-northeast-2.compute.amazonaws.com/vote/isVote?postId=${feed.id}?`, { 
       headers: {
         authorization: accessToken,
       },
@@ -61,12 +62,14 @@ const Feed = ({feed, accessToken, isLogin}) => {
         }
       } else{
         //투표 한 사람
-        setIsVoteReal(true);
-        alert('이미 투표를 완료하셨어요!(alert창 없애고 컴포넌트 띄울 예정)')
-
+          setIsVoteReal(true);
+          alert('이미 투표를 완료하셨어요!(alert창 없애고 컴포넌트 띄울 예정)')
       }
     })
-    
+    } else{
+      //로그인 안 한 사람.
+      alert('로그인 해주세요')
+    } 
   }
   const clickOpt = (el) => {
   
@@ -88,7 +91,10 @@ const Feed = ({feed, accessToken, isLogin}) => {
     {
       isVoteReal
       ? 
-       <VoteResult feed={feed} isVoted={isVoted} setIsVoted={setIsVoted}/>
+       <VoteResult feed={feed} 
+       isVoted={isVoted} 
+       setIsVoted={setIsVoted}
+       setIsVoteReal={setIsVoteReal}/>
       :
       (<section className={styles.container}>
         <div className={styles.feed}>

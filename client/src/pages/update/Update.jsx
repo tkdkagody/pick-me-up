@@ -6,7 +6,7 @@ import axios from 'axios';
 axios.defaults.withCredentials = true;
 
 
-const Update = ({feed, accessToken}) => { //수정하기 클릭했을 때 전달해온 해당 피드...
+const Update = ({feed, accessToken, setListRender}) => { //수정하기 클릭했을 때 전달해온 해당 피드...
 
   //feed가 null일 때 어떠한 컴포넌트라도 보여야 함!(버그)
 
@@ -88,6 +88,8 @@ const Update = ({feed, accessToken}) => { //수정하기 클릭했을 때 전달
         },
         "Content-Type": "application/json",
       })
+
+      setListRender();
     };
   }
 
@@ -139,10 +141,10 @@ const Update = ({feed, accessToken}) => { //수정하기 클릭했을 때 전달
           {title === '' || firstOpt === '' || secondOpt ==='' || firstImg === null || secondImg === null || content === '' || isClicked.length === 0 ? 
             <button className={styles.submitBtn} onClick={updateFeedHandle}>등록</button>
           : 
-          <Link to="/mypage">
+          <Link to="/">
             <button className={styles.submitBtn} onClick={updateFeedHandle}>등록</button>
           </Link>}
-          <Link to="/mypage">
+          <Link to="/">
             <button className={styles.submitBtn}>취소</button>
           </Link>
         </div>

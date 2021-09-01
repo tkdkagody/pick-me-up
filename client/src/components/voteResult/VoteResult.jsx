@@ -3,7 +3,7 @@ import styles from './VoteResult.module.css';
 import Feed from '../../pages/feed/Feed';
 
 
-const VoteResult = ({feed, isVoted,setIsVoted}) => {
+const VoteResult = ({feed, isVoted,setIsVoted, setIsVoteReal}) => {
 
   const voteDate = {
     per1 : {
@@ -15,7 +15,8 @@ const VoteResult = ({feed, isVoted,setIsVoted}) => {
   }
 
   const clickBack = () => {
-    setIsVoted(true)
+    setIsVoted(false)
+    setIsVoteReal(false)
   }
 
   return  (

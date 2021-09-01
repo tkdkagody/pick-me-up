@@ -213,6 +213,7 @@ function App() {
                   accessToken={accessToken}
                   isLogin={isLogin}
                   handleFeeds={select}
+                  setListRender={() => setListRender(!listRender)}
                 />
               </Route>
               <Route path="/modifyinfo">
@@ -232,7 +233,9 @@ function App() {
                 />
               </Route>
               <Route path="/update">
-                <Update feed={revised} accessToken={accessToken} />
+                <Update feed={revised} 
+                accessToken={accessToken}
+                setListRender={() => setListRender(!listRender)} />
               </Route>
               {selectedFeed ? ( //피드 클릭했으면 여기서 feed페이지로 감!
                 <Route path="/feed">
