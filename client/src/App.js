@@ -27,6 +27,8 @@ function App() {
   const [info, setInfo] = useState(null);
   const [accessToken, setAccessToken] = useState(null);
 
+  const [isGoogle, setIsGoogle] = useState(false);
+
   const isAuthenticated = (accessToken) => {
     setAccessToken(accessToken);
     axios
@@ -62,8 +64,17 @@ function App() {
   };
 
   useEffect(() => {
+    console.log("useEffect...");
+    const url = new URL(window.location.href);
+    const authorizationCode = url.searchParams.get("code");
+
+    if (authorizationCode) {
+      getAccessToken(authorizationCode);
+    }
+
     setListRender();
-  });
+    return () => {};
+  }, []);
 
   /**********************페이지 컨트롤 부분***************************/
 
@@ -166,18 +177,115 @@ function App() {
         //첫화면으로 랜더시키기 !
       });
     setIsLogin(false);
+    setIsGoogle(false);
     localStorage.removeItem("accessToken");
     setAccessToken(null);
   };
 
   useEffect(() => {
     const storageToken = localStorage.getItem("accessToken");
+    console.log(isGoogle);
+    const a = Math.random();
     if (storageToken) {
       loginHandler();
-      isAuthenticated(JSON.parse(storageToken));
+      if (isGoogle) {
+        const userInfo = getUserInfo(storageToken);
+        setInfo({
+          userId: userInfo.email,
+          password: "123456",
+          userName: `google1234`,
+          mobile: "010-1234-1234",
+          signUpType: "google",
+        });
+      } else {
+        isAuthenticated(JSON.parse(storageToken));
+      }
     }
   }, [accessToken]);
 
+  const getUserInfo = async (accessToken) => {
+    const res = await axios.get(
+      `http://localhost:8080/receive/userinfo?accessToken=${accessToken}`
+    );
+
+    return res.data;
+  };
+
+  const getAccessToken = async (authorizationCode) => {
+    try {
+      const res = await axios.post(`http://localhost:8080/receive/token`, {
+        authorizationCode,
+      });
+
+      localStorage.setItem("accessToken", res.data.access_token);
+      setIsGoogle(true);
+      setAccessToken(res.data.access_token);
+      const refreshToken = localStorage.getItem("refreshToken");
+      console.log(res.data);
+      if (!refreshToken) {
+        //최초 1회
+        // isrefreshToken(false) //회원가입 필요한 상태
+        axios.post(
+          "http://ec2-3-34-191-91.ap-northeast-2.compute.amazonaws.com/sign-up",
+          info,
+          {
+            "Content-Type": "application/json",
+            // withCredentials: true,
+          }
+        );
+        setIsLogin(true);
+        localStorage.setItem("refreshToken", res.data.refresh_token);
+      } else {
+        setIsGoogle(true);
+        setIsLogin(true);
+        setIsLogin(true);
+        const loginInfo = {
+          userId: info.userId,
+          password: info.password,
+        };
+        axios
+          .post(
+            "http://ec2-3-34-191-91.ap-northeast-2.compute.amazonaws.com/sign-in",
+            loginInfo
+          )
+          .then((result) => {
+            if (result.data.message === "ok") {
+              window.localStorage.setItem(
+                "accessToken",
+                JSON.stringify(result.data.accessToken)
+                // result.data.accessToken
+              );
+              handleResponseSuccess(result.data); //result.data.message="ok"!!
+              //::제대로 받아왔을경우 사인인창 없애기
+              history.push("/");
+            }
+          });
+        //이미 가입한 user
+        //로그인 시켜줌.
+      }
+    } catch (error) {
+      console.log(error);
+    }
+
+    // .then((res) => {
+    //   localStorage.setItem("accessToken", res.data.access_token);
+    //   setAccessToken(res.data.access_token);
+    //   const refreshToken = localStorage.getItem("refreshToken");
+    //   console.log(res.data);
+    //   if (!refreshToken) {
+    //     //최초 1회
+    //     //회원가입, 로그인 시켜줌.
+    //     localStorage.setItem("refreshToken", res.data.refresh_token);
+
+    //     setIsGoogle(true);
+    //   } else {
+    //     setIsGoogle(true);
+    //     //이미 가입한 user
+    //     //로그인 시켜줌.
+    //   }
+    // });
+  };
+  /*************************************************/
   return (
     <>
       {/* {
