@@ -206,6 +206,7 @@ function App() {
                   setInfo={setInfo}
                   accessToken={accessToken}
                   isLogin={isLogin}
+                  handleFeeds={select}
                 />
               </Route>
               <Route path="/modifyinfo">
