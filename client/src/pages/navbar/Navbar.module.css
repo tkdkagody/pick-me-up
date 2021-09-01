@@ -4,7 +4,7 @@
   width: 100%;
   height: 75px;
   background-color: #fbc000;
-  box-shadow: -1px 0 4px rgba(14, 55, 63, 0.15);
+  box-shadow: -1px 0 4px rgb(145, 145, 145);
   position: sticky;
   top: 0;
   z-index: 2;
@@ -16,7 +16,7 @@
   position: sticky;
   top: 0;
   z-index: 2;
-  box-shadow: -1px 0 4px rgba(14, 55, 63, 0.15);
+  box-shadow: -1px 0 4px rgb(212, 212, 212);
 }
 
 .contentbox {
@@ -79,11 +79,18 @@
   margin-left: 10px;
 }
 
+.scrollMypagebtn {
+  margin-left: 10px;
+}
 .signbtn:hover,
 .mypagebtn:hover {
   color: rgb(238, 235, 235);
 }
 
+.scrollSignbtn:hover,
+.scrollMypagebtn:hover {
+  color: #fbc000;
+}
 /*반응형*/
 @media screen and (max-width: 33rem) {
   .contentbox {
@@ -102,7 +109,9 @@
   }
 
   .signbtn,
-  .mypagebtn {
+  .mypagebtn,
+  .scrollSignbtn,
+  .scrollMypagebtn {
     width: 60px;
     margin-top: 5px;
     margin-left: 10px;
