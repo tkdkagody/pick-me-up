@@ -22,7 +22,6 @@ import LoadingIndicator from "./components/LoadingIndicator";
 
 function App() {
   const history = useHistory();
-  //로그인상태
   const [isLogin, setIsLogin] = useState(false);
   const [info, setInfo] = useState(null);
   const [accessToken, setAccessToken] = useState(null);
@@ -42,7 +41,7 @@ function App() {
         }
       )
       .then((result) => {
-        const { id, user_id, nickname, password, phone_number, sign_up_type } =
+        const { id, user_id, nickname, password, phone_number } =
           result.data.data.userInfo;
         setInfo({
           id: id,
@@ -52,14 +51,20 @@ function App() {
           password: password,
           password2: "",
         });
-        browserHistory.push("/");
       });
   };
+  const storageToken = localStorage.getItem("accessToken");
+  useEffect(() => {
+    if (storageToken) {
+      loginHandler();
+      isAuthenticated(JSON.parse(storageToken));
+    }
+  }, [accessToken, info]);
 
   const handleResponseSuccess = (data) => {
     const { accessToken, message } = data;
     setAccessToken(accessToken);
-    loginHandler(); //로그인 true
+    loginHandler();
     isAuthenticated(accessToken);
   };
 
@@ -75,8 +80,6 @@ function App() {
     setListRender();
     return () => {};
   }, []);
-
-  /**********************페이지 컨트롤 부분***************************/
 
   const [feeds, setFeeds] = useState([]); //전체 피드리스트
   const [selectedFeed, setSelectedFeed] = useState(null); //선택된 피드페이지(투표)로 이동할 때
@@ -173,8 +176,6 @@ function App() {
         setInfo(null);
         setAccessToken(result.data.accessToken);
         browserHistory.push("/");
-
-        //첫화면으로 랜더시키기 !
       });
     setIsLogin(false);
     setIsGoogle(false);
@@ -302,6 +303,7 @@ function App() {
             isAuthenticated={isAuthenticated}
             setInfo={setInfo}
             accessToken={accessToken}
+            setListRender={setListRender}
           />
 
           <div id="page">

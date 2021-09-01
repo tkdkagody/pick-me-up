@@ -18,7 +18,6 @@ const MyinfoModify = ({
   const [mobilenum, setMobileNum] = useState(info.mobile);
   const [password, setPassword] = useState("");
   const [password2, setPassword2] = useState("");
-
   const [modifyYes, setModifyYes] = useState(false);
 
   const history = useHistory();
@@ -45,10 +44,11 @@ const MyinfoModify = ({
   };
 
   const realModify = () => {
+    console.log(nickname, "---------------");
     axios
       .post(
         "http://ec2-3-34-191-91.ap-northeast-2.compute.amazonaws.com/user/profile/:id",
-        { userName: info.nickname, mobile: info.mobile },
+        { userName: nickname, mobile: mobilenum },
         {
           params: {
             id: info.id,
