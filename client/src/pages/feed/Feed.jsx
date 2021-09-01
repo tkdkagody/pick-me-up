@@ -7,13 +7,18 @@ import axios from 'axios';
 import LoadingIndicator from '../../components/loadingIndicator/LoadingIndicator';
 
 
-const Feed = ({feed, accessToken, isLogin}) => {
+const Feed = ({feed, accessToken, isLogin, setListRender}) => {
 
   const [isVoted, setIsVoted] = useState(false); //vote하시겠습니까 모달창 띄울지 말지 
   const [isVoteReal, setIsVoteReal] = useState(false);
   const [clickedOpt, setClickedOpt] = useState(null); //feed.option1(or feed.option2)
   const [isLoading, setIsLoading] = useState(false);
   const [voteMsg, setVoteMsg] = useState(false); //props로 넘겨서 이미 투표한 사람들 메세지 보여주기
+  const [newVoteCount, setNewVoteCount] = useState(null); //
+  // {
+  //   option1_count,
+  //   option2_count,
+  // }
 
   const vote =(el) => {
     //로그인 했는지 안했는지에 따라서 랜더링 해야 함.
@@ -44,41 +49,64 @@ const Feed = ({feed, accessToken, isLogin}) => {
             "Content-Type": "application/json",
           })
           .then(res => {
-            setIsVoteReal(true);
-            setIsLoading(true);
+            axios.post('http://ec2-3-34-191-91.ap-northeast-2.compute.amazonaws.com/vote/vote-result', {
+              postId: feed.id, //피드 pr키
+            }, {"Content-Type": "application/json"})
+            .then(res => {
+              setNewVoteCount(res.data.data)
+              setIsVoteReal(true);
+              setIsLoading(true); //로딩화면 켜지고 ... 
               setTimeout(() => {
-                setIsLoading(false);// 투표한 상태로 바꿔서 result 페이지 보여주기
+                setListRender(); 
+                setIsLoading(false);// 로딩화면 꺼짐.
               }, 1500);
+            })
           })
 
         } else if(clickedOpt === el.option2){
           axios.post('http://ec2-3-34-191-91.ap-northeast-2.compute.amazonaws.com/vote', {
             postId: feed.id,
             option: 2
-          }, { 
+          }, {
             headers: {
               authorization: accessToken,
             },
-            "Content-Type": "application/json",
+            "Content-Type": "application/json"
           })
           .then(res => {
-            setIsVoteReal(true);
-            setIsLoading(true);
-              setTimeout(() => {
-                setIsLoading(false);// 투표한 상태로 바꿔서 result 페이지 보여주기
+            axios.post('http://ec2-3-34-191-91.ap-northeast-2.compute.amazonaws.com/vote/vote-result', {
+              postId: feed.id, //피드 pr키
+            }, { 
+              "Content-Type": "application/json",
+            })
+            .then(res => {
+              setNewVoteCount(res.data.data)
+              setIsVoteReal(true);
+              setIsLoading(true); //로딩화면 켜지고 ... 
+              setTimeout(() => { 
+                setListRender();
+                setIsLoading(false);// 로딩화면 꺼짐.
               }, 1500);
+            })
           })
 
         }
       } else{
         //투표 한 사람
-        setIsVoteReal(true);
-        setIsLoading(true);
+        axios.post('http://ec2-3-34-191-91.ap-northeast-2.compute.amazonaws.com/vote/vote-result', {
+          postId: feed.id, //피드 pr키
+        }, { 
+          "Content-Type": "application/json",
+        })
+        .then(res => {
+          setNewVoteCount(res.data.data)
+          setIsVoteReal(true);
+          setIsLoading(true); //로딩화면 켜지고 ... 
           setTimeout(() => {
-            setIsLoading(false);// 투표한 상태로 바꿔서 result 페이지 보여주기
-            //alert('이미 투표를 완료하셨어요!(alert창 없애고 컴포넌트 띄울 예정)')
-            setVoteMsg(true);
-          }, 500);
+            setVoteMsg(true);  
+            setIsLoading(false);// 로딩화면 꺼짐.
+          }, 800);
+        }) 
       }
     })
     } else{
@@ -112,7 +140,7 @@ const Feed = ({feed, accessToken, isLogin}) => {
        setIsVoted={setIsVoted}
        setIsVoteReal={setIsVoteReal}
        voteMsg={voteMsg}
-       clickedOpt={clickedOpt}/>
+       voteCount={newVoteCount}/>
       :
       (<section className={styles.container}>
         <div className={styles.feed}>
@@ -125,7 +153,10 @@ const Feed = ({feed, accessToken, isLogin}) => {
             <div>by 익명</div>
           </div>
           <p className={styles.content}>{feed.contents}</p>
-          <div className={styles.voteText}>{feed.option1_count+feed.option2_count}명이 투표했어요</div>
+          <div className={styles.voteText}>
+            {newVoteCount? 
+            newVoteCount.option1_count+newVoteCount.option2_count
+            : feed.option1_count+feed.option2_count}명이 투표했어요</div>
           {
             isVoted ?
             (<>

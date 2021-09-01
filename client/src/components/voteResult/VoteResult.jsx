@@ -3,35 +3,15 @@ import styles from './VoteResult.module.css';
 import Feed from '../../pages/feed/Feed';
 
 
-const VoteResult = ({feed, isVoted,setIsVoted, setIsVoteReal, voteMsg, clickedOpt}) => {
-
+const VoteResult = ({feed, isVoted,setIsVoted, setIsVoteReal, voteMsg, voteCount}) => {
+  
+  //voteCount가 들어오게 되면...
   let voteDate = {
     per1 : {
-      percent: Math.round((feed.option1_count/(feed.option1_count+feed.option2_count))*100)
+      percent: Math.round((voteCount.option1_count/(voteCount.option1_count+voteCount.option2_count))*100)
     },
     per2 : {
-      percent: Math.round((feed.option2_count/(feed.option1_count+feed.option2_count))*100)
-    }
-  }
-  if((feed.option1_count+feed.option2_count) === 0){
-    if(clickedOpt === feed.option1){
-      voteDate = {
-        per1 : {
-          percent: 100
-        },
-        per2 : {
-          percent: 0
-        }
-      }
-    }else{
-      voteDate = {
-        per1 : {
-          percent: 0
-        },
-        per2 : {
-          percent: 100
-        }
-      }
+      percent: Math.round((voteCount.option2_count/(voteCount.option1_count+voteCount.option2_count))*100)
     }
   }
 

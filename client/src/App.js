@@ -84,7 +84,7 @@ function App() {
             };
           }));
       });
-    }, 500);
+    }, 300);
   }, [listRender]); //글쓰기 버튼이 눌려질 때 마다 axiosGET요청 보내기.
 
   // useEffect(() => {
@@ -239,6 +239,7 @@ function App() {
                       feed={selectedFeed}
                       accessToken={accessToken}
                       isLogin={isLogin}
+                      setListRender={() => setListRender(!listRender)}
                     />
                   </Route>
                 ) : null}
