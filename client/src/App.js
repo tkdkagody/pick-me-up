@@ -203,6 +203,7 @@ function App() {
                   feeds={feeds}
                   filterHandle={listFilter}
                   handleClick={select}
+                  listRender={listRender}
                 />
               </Route>
               <Route path="/mypage">

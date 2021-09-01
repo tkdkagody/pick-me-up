@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styles from './SubNavbar.module.css'
 import { Link } from 'react-router-dom';
 
-const SubNavbar = ({filterHandle}) => {
+const SubNavbar = ({filterHandle, tagReset}) => {
 
   const tags=['전체', '#의류', '#리빙', '#뷰티', '#식품', '#잡화', '#디지털']
   const [tagClicked, setTagClicked] = useState('전체');
@@ -12,9 +12,9 @@ const SubNavbar = ({filterHandle}) => {
     filterHandle(el);
   }
 
-  // useEffect(() => {
-  //   setTagClicked('전체')
-  // }, []) //default로 전체 피드 보여주기.
+  useEffect(() => {
+    setTagClicked('전체')
+  }, [tagReset]) //로고버튼 누르면 listRender 작동. listRender-->tagReset으로 가져와서 상태 전체로 변경시키기
 
   return (
     <>
