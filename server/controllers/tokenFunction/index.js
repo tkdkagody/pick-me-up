@@ -6,7 +6,7 @@ module.exports = {
     return sign(data, process.env.ACCESS_SECRET);
   },
   isAuthorized: (req) => {
-    const authorization = req.headers.authorization; /*["cookie"];*/
+    const authorization = req.headers.authorization; /**["cookie"];*/
     if (!authorization) {
       return null;
     }

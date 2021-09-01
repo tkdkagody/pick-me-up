@@ -1,11 +1,24 @@
+const { changeProfile } = require("../controllers/ProfileChange");
 require("dotenv").config();
 const { Router } = require("express");
 const router = Router();
 const { users } = require("../models");
+const { getMyPost } = require("../controllers/GetMyPost");
 const jwt = require("jsonwebtoken");
 const { generateAccessToken } = require("./tokenFunction");
 const { changeProfile } = require("../controllers/ProfileChange");
+const { getMyInfo } = require("./GetMyInfo");
+const { auth } = require("../controllers/auth");
+const { updateMyPost } = require("./UpdateMyPost");
+const { sendPost } = require("../controllers/Post");
+const { deleteMyPost } = require("./DestroyMyPost");
+const { getAllPost } = require("./MainPage");
+const { isVote, vote, voteResult } = require("./Vote");
+
 //아이디 닉네임 모바일 비밀번호
+
+router.patch("/user/profile/:id", changeProfile);
+//router.get("/user/posting-list/:id", getMyPost);
 
 router.post("/sign-up", (req, res) => {
   const { userId, password, userName, mobile, signUpType } = req.body;
@@ -69,7 +82,7 @@ router.post("/sign-in", async (req, res) => {
       .status(200)
       // .cookie("jwt", accessToken, {
       //   httpOnly: true,
-      //   secure: false,
+      //   sameSite: "lax",
       // })
       .json({
         accessToken,
@@ -84,8 +97,26 @@ router.post("/sign-out", (req, res) => {
 
 router.post("/user/profile/:id", changeProfile);
 
+router.post("/posting", sendPost);
+router.get("/get-all-post", getAllPost);
+
+router.get("/vote/isVote?", isVote);
+router.post("/vote", vote);
+router.post("/vote/vote-result", voteResult);
+
+router.delete("/user/posting-list/:postid", deleteMyPost);
+
+
 router.get("/", (req, res) => {
   res.send("hello world");
 });
+
+router.get("/user/posting-list/:id", getMyPost);
+
+router.get("/user/auth", auth);
+
+router.get("/user/:id", getMyInfo);
+
+router.post("/user/posting-list/:postid", updateMyPost);
 
 module.exports = router;
