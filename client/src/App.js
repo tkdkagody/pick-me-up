@@ -18,6 +18,7 @@ import axios from "axios";
 import Update from "./pages/update/Update";
 import MyinfoModify from "./pages/myinfoModify/MyinfoModify";
 import NullPage from "./components/NullPage/Nullpage";
+import ScrollTop from "./components/scrollTop/ScrollTop";
 
 
 function App() {
@@ -92,7 +93,7 @@ function App() {
   useEffect(() => {
     setListRender();
   });
-  
+
   const select = (el) => {
     //썸네일 클릭 시
     setSelectedFeed(el);
@@ -197,61 +198,63 @@ function App() {
           />
 
           <div id="page">
-            <Switch>
-              <Route exact={true} path="/">
-                <MainFeeds
-                  feeds={feeds}
-                  filterHandle={listFilter}
-                  handleClick={select}
-                  listRender={listRender}
-                />
-              </Route>
-              <Route path="/mypage">
-                <Mypage
-                  handleContent={revise}
-                  info={info}
-                  setInfo={setInfo}
-                  accessToken={accessToken}
-                  isLogin={isLogin}
-                  handleFeeds={select}
-                  setListRender={() => setListRender(!listRender)}
-                />
-              </Route>
-              <Route path="/modifyinfo">
-                <MyinfoModify
-                  info={info}
-                  setInfo={setInfo}
-                  accessToken={accessToken}
-                  isLogin={isLogin}
-                />
-                {/* <Mypage handleContent={revise} info={info} setInfo={setInfo} /> */}
-              </Route>
-              <Route path="/writing">
-                <Writing
-                  accessToken={accessToken}
-                  isLogin={isLogin}
-                  setListRender={() => setListRender(!listRender)}
-                />
-              </Route>
-              <Route path="/update">
-                <Update feed={revised} 
-                accessToken={accessToken}
-                setListRender={() => setListRender(!listRender)} />
-              </Route>
-              {selectedFeed ? ( //피드 클릭했으면 여기서 feed페이지로 감!
-                <Route path="/feed">
-                  <Feed
-                    feed={selectedFeed}
+            <ScrollTop>
+              <Switch>
+                <Route exact={true} path="/">
+                  <MainFeeds
+                    feeds={feeds}
+                    filterHandle={listFilter}
+                    handleClick={select}
+                    listRender={listRender}
+                  />
+                </Route>
+                <Route path="/mypage">
+                  <Mypage
+                    handleContent={revise}
+                    info={info}
+                    setInfo={setInfo}
+                    accessToken={accessToken}
+                    isLogin={isLogin}
+                    handleFeeds={select}
+                    setListRender={() => setListRender(!listRender)}
+                  />
+                </Route>
+                <Route path="/modifyinfo">
+                  <MyinfoModify
+                    info={info}
+                    setInfo={setInfo}
                     accessToken={accessToken}
                     isLogin={isLogin}
                   />
+                  {/* <Mypage handleContent={revise} info={info} setInfo={setInfo} /> */}
                 </Route>
-              ) : null}
-              {/* <Route path="/feedresult">
-                <FeedResult feed={selectedResult}/>
-              </Route> */}
-              {/* 이부분 투표창에서 새로고침시 페이지 사라지는거 막아야함 */}
-            </Switch>
+                <Route path="/writing">
+                  <Writing
+                    accessToken={accessToken}
+                    isLogin={isLogin}
+                    setListRender={() => setListRender(!listRender)}
+                  />
+                </Route>
+                <Route path="/update">
+                  <Update feed={revised} 
+                  accessToken={accessToken}
+                  setListRender={() => setListRender(!listRender)} />
+                </Route>
+                {selectedFeed ? ( //피드 클릭했으면 여기서 feed페이지로 감!
+                  <Route path="/feed">
+                    <Feed
+                      feed={selectedFeed}
+                      accessToken={accessToken}
+                      isLogin={isLogin}
+                    />
+                  </Route>
+                ) : null}
+                {/* <Route path="/feedresult">
+                  <FeedResult feed={selectedResult}/>
+                </Route> */}
+                {/* 이부분 투표창에서 새로고침시 페이지 사라지는거 막아야함 */}
+              </Switch>
+            </ScrollTop>
           </div>
           <Footer></Footer>
           <ScrollButton />

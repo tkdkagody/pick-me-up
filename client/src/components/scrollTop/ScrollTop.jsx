@@ -1,17 +1,19 @@
-class ScrollToTop extends React.Component {
-  
-  getSnapshotBeforeUpdate(prevProps, prevState) {
-    const { location = {} } = prevProps;
+import { Component } from 'react'; 
+import { withRouter } from 'react-router'; 
 
-    // 컴포넌트 업데이트 시 페이지 이동인지 확인
-    if (this.props.location.pathname !== location.pathname) {
-      window.scrollTo(0, 0);
-    }
-  }
+class ScrollToTop extends Component { 
+  componentDidUpdate(prevProps) { 
+    if (this.props.location !== prevProps.location) { 
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+    } 
+  } 
+  render() { 
+    return this.props.children 
+  } 
+} 
   
-  render() {
-    return this.props.children;
-  }
-}
+export default withRouter(ScrollToTop)
 
-export default ScrollToTop;
