@@ -8,21 +8,22 @@ import axios from "axios";
 //   const [infoClicked, setInfoClicked] = useState(true);
 //   const [myContent, setMycontent] = useState(null);
 
+
+
 const Mypage = ({ info, setInfo, handleContent, accessToken, isLogin, handleFeeds, setListRender }) => {
+
 
   //console.log(info, "마이페이지");
 
   /* 카테고리이동 핸들러*/
   const [infoClicked, setInfoClicked] = useState(true);
-  const [myContent, setMyContent] =useState([]); 
-
+  const [myContent, setMyContent] = useState([]);
 
   const handleClickMyinfo = () => {
     setInfoClicked(true);
   };
   
   const handleClickMycontent = () => {
-
     setInfoClicked(false); //상단 subnavbar전환시키고
 
     axios.get("http://ec2-3-34-191-91.ap-northeast-2.compute.amazonaws.com/user/auth", {
@@ -52,6 +53,7 @@ const Mypage = ({ info, setInfo, handleContent, accessToken, isLogin, handleFeed
       })
     });
 
+
   };
 
   const infounderline = infoClicked ? styles.myinfosub : styles.myinfo;
@@ -77,6 +79,16 @@ const Mypage = ({ info, setInfo, handleContent, accessToken, isLogin, handleFeed
             isLogin={isLogin}
           />
         ) : (
+        
+//           //           <Mycontent handleContent={handleContent} feeds={myContent} />
+
+//           <Mycontent
+//             handleContent={handleContent}
+//             feeds={myContent}
+//             accessToken={accessToken}
+//             handleFeeds={handleFeeds}
+//           />
+
           <Mycontent
           isLogin={isLogin} 
           handleContent={handleContent}

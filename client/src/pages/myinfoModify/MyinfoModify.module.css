@@ -96,7 +96,10 @@
   font-weight: bold;
   border: none;
 }
-
+.passcheck {
+  color: red;
+  font-weight: bold;
+}
 /*모달*/
 /* 상위 컴포넌트에서 flex걸어서 로그인창 가운데정렬하기  */
 

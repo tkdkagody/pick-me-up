@@ -78,7 +78,6 @@ function App() {
       getAccessToken(authorizationCode);
     }
 
-    //setListRender();
     return () => {};
   }, []);
 
@@ -175,7 +174,7 @@ function App() {
     //update할 포스트 정보 상태에 끼워넣고 /update페이지로 보내주기.
     setRevised(el);
   };
-
+  
   const feedSort = (event) => { //select태그 클릭 시 axios요청 안 보내고 있는 feeds상태값을 그냥 정렬.
     setSortValue(event.target.value)
     // console.log(event.target.value)
@@ -202,6 +201,7 @@ function App() {
 
   /**********************sign in 컨트롤 부분***************************/
 
+
   //로그인상태 변경 메소드
   const loginHandler = () => {
     setIsLogin(true);
@@ -227,7 +227,7 @@ function App() {
 
   useEffect(() => {
     const storageToken = localStorage.getItem("accessToken");
-    console.log(isGoogle);
+    //console.log(isGoogle);
     const a = Math.random();
     if (storageToken) {
       loginHandler();
@@ -339,7 +339,7 @@ function App() {
     //   }
     // });
   };
-  /*************************************************/
+
   return (
     <>
       {/* {

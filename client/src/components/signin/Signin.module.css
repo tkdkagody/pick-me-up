@@ -8,7 +8,9 @@ span {
 
 .backdrop {
   position: fixed;
-  z-index: 100;
+
+  z-index: 10;
+
   top: 0;
   left: 0;
   right: 0;
@@ -26,7 +28,9 @@ span {
   justify-content: center;
   background-color: white;
   border: 2px solid grey;
-  z-index: 5;
+
+  z-index: 2;
+
 }
 
 .titlebox {
@@ -87,7 +91,8 @@ span {
   outline: none;
 }
 
-.button {
+.button,
+.googlebtn {
   width: 100%;
   height: 2.5em;
   font-size: 1.2rem;
@@ -131,6 +136,10 @@ span {
   color: white;
   background-color: #fbc000;
 }
+.googlebtn:hover {
+  color: white;
+  background-color: rgb(44, 82, 253);
+}
 
 .alert {
   color: red;
@@ -141,8 +150,13 @@ span {
   border-radius: 0.25rem;
 }
 
+/* @media screen and (max-width: 33rem) {
+  .signin {
+    width: 28em; */
+
 @media screen and (max-width: 500px) {
   .signin {
     width: 100%;
+
   }
 }

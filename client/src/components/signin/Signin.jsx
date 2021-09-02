@@ -120,7 +120,7 @@ const Signin = ({
             </li>
 
             <li className={styles.item}>
-              <button className={styles.button}>
+              <button className={styles.googlebtn}>
                 <GoogleLogin />
               </button>
             </li>
