@@ -106,123 +106,63 @@ const Update = ({feed, accessToken, setListRender}) => { //수정하기 클릭�
 
   return (
     <section className={styles.container}>
+
       <div className={styles.category}>
         <div>제목</div>
-        <input
-          className={styles.textBoxTitle}
-          type="text"
-          value={title}
-          onChange={titleHandle}
-        />
+        <input className={styles.textBoxTitle} type="text" value={title} onChange={titleHandle}/>
       </div>
-
-      <div className={styles.category}>
+      
+      <div className={styles.category}>    
         <div>투표 옵션 1</div>
-        <input
-          className={styles.textBoxOpt}
-          type="text"
-          placeholder="항목명"
-          value={firstOpt}
-          onChange={firstOptHandle}
-        />
+        <input className={styles.textBoxOpt} type="text" placeholder="항목명" value={firstOpt} onChange={firstOptHandle}/>
         <div className={styles.filebox}>
-          <input
-            type="file"
-            id="ex_file"
-            accept="image/*"
-            onChange={firstImgHandle}
-          ></input>
-          {firstImg ? (
-            <img className={styles.fileView} src={firstImg}></img>
-          ) : null}
+          <input type="file" id="ex_file" accept="image/*" onChange={firstImgHandle}></input>
+          {firstImg? <img className={styles.fileView} src={firstImg}></img> : null}
         </div>
       </div>
 
-      <div className={styles.category}>
-        <div>투표 옵션 2</div>
-        <input
-          className={styles.textBoxOpt}
-          type="text"
-          placeholder="항목명"
-          value={secondOpt}
-          onChange={secondOptHandle}
-        />
-        <div className={styles.filebox}>
-          <input
-            type="file"
-            id="ex_file"
-            accept="image/*"
-            onChange={secondImgHandle}
-          ></input>
-          {secondImg ? (
-            <img className={styles.fileView} src={secondImg}></img>
-          ) : null}
-        </div>
-      </div>
 
-      <div className={styles.category}>
-        <div>내용</div>
-        <textarea
-          name="content"
-          id=""
-          cols="30"
-          rows="10"
-          value={content}
-          onChange={contentHandle}
-        ></textarea>
+    <div className={styles.category}>    
+      <div>투표 옵션 2</div>
+      <input className={styles.textBoxOpt} type="text" placeholder="항목명" value={secondOpt} onChange={secondOptHandle}/>
+      <div className={styles.filebox}>
+        <input type="file" id="ex_file" accept="image/*" onChange={secondImgHandle}></input>
+        {secondImg? <img className={styles.fileView} src={secondImg}></img> : null}
       </div>
+    </div>
 
-      <div className={styles.category}>
-        <div>
-          카테고리<span class={styles.subTitle}>(복수선택가능)</span>
-        </div>
-        <div className={styles.tags}>
-          {tags.map((el) => {
-            return (
-              <>
-                <input type="checkbox" name={el} value={el} />
-                <label
-                  className={
-                    isClicked.includes(el)
-                      ? styles.hashtagClicked
-                      : styles.hashtag
-                  }
-                  onClick={() => tagHandle(el)}
-                >
-                  {el}
-                </label>
-              </>
-            );
-          })}
-        </div>
+    <div className={styles.category}>
+      <div>내용</div>
+      <textarea name="content" id="" cols="30" rows="10" value={content} onChange={contentHandle}></textarea>
+    </div>
+
+    <div className={styles.category}>
+      <div>카테고리<span class={styles.subTitle}>(복수선택가능)</span></div>
+      <div className={styles.tags}>
+        {tags.map(el =>{ 
+          return <>
+            <input type="checkbox" name={el} value={el}/>
+            <label className={isClicked.includes(el)? styles.hashtagClicked :styles.hashtag} onClick={()=>tagHandle(el)}>{el}</label>
+          </>
+        })}
       </div>
+    </div>
 
     <div className={styles.submit}>
-        {title === "" ||
-        firstOpt === "" ||
-        secondOpt === "" ||
-        firstImg === null ||
-        secondImg === null ||
-        content === "" ||
-        isClicked.length === 0 ? (
-          <button className={styles.submitBtn} onClick={updateFeedHandle}>
-            등록
-          </button>
-        ): 
+          {title === '' || firstOpt === '' || secondOpt ==='' || firstImg === null || secondImg === null || content === '' || isClicked.length === 0 ? 
+            <button className={styles.submitBtn} onClick={updateFeedHandle}>등록</button>
+          : 
           <Link to="/">
             <button className={styles.submitBtn} onClick={updateFeedHandle}>등록</button>
           </Link>}
           <Link to="/">
             <button className={styles.submitBtn}>취소</button>
           </Link>
-        )}
-        <Link to="/mypage">
-          <button className={styles.submitBtn}>취소</button>
-        </Link>
-      </div>
-      <div className={styles.error}>{errorMessage}</div>
-    </section>
-  );
+        </div>
+        <div className={styles.error}>{errorMessage}</div>
+  
+  </section>
+  )
 };
 
 export default Update;
