@@ -2,6 +2,7 @@
   /*최상위 바디 컨테이너*/
   width: 500px;
   margin: 0 auto;
+  height: 80vh;
 }
 .category {
   margin-top: 1rem;

@@ -9,8 +9,7 @@ label {
   list-style: none;
   margin: 0 auto;
   width: 500px;
-  /* justify-content: center;
-  align-items: center; */
+  height: 80vh;
 }
 
 .goback {

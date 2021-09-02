@@ -185,7 +185,7 @@ const MyinfoModify = ({
             </div>
 
             <div className={styles.btns}>
-              <Link to="/">
+              <Link to="/mypage">
                 <button className={styles.btn}>취소</button>
               </Link>
 
