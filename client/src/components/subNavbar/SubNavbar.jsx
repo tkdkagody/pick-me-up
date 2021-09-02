@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styles from './SubNavbar.module.css'
 import { Link } from 'react-router-dom';
 
-const SubNavbar = ({filterHandle, tagReset}) => {
+const SubNavbar = ({filterHandle, tagReset, feedSort, sortValue}) => {
 
   const tags=['전체', '#의류', '#리빙', '#뷰티', '#식품', '#잡화', '#디지털']
   const [tagClicked, setTagClicked] = useState('전체');
@@ -22,6 +22,10 @@ const SubNavbar = ({filterHandle, tagReset}) => {
         {tags.map(el => <span className={el===tagClicked? styles.hashtagClicked :styles.hashtag} onClick={()=>tagHandle(el)}>{el}</span>)}
       </div>
       <div className={styles.writingBtn}>
+        <select className={styles.sort} value={sortValue} onChange={feedSort} >
+          <option value="최신순">최신순</option>
+          <option value="인기순">인기순</option>
+        </select>
         <Link to="/writing">
           <button className={styles.button}>글쓰기</button>
         </Link>

@@ -22,55 +22,38 @@ const Mypage = ({ info, setInfo, handleContent, accessToken, isLogin, handleFeed
   const handleClickMyinfo = () => {
     setInfoClicked(true);
   };
+  
   const handleClickMycontent = () => {
     setInfoClicked(false); //상단 subnavbar전환시키고
 
-    //여기서 mycontent불러오는 axios GET
-    // axios.post('http://ec2-3-34-191-91.ap-northeast-2.compute.amazonaws.com/posting', {
-    //   }, {
-    //     headers: {
-    //       authorization: accessToken,
-    //     },
-    //     "Content-Type": "application/json",
-    //   })
-    // .then(res => {
-    //   const result = res.data.data.sort((a,b)=>{
-    //         return new Date(b.created_at) - new Date(a.created_at);
-    //   });
-    //   setMycontent(result.map(el => {
-    //     return {
-    //       ...el,
-    //       tags: JSON.parse(el.tags)
-    //     }
-    //   }))
-    // })
+    axios.get("http://ec2-3-34-191-91.ap-northeast-2.compute.amazonaws.com/user/auth", {
+      headers: {
+        authorization: accessToken,
+      },
+      "Content-Type": "application/json",
+    })
+    .then((result) => {
+      const { id } = result.data.data.userInfo;
+      axios.get(`http://ec2-3-34-191-91.ap-northeast-2.compute.amazonaws.com/user/posting-list/${id}`, {
+      headers: {
+        authorization: accessToken,
+      },
+      "Content-Type": "application/json",
+      })
+      .then(res=> {
+        const result = res.data.data.sort((a,b)=>{
+          return new Date(b.created_at) - new Date(a.created_at);
+        });
+        setMyContent(result.map(el => {
+          return {
+            ...el, 
+            tags: JSON.parse(el.tags)
+          }
+        }))
+      })
+    });
 
-    //     axios.get("http://ec2-3-34-191-91.ap-northeast-2.compute.amazonaws.com/user/auth", {
-    //       headers: {
-    //         authorization: accessToken,
-    //       },
-    //       "Content-Type": "application/json",
-    //     })
-    //     .then((result) => {
-    //       const { id } = result.data.data.userInfo;
-    //       axios.get(`http://ec2-3-34-191-91.ap-northeast-2.compute.amazonaws.com/user/posting-list/${id}`, {
-    //       headers: {
-    //         authorization: accessToken,
-    //       },
-    //       "Content-Type": "application/json",
-    //       })
-    //       .then(res=> {
-    //         const result = res.data.data.sort((a,b)=>{
-    //           return new Date(b.created_at) - new Date(a.created_at);
-    //         });
-    //         setMyContent(result.map(el => {
-    //           return {
-    //             ...el,
-    //             tags: JSON.parse(el.tags)
-    //           }
-    //         }))
-    //       })
-    //     });
+
   };
 
   const infounderline = infoClicked ? styles.myinfosub : styles.myinfo;

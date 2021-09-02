@@ -78,16 +78,15 @@ function App() {
       getAccessToken(authorizationCode);
     }
 
-    setListRender();
-    console.log(info, "뭘까????");
     return () => {};
   }, []);
 
-
+  /*********************메인 페이지 컨트롤 부분***************************/
   const [feeds, setFeeds] = useState([]); //전체 피드리스트
   const [selectedFeed, setSelectedFeed] = useState(null); //선택된 피드페이지(투표)로 이동할 때
   const [revised, setRevised] = useState(null); //writing 할 피드 선택된 것.
   const [listRender, setListRender] = useState(true);
+  const [sortValue, setSortValue] = useState('최신순');
 
   useEffect(() => {
     setTimeout(() => {
@@ -96,20 +95,26 @@ function App() {
         "http://ec2-3-34-191-91.ap-northeast-2.compute.amazonaws.com/get-all-post"
       )
       .then((res) => {
-        const result = res.data.data.sort((a, b) => {
-          return new Date(b.created_at) - new Date(a.created_at);
-        });
-        setFeeds(result.map((el) => {
-            return {...el, tags: JSON.parse(el.tags),
-            };
-          }));
+        if(sortValue === '최신순'){
+          let result = res.data.data.sort((a, b) => {
+            return new Date(b.created_at) - new Date(a.created_at);
+          });
+          setFeeds(
+            result.map((el) => {
+              return {...el, tags: JSON.parse(el.tags),
+            }}))
+        } else if(sortValue==='인기순'){
+          let result = res.data.data.sort((a, b) => {
+            return (b.option1_count+b.option2_count) - (a.option1_count+a.option2_count);
+          });
+          setFeeds(
+            result.map((el) => {
+              return {...el, tags: JSON.parse(el.tags),
+            }}))
+        }
       });
     }, 300);
   }, [listRender]); //글쓰기 버튼이 눌려질 때 마다 axiosGET요청 보내기.
-
-  // useEffect(() => {
-  //   setListRender();
-  // }); //자꾸 undefined 떠서 주석처리 해놓음. 위처럼 비동기 처리 해놓음...
 
   const select = (el) => {
     //썸네일 클릭 시
@@ -123,16 +128,23 @@ function App() {
           "http://ec2-3-34-191-91.ap-northeast-2.compute.amazonaws.com/get-all-post"
         )
         .then((res) => {
+          if(sortValue === '최신순'){
           let result = res.data.data.sort((a, b) => {
             return new Date(b.created_at) - new Date(a.created_at);
           });
-
           setFeeds(
             result.map((el) => {
               return {...el, tags: JSON.parse(el.tags),
-              };
-            })
-          );
+            }}))
+          } else if(sortValue==='인기순'){
+            let result = res.data.data.sort((a, b) => {
+              return (b.option1_count+b.option2_count) - (a.option1_count+a.option2_count);
+            });
+            setFeeds(
+              result.map((el) => {
+                return {...el, tags: JSON.parse(el.tags),
+              }}))
+          }
         });
     } else {
       axios
@@ -143,6 +155,11 @@ function App() {
           let result = res.data.data.sort((a, b) => {
             return new Date(b.created_at) - new Date(a.created_at);
           }); //최신순으로 정렬
+          if(sortValue==='인기순'){
+            result = res.data.data.sort((a, b) => {
+              return (b.option1_count+b.option2_count) - (a.option1_count+a.option2_count);
+            })
+          }
           result = result.map((el) => {
             return {...el, tags: JSON.parse(el.tags),
             };
@@ -157,6 +174,33 @@ function App() {
     //update할 포스트 정보 상태에 끼워넣고 /update페이지로 보내주기.
     setRevised(el);
   };
+  
+  const feedSort = (event) => { //select태그 클릭 시 axios요청 안 보내고 있는 feeds상태값을 그냥 정렬.
+    setSortValue(event.target.value)
+    // console.log(event.target.value)
+    if(event.target.value==='최신순'){
+      let result = feeds.sort((a, b) => {
+        return new Date(b.created_at) - new Date(a.created_at);
+      });
+      result = result.map((el) => {
+        return {...el, tags: JSON.parse(el.tags),
+        };
+      })
+      setFeeds([...result]);
+    } else if(event.target.value==='인기순'){
+      let result = feeds.sort((a, b) => {
+        return (b.option1_count+b.option2_count) - (a.option1_count+a.option2_count);
+      });
+      result = result.map((el) => {
+        return {...el, tags: JSON.parse(el.tags),
+        };
+      })
+      setFeeds([...result]);
+    }
+  }
+
+  /**********************sign in 컨트롤 부분***************************/
+
 
   //로그인상태 변경 메소드
   const loginHandler = () => {
@@ -312,7 +356,6 @@ function App() {
             isAuthenticated={isAuthenticated}
             setInfo={setInfo}
             accessToken={accessToken}
-            setListRender={setListRender}
           />
           <main id="page">
             <ScrollTop>
@@ -323,6 +366,8 @@ function App() {
                     filterHandle={listFilter}
                     handleClick={select}
                     listRender={listRender}
+                    sortValue={sortValue}
+                    feedSort={feedSort}
                   />
                 </Route>
                 <Route path="/mypage">

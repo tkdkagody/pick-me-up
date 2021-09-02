@@ -39,11 +39,14 @@
 
 .writingBtn {
   text-align: right;
-  margin: 1rem 0;
+  margin: 1rem 0 0.7rem 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .button {
-  margin-right: 0.5rem;
+  margin-right: 0.3rem;
   cursor: pointer;
   border: none;
   padding: 0.4rem 1rem;
@@ -54,6 +57,25 @@
   font-weight: bold;
   color: white;
 }
-.feedList {
-  border: 1px solid red;
+
+.sort {
+  width: 4.5rem;
+  height: 100%;
+  font-size: 0.65rem;
+  margin-left: 0.3rem;
+  color: grey;
+  background: url("https://freepikpsd.com/media/2019/10/down-arrow-icon-png-7-Transparent-Images.png")
+    calc(100% - 5px) center no-repeat;
+  background-size: 20px;
+  padding: 5px 30px 5px 10px;
+  border-radius: 5px;
+  border: 1px solid rgb(210, 210, 210);
+  outline: 0 none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+.sort::-ms-expand {
+  display: none;
 }
