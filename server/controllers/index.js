@@ -1,12 +1,9 @@
 const { changeProfile } = require("../controllers/ProfileChange");
-require("dotenv").config();
 const { Router } = require("express");
 const router = Router();
 const { users } = require("../models");
 const { getMyPost } = require("../controllers/GetMyPost");
-const jwt = require("jsonwebtoken");
 const { generateAccessToken } = require("./tokenFunction");
-
 const { getMyInfo } = require("./GetMyInfo");
 const { auth } = require("../controllers/auth");
 const { updateMyPost } = require("./UpdateMyPost");
@@ -78,10 +75,6 @@ router.post("/sign-in", async (req, res) => {
   return (
     res
       .status(200)
-      // .cookie("jwt", accessToken, {
-      //   httpOnly: true,
-      //   sameSite: "lax",
-      // })
       .json({
         accessToken,
         message: "ok",
