@@ -1,27 +1,58 @@
-const express = require("express");
 const { users } = require("../models");
-const jwt = require("jsonwebtoken");
 const { isAuthorized } = require("./tokenFunction");
-require("dotenv").config();
+const { generateAccessToken } = require("./tokenFunction");
 
 module.exports = {
   // [POST] /user/profile/:id
-  changeProfile: (req, res) => {
+  changeProfile: async (req, res) => {
     const user_id = req.params.id;
-    console.log("user_id", user_id);
-    // const authorization = req.headers.cookie;
-    // console.log(authorization);
-    const { userName, mobile } = req.body;
 
+    const { userName, mobile, password } = req.body;
+    console.log(req.body);
     const accessTokendata = isAuthorized(req);
-    console.log(accessTokendata);
 
     if (!accessTokendata) {
       res.status(401).json({ message: "invalid access token" });
     } else {
       // res.status(200).json({ message: "ok" });
-      users
-        .update(
+      // password 변경 시
+      if (password.length !== 0) {
+        const newPasswordToken = generateAccessToken(password);
+
+        const isUpdate = await users.update(
+          {
+            nickname: userName,
+            phone_number: mobile,
+            password: newPasswordToken,
+          },
+          {
+            where: {
+              id: accessTokendata.id,
+            },
+          }
+        );
+
+        if (isUpdate) {
+          const result = await users.findOne({
+            where: {
+              id: user_id,
+            },
+          });
+
+          const userData = result.dataValues;
+          delete userData.password;
+          const newAccessToken = generateAccessToken(userData);
+
+          res
+            .status(200)
+            .json({ data: newAccessToken, message: "profile changed" });
+        } else {
+          res.status(404).json({ message: "user not exists" });
+        }
+      }
+      // password 변경 없을 시
+      else {
+        const isUpdate = await users.update(
           {
             nickname: userName,
             phone_number: mobile,
@@ -31,20 +62,26 @@ module.exports = {
               id: accessTokendata.id,
             },
           }
-        )
-        .then((userInfo) => {
-          console.log("userInfo:", userInfo);
-          if (!userInfo) {
-            res.status(404).json({ message: "user not exists" });
-          } else {
-            // console.log("userInfo:", userInfo);
-            res.status(200).json({ message: "profile changed" });
-          }
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+        );
+
+        if (isUpdate) {
+          const result = await users.findOne({
+            where: {
+              id: user_id,
+            },
+          });
+          console.log(result);
+          const userData = result.dataValues;
+          delete userData.password;
+          const newAccessToken = generateAccessToken(userData);
+
+          res
+            .status(200)
+            .json({ data: newAccessToken, message: "profile changed" });
+        } else {
+          res.status(404).json({ message: "user not exists" });
+        }
+      }
     }
   },
 };
-

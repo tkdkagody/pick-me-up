@@ -5,6 +5,8 @@ const router = Router();
 const { users } = require("../models");
 const { getMyPost } = require("../controllers/GetMyPost");
 const jwt = require("jsonwebtoken");
+const { generateAccessToken } = require("./tokenFunction");
+
 const { getMyInfo } = require("./GetMyInfo");
 const { auth } = require("../controllers/auth");
 const { updateMyPost } = require("./UpdateMyPost");
@@ -12,11 +14,9 @@ const { sendPost } = require("../controllers/Post");
 const { deleteMyPost } = require("./DestroyMyPost");
 const { getAllPost } = require("./MainPage");
 const { isVote, vote, voteResult } = require("./Vote");
+const { getToken, getUserInfo } = require("../controllers/GoogleOAuth");
 
 //아이디 닉네임 모바일 비밀번호
-
-router.patch("/user/profile/:id", changeProfile);
-//router.get("/user/posting-list/:id", getMyPost);
 
 router.post("/sign-up", (req, res) => {
   const { userId, password, userName, mobile, signUpType } = req.body;
@@ -25,7 +25,7 @@ router.post("/sign-up", (req, res) => {
   if (!userId || !password || !userName || !mobile) {
     return res.status(422).send("insufficient parameters supplied");
   }
-  const passwordToken = jwt.sign(password, process.env.ACCESS_SECRET);
+  const passwordToken = generateAccessToken(password);
 
   users
     .findOrCreate({
@@ -58,7 +58,7 @@ router.post("/sign-up", (req, res) => {
 router.post("/sign-in", async (req, res) => {
   const { userId, password } = req.body;
 
-  const passwordToken = jwt.sign(password, process.env.ACCESS_SECRET);
+  const passwordToken = generateAccessToken(password);
 
   const result = await users.findOne({
     where: {
@@ -71,8 +71,9 @@ router.post("/sign-in", async (req, res) => {
   }
   const userInfo = result.dataValues;
   console.log(userInfo);
+  delete userInfo.password;
 
-  const accessToken = jwt.sign(userInfo, process.env.ACCESS_SECRET);
+  const accessToken = generateAccessToken(userInfo);
 
   return (
     res
@@ -88,11 +89,18 @@ router.post("/sign-in", async (req, res) => {
   );
 });
 
+router.post("/receive/token", getToken);
+router.get("/receive/userinfo?", getUserInfo);
+
 router.post("/sign-out", (req, res) => {
   res.status(205).json({ message: "successfully signed out!" });
 });
 
-router.post("/user/profile/:id", changeProfile);
+router.post(
+  "/user/profile/:id",
+
+  changeProfile
+);
 
 router.post("/posting", sendPost);
 router.get("/get-all-post", getAllPost);
@@ -102,7 +110,6 @@ router.post("/vote", vote);
 router.post("/vote/vote-result", voteResult);
 
 router.delete("/user/posting-list/:postid", deleteMyPost);
-
 
 router.get("/", (req, res) => {
   res.send("hello world");

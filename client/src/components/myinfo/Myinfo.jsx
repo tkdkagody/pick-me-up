@@ -14,10 +14,10 @@ const Myinfo = ({ info, accessToken, isLogin }) => {
     history.push("/modifyinfo");
   };
 
-  const clickDeleteUser = () => {
-    //회원탈퇴 요청하기
-    //axios.post("")
-  };
+  // const clickDeleteUser = () => {
+  //   //회원탈퇴 요청하기
+  //   //axios.post("")
+  // };
 
   return (
     <>
@@ -34,14 +34,14 @@ const Myinfo = ({ info, accessToken, isLogin }) => {
             </div>
             <div className={styles.textbox}>
               <div className={styles.ulbox}>
-                <span className={styles.list}>
+                {/* <span className={styles.list}>
                   아이디:
                   <input
                     className={styles.input}
                     value={info.userid}
                     readOnly
                   ></input>
-                </span>
+                </span> */}
                 <span className={styles.list}>
                   닉네임:
                   <input
@@ -63,9 +63,9 @@ const Myinfo = ({ info, accessToken, isLogin }) => {
           </div>
 
           <div className={styles.btns}>
-            <button className={styles.out} onClick={clickDeleteUser}>
+            {/* <button className={styles.out} onClick={clickDeleteUser}>
               회원탈퇴
-            </button>
+            </button> */}
             <button className={styles.btn} onClick={handleClickModify}>
               수정하기
             </button>

@@ -11,6 +11,8 @@ const MyinfoModify = ({
   info,
   setInfo,
   accessToken,
+  setAccessToken,
+  isAuthenticated,
   isLogin = { isLogin },
 }) => {
   const [userid, setUserId] = useState(info.userid);
@@ -18,7 +20,6 @@ const MyinfoModify = ({
   const [mobilenum, setMobileNum] = useState(info.mobile);
   const [password, setPassword] = useState("");
   const [password2, setPassword2] = useState("");
-
   const [modifyYes, setModifyYes] = useState(false);
 
   const history = useHistory();
@@ -39,20 +40,17 @@ const MyinfoModify = ({
     setPassword2(event.target.value);
   };
 
-  //console.log(info.id, "ddddddd");
   const doneModify = () => {
     setModifyYes(true);
   };
 
   const realModify = () => {
+    console.log(nickname, "---------------");
     axios
       .post(
-        "http://ec2-3-34-191-91.ap-northeast-2.compute.amazonaws.com/user/profile/:id",
-        { userName: info.nickname, mobile: info.mobile },
+        `http://ec2-3-34-191-91.ap-northeast-2.compute.amazonaws.com/user/profile/${info.id}`,
+        { userName: nickname, mobile: mobilenum, password },
         {
-          params: {
-            id: info.id,
-          },
           headers: {
             authorization: accessToken,
           },
@@ -64,7 +62,9 @@ const MyinfoModify = ({
         console.log(result.data);
         if (result.data.message === "profile changed") {
           setModifyYes(false);
+          setAccessToken(result.data.data);
           history.push("/");
+          isAuthenticated(result.data.data);  //얘 수정중암 @@
         }
       })
       .catch((err) => {
@@ -154,7 +154,7 @@ const MyinfoModify = ({
                   <span className={styles.list}>
                     비밀번호:
                     <input
-                      type="text"
+                      type="password"
                       // ref={passwordRef}
                       className={styles.input}
                       value={password}
@@ -166,7 +166,7 @@ const MyinfoModify = ({
                   <span className={styles.list}>
                     비밀번호확인:
                     <input
-                      type="text"
+                      type="password"
                       // ref={password2Ref}
                       className={styles.input}
                       value={password2}
