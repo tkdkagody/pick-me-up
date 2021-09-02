@@ -130,3 +130,8 @@
     height: 5rem;
   }
 }
+@media screen and (max-height: 700px) {
+  .btns {
+    padding: 3rem 4em 5rem 4rem;
+  }
+}

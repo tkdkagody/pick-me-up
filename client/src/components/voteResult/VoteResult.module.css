@@ -142,3 +142,9 @@ label {
     height: 230px;
   }
 }
+
+@media screen and (max-height: 700px) {
+  .container {
+    height: 130vh;
+  }
+}

@@ -189,9 +189,9 @@ const MyinfoModify = ({
                 <button className={styles.btn}>취소</button>
               </Link>
 
-              <button className={styles.btn} onClick={doneModify}>
+              <span className={styles.btn} onClick={doneModify}>
                 수정완료
-              </button>
+              </span>
             </div>
           </div>
         </form>

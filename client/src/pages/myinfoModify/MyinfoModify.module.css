@@ -100,7 +100,7 @@
   transition: 0.3s;
   font-size: 0.8rem;
   color: white;
-  /* white-space: nowrap; */
+  white-space: nowrap;
 }
 .passcheck {
   color: red;
@@ -188,5 +188,9 @@ span {
   }
   .btns {
     padding: 2rem 4rem;
+  }
+  .contain {
+    /*최상위 바디 컨테이너*/
+    height: 130vh;
   }
 }

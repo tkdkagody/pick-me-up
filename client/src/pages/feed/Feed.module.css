@@ -119,8 +119,19 @@
 @media screen and (max-height: 850px) {
   .container {
     padding: 1.5rem 0 4.5rem 0;
+    height: 80vh;
   }
   .images {
     height: 230px;
+  }
+}
+@media screen and (max-height: 720px) {
+  .container {
+    height: 110vh;
+  }
+}
+@media screen and (max-height: 600px) {
+  .container {
+    height: 140vh;
   }
 }
