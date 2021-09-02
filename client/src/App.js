@@ -190,7 +190,7 @@ function App() {
             accessToken={accessToken}
           />
 
-          <div id="page">
+          <main id="page">
             <ScrollTop>
               <Switch>
                 <Route exact={true} path="/">
@@ -249,7 +249,7 @@ function App() {
                 {/* 이부분 투표창에서 새로고침시 페이지 사라지는거 막아야함 */}
               </Switch>
             </ScrollTop>
-          </div>
+          </main>
           <Footer></Footer>
           <ScrollButton />
         </Router>
