@@ -5,46 +5,53 @@ span {
 }
 .container {
   width: 100%;
-  height: 100px;
+  height: 9rem;
   padding: 1em;
-  /* background-color: #fad16a; */
   background-color: whitesmoke;
-
+  color: grey;
   display: flex;
   justify-content: center;
-  align-items: center;
 }
 
 .contentbox {
   width: 500px;
+  height: 100%;
   text-align: center;
   margin: 0 auto;
-}
-
-.info {
-  /*ul부분*/
-  list-style: none;
-  padding: 0.8rem 0.8rem;
-  display: flex;
-}
-.title {
-  margin-bottom: 2rem;
-  font-size: 1rem;
-  font-weight: bold;
-  font-family: "Fredoka One", cursive;
-  /* font-weight: bold; */
-}
-.name {
-  font-family: "Fredoka One", cursive;
-  font-size: 0.8rem;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
+  align-items: center;
+}
+
+.teamname {
+  font-family: "Fredoka One", cursive;
+  font-size: 1.2rem;
+  display: flex;
+  flex-direction: column;
   align-items: unset;
+  margin-bottom: 2rem;
+  color: rgb(85, 85, 85);
+}
+.nameList {
   list-style: none;
+  display: flex;
+  justify-content: center;
+  margin-top: 0.2rem;
+  color: rgb(116, 116, 116);
+}
+.member:link {
+  margin: 0 0.4rem;
+  font-size: 0.7rem;
+  color: rgb(116, 116, 116);
+  white-space: nowrap;
+}
+.member:hover {
+  color: rgb(106, 126, 191);
 }
 .rights {
   font-size: 0.5rem;
+  font-style: italic;
 }
 
 @media screen and (max-width: 500px) {
