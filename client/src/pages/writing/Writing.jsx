@@ -7,7 +7,7 @@ import AWS from "aws-sdk";
 axios.defaults.withCredentials = true;
 
 const Writing = ({ accessToken, isLogin, setListRender }) => {
-  const tags = ["#의류", "#리빙", "#뷰티", "#식품", "#잡화", "#디지털"];
+  const tags = ["#일상", "#리빙", "#뷰티", "#음식", "#디지털"];
 
   const [title, setTitle] = useState(""); //제목
   const [firstOpt, setFirstOpt] = useState(""); //옵션명1

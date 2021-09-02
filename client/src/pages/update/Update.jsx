@@ -11,7 +11,7 @@ const Update = ({feed, accessToken, setListRender}) => { //수정하기 클릭�
 
   //feed가 null일 때 어떠한 컴포넌트라도 보여야 함!(버그)
 
-  const tags = ["#의류", "#리빙", "#뷰티", "#식품", "#잡화", "#디지털"];
+  const tags = ["#일상", "#리빙", "#뷰티", "#음식", "#디지털"];
 
   const [title, setTitle] = useState(feed.title); //제목
   const [firstOpt, setFirstOpt] = useState(feed.option1); //옵션명1

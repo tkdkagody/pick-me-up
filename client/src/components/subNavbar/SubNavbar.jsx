@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 const SubNavbar = ({filterHandle, tagReset, feedSort, sortValue}) => {
 
-  const tags=['전체', '#의류', '#리빙', '#뷰티', '#식품', '#잡화', '#디지털']
+  const tags=['전체', '#일상', '#리빙', '#뷰티', '#음식', '#디지털']
   const [tagClicked, setTagClicked] = useState('전체');
 
   const tagHandle = (el) => {
