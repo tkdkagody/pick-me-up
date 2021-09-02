@@ -14,7 +14,6 @@ module.exports = {
     if (!accessTokendata) {
       res.status(401).json({ message: "invalid access token" });
     } else {
-      // res.status(200).json({ message: "ok" });
       // password 변경 시
       if (password.length !== 0) {
         const newPasswordToken = generateAccessToken(password);
