@@ -9,8 +9,7 @@ label {
   list-style: none;
   margin: 0 auto;
   width: 500px;
-  /* justify-content: center;
-  align-items: center; */
+  height: 80vh;
 }
 
 .goback {
@@ -141,5 +140,11 @@ label {
   }
   .images {
     height: 230px;
+  }
+}
+
+@media screen and (max-height: 700px) {
+  .container {
+    height: 130vh;
   }
 }
