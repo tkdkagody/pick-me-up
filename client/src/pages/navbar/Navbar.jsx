@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
 import Signin from "../../components/signin/Signin";
 import styles from "./Navbar.module.css";
@@ -35,8 +35,32 @@ const Navbar = ({
     isAuthenticated()
   };
 
+  const [ScrollY, setScrollY] = useState(0);
+  const [BtnStatus, setBtnStatus] = useState(false); // 버튼 상태
+
+  const handleFollow = () => {
+    setScrollY(window.pageYOffset);
+    if(ScrollY > 100) {
+      // 100 이상이면 버튼이 보이게
+      setBtnStatus(true);
+    } else {
+      // 100 이하면 버튼이 사라지게
+      setBtnStatus(false);
+    }
+  }
+  
+  useEffect(() => {
+    const watch = () => {
+      window.addEventListener('scroll', handleFollow)
+    }
+    watch();
+    return () => {
+      window.removeEventListener('scroll', handleFollow)
+    }
+  })
+
   return (
-    <header className={styles.header}>
+    <header className={BtnStatus ? styles.scrollHeader : styles.header}>
       {/* 가입하기 모달창 */}
       {isSigninClicked ? (
         <Signin
@@ -50,25 +74,25 @@ const Navbar = ({
       <div className={styles.contentbox}>
         <Link to="/" className={styles.underline}>
           <div className={styles.title} onClick={reset}>
-            Pick me Up
+            Pick me up
           </div>
         </Link>
         <div className={styles.btns}>
           {isLogin ? (
-            <button className={styles.signbtn} onClick={onSignout}>
+            <button className={BtnStatus ? styles.scrollSignbtn : styles.signbtn} onClick={onSignout}>
               Logout
             </button>
           ) : (
-            <button className={styles.signbtn} onClick={clickSigninBtn}>
+            <button className={BtnStatus ? styles.scrollSignbtn: styles.signbtn} onClick={clickSigninBtn}>
               Sign in
             </button>
           )}
-
           <Link to="/mypage">
-            <button className={styles.mypagebtn} onClick={clickmypage}>
+            <button className={BtnStatus ? styles.scrollMypagebtn : styles.mypagebtn} onClick={clickmypage}>
               My page
             </button>
           </Link>
+
         </div>
       </div>
     </header>
