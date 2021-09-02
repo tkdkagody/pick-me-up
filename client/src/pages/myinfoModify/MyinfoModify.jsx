@@ -64,7 +64,7 @@ const MyinfoModify = ({
           setModifyYes(false);
           setAccessToken(result.data.data);
           history.push("/");
-          isAuthenticated(result.data.data);  //얘 수정중암 @@
+          isAuthenticated(result.data.data); //얘 수정중암 @@
         }
       })
       .catch((err) => {
@@ -175,6 +175,11 @@ const MyinfoModify = ({
                       autoComplete="off"
                     ></input>
                   </span>
+                  {password !== password2 ? (
+                    <span className={styles.passcheck}>
+                      비밀번호를 확인해주세요
+                    </span>
+                  ) : null}
                 </div>
               </div>
             </div>
