@@ -1,6 +1,4 @@
 const { post } = require("../models");
-// const jwt = require("jsonwebtoken");
-require("dotenv").config();
 const { isAuthorized } = require("../controllers/tokenFunction");
 
 module.exports = {
@@ -28,16 +26,5 @@ module.exports = {
           }
         });
     }
-
-    // post.findAll({
-    //     where: {
-    //         user_id: req.params.id
-    //     }
-    // })
-    // .then(result => {
-    //     if(!result) {
-    //         return res.status(404).send({ "data": null, "message": "user not exists" });
-    //     }
-    // })
   },
 };
