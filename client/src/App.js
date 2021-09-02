@@ -79,6 +79,7 @@ function App() {
     }
 
     setListRender();
+    console.log(info, "뭘까????");
     return () => {};
   }, []);
 
@@ -157,8 +158,6 @@ function App() {
     setRevised(el);
   };
 
-  /**********************sign in 컨트롤 부분***************************/
-
   //로그인상태 변경 메소드
   const loginHandler = () => {
     setIsLogin(true);
@@ -184,7 +183,7 @@ function App() {
 
   useEffect(() => {
     const storageToken = localStorage.getItem("accessToken");
-    console.log(isGoogle);
+    //console.log(isGoogle);
     const a = Math.random();
     if (storageToken) {
       loginHandler();
@@ -296,7 +295,7 @@ function App() {
     //   }
     // });
   };
-  /*************************************************/
+
   return (
     <>
       {/* {

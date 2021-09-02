@@ -1,6 +1,5 @@
 import styles from "./Myinfo.module.css";
 import React, { useState } from "react";
-import MyinfoModify from "../../pages/myinfoModify/MyinfoModify";
 import NullPage from "../NullPage/Nullpage";
 import { useHistory } from "react-router";
 import { Link } from "react-router-dom";

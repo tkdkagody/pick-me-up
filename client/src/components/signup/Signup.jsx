@@ -20,8 +20,12 @@ const Signup = ({ setIsSignUpClicked, clickCloseBtn }) => {
   const [errorMessage, setErrorMessage] = useState("");
   const { userId, userName, mobile, password, password2 } = userinfo;
 
-  const checkValue = (asValue) => {
+  const checkIdPass = (asValue) => {
     var regExp = /^[a-zA-z0-9]{4,12}$/;
+    return regExp.test(asValue);
+  };
+  const checkmobile = (asValue) => {
+    var regExp = /^[0-9]{9,11}$/;
     return regExp.test(asValue);
   };
 
@@ -34,12 +38,16 @@ const Signup = ({ setIsSignUpClicked, clickCloseBtn }) => {
       setErrorMessage("두 비밀번호가 같지 않습니다.");
       return false;
     }
-    if (!checkValue(password)) {
-      setErrorMessage("비밀번호는 4글자 이상 영문이어야합니다.");
+    if (!checkmobile(mobile)) {
+      setErrorMessage("휴대폰번호는 숫자만 입력해주세요");
       return false;
     }
-    if (!checkValue(userId)) {
-      setErrorMessage("아이디는 4글자 이상 영문이어야합니다.");
+    if (!checkIdPass(password)) {
+      setErrorMessage("비밀번호는 4-12자리의 숫자,영문입니다.");
+      return false;
+    }
+    if (!checkIdPass(userId)) {
+      setErrorMessage("아이디는 4-12자리의 숫자,영문입니다.");
       return false;
     }
     signupreq();
@@ -103,7 +111,7 @@ const Signup = ({ setIsSignUpClicked, clickCloseBtn }) => {
                 type="text"
                 onChange={handleInputValue("userId")}
                 className={styles.text}
-                placeholder="아이디는 4글자 이상의 영문"
+                placeholder="아이디는 4-12자리의 숫자,영문만 가능합니다."
               />
             </li>
             <li className={styles.item}>
@@ -111,7 +119,7 @@ const Signup = ({ setIsSignUpClicked, clickCloseBtn }) => {
                 type="text"
                 onChange={handleInputValue("userName")}
                 className={styles.text}
-                placeholder="닉네임을 입력하세요"
+                placeholder="닉네임을 입력하세요."
               />
             </li>
             <li className={styles.item}>
@@ -119,7 +127,7 @@ const Signup = ({ setIsSignUpClicked, clickCloseBtn }) => {
                 type="text"
                 onChange={handleInputValue("mobile")}
                 className={styles.text}
-                placeholder="휴대폰번호를 입력하세요"
+                placeholder="휴대폰번호는 숫자만입력해주세요."
               />
             </li>
             <li className={styles.item}>
@@ -127,7 +135,7 @@ const Signup = ({ setIsSignUpClicked, clickCloseBtn }) => {
                 type="password"
                 onChange={handleInputValue("password")}
                 className={styles.text}
-                placeholder="비밀번호는 4글자 이상의 영문"
+                placeholder="비밀번호는 4-12자리의 숫자,영문만 가능합니다."
               />
             </li>
             <li className={styles.item}>
