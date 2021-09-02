@@ -30,31 +30,10 @@ const Navbar = ({
     setListRender();
   };
 
-  // const clickmypage = () => {
-  //   axios
-  //     .get(
-  //       "http://ec2-3-34-191-91.ap-northeast-2.compute.amazonaws.com/user/auth",
-  //       {
-  //         headers: {
-  //           authorization: accessToken,
-  //         },
-  //         "Content-Type": "application/json",
-  //       }
-  //     )
-  //     .then((result) => {
-  //       const { id, user_id, nickname, password, phone_number } =
-  //         result.data.data.userInfo;
-  //       setInfo({
-  //         id: id,
-  //         userid: user_id,
-  //         nickname: nickname,
-  //         mobile: phone_number,
-  //         password: password,
-  //         password2: "",
-  //       });
-  //     });
-  //   // history.push("/mypage");
-  // };
+  const clickmypage = () => {
+    // history.push("/mypage");
+    isAuthenticated()
+  };
 
   return (
     <header className={styles.header}>
@@ -86,7 +65,9 @@ const Navbar = ({
           )}
 
           <Link to="/mypage">
-            <button className={styles.mypagebtn}>My page</button>
+            <button className={styles.mypagebtn} onClick={clickmypage}>
+              My page
+            </button>
           </Link>
         </div>
       </div>

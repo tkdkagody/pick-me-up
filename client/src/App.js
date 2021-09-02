@@ -334,6 +334,7 @@ function App() {
                   accessToken={accessToken}
                   isLogin={isLogin}
                   handleFeeds={select}
+                  isAuthenticated={isAuthenticated}
                 />
               </Route>
               <Route path="/modifyinfo">
@@ -343,6 +344,7 @@ function App() {
                   setAccessToken={setAccessToken}
                   accessToken={accessToken}
                   isLogin={isLogin}
+                  isAuthenticated={isAuthenticated}
                 />
                 {/* <Mypage handleContent={revise} info={info} setInfo={setInfo} /> */}
               </Route>
