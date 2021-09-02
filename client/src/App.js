@@ -82,7 +82,7 @@ function App() {
     return () => {};
   }, []);
 
-
+  /*********************메인 페이지 컨트롤 부분***************************/
   const [feeds, setFeeds] = useState([]); //전체 피드리스트
   const [selectedFeed, setSelectedFeed] = useState(null); //선택된 피드페이지(투표)로 이동할 때
   const [revised, setRevised] = useState(null); //writing 할 피드 선택된 것.
@@ -176,7 +176,7 @@ function App() {
     setRevised(el);
   };
 
-  const feedSort = (event) => {
+  const feedSort = (event) => { //select태그 클릭 시 axios요청 안 보내고 있는 feeds상태값을 그냥 정렬.
     setSortValue(event.target.value)
     // console.log(event.target.value)
     if(event.target.value==='최신순'){
