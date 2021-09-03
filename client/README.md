@@ -48,7 +48,7 @@
 <img width="600" alt="" src="https://images.velog.io/images/devjade/post/0871fec2-0216-46d1-8773-e70c88d02620/pickmeup_1.gif">
 
 ### 메인 랜딩 페이지(모바일)
-<img width="300" alt="" src="https://images.velog.io/images/devjade/post/a675cbab-ee89-4a58-9dec-5f7b58453105/pickmeup_2.gif">
+<img width="280" alt="" src="https://images.velog.io/images/devjade/post/b90fd6be-fe9a-4899-b4fc-56c15f52ef59/pickmeup_2.gif">
 
 
 더 자세한 기능은 직접 서비스에 접속하셔서 생생하게 확인해보세요! 
